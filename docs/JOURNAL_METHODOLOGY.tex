@@ -13,14 +13,13 @@
 % PACKAGE IMPORTS (Matching Reference Paper Style)
 % ============================================================================
 
-\usepackage[utf-8]{inputenc}
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{mathtools}
 \usepackage{algorithm}
-\usepackage{algorithmic}
+\usepackage{algpseudocode}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{array}
@@ -31,6 +30,7 @@
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage{natbib}
+\usepackage{listings}
 
 % Configure hyperref
 \hypersetup{
@@ -43,6 +43,18 @@
 % Configure captions (matching reference paper)
 \captionsetup[table]{position=top, skip=5pt, font=small}
 \captionsetup[figure]{position=bottom, skip=5pt, font=small}
+
+% Configure listings
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left
+}
+
+% Algorithm commands
+\algnewcommand\Input{\item[\textbf{Input:}]}
+\algnewcommand\Output{\item[\textbf{Output:}]}
 
 % Bibliography style (APA-like)
 \bibliographystyle{elsarticle-harv}
@@ -316,8 +328,8 @@ Total Features & 46 & --- \\
 \midrule
 \multicolumn{3}{l}{\textit{Performance Class Distribution}} \\
 Low Performance (GPA < 2.5) & 1,286 & 29.1\% \\
-Medium Performance (2.5 ≤ GPA < 3.5) & 2,104 & 47.6\% \\
-High Performance (GPA ≥ 3.5) & 1,034 & 23.4\% \\
+Medium Performance ($2.5 \leq$ GPA $< 3.5$) & 2,104 & 47.6\% \\
+High Performance (GPA $\geq 3.5$) & 1,034 & 23.4\% \\
 \midrule
 \multicolumn{3}{l}{\textit{Dropout Status Distribution}} \\
 Continued Studies & 3,541 & 80.0\% \\
@@ -576,14 +588,14 @@ Figure \ref{fig:methodology_main} presents the complete 9-phase research methodo
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=0.95\textwidth]{outputs/figures_journal/methodology_flowchart_main.pdf}
+\includegraphics[width=0.95\textwidth]{../outputs/figures_journal/methodology_flowchart_main.pdf}
 \caption{\textbf{Complete Research Methodology Flowchart (9-Phase Workflow).} Comprehensive visualization of the end-to-end research methodology from data collection through deployment: Phase 1 (Data Collection) acquires 4,424 student records with 46 features; Phase 2 (Preprocessing) implements 8-step pipeline including imputation, encoding, normalization, and tensor conversion; Phase 3 (Theoretical Framework) maps features to Tinto (68\%) and Bean (32\%) models; Phase 4 (Model Development) branches into three architectures (PPN for 3-class performance, DPN-A for binary dropout with attention, HMTL for multi-task learning); Phase 5 (Training \& Optimization) employs Adam optimizer with 10-fold cross-validation and early stopping; Phase 6 (Evaluation) assesses performance using 8 metrics (accuracy, F1, precision, recall, AUC-ROC, AUC-PR, confusion matrices, CV); Phase 7 (Results \& Analysis) validates PPN (76.4\%), DPN-A (87.05\%, AUC-ROC 0.910), and HMTL performance; Phase 8 (LLM Integration) generates GPT-4 powered personalized interventions with rule-based fallback; Phase 9 (Deployment) implements institutional early warning system with advisor dashboard. Color-coded phases facilitate navigation: blue (data), yellow (preprocessing), purple (theory/LLM), green (models), orange (training), teal (evaluation), pink (results), light green (deployment). This systematic methodology ensures reproducibility and addresses both prediction accuracy and actionable intervention generation.}
 \label{fig:methodology_main}
 \end{figure}
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=0.95\textwidth]{outputs/figures_journal/methodology_flowchart_objectives.pdf}
+\includegraphics[width=0.95\textwidth]{../outputs/figures_journal/methodology_flowchart_objectives.pdf}
 \caption{\textbf{Research Objectives Breakdown with Dual-Task Analysis.} Hierarchical decomposition of the main research question ``Can deep learning + LLM predict student outcomes and provide actionable interventions?'' into two parallel objectives: Objective 1 (Student Performance Prediction) addresses 3-class classification through 5 systematic sub-tasks from baseline model development (Task 1.1: PPN) through multi-metric evaluation (Task 1.5), achieving 76.4\% accuracy with interpretable attention-based predictions; Objective 2 (Student Dropout Prediction) implements binary classification via 5 sub-tasks including attention-based architecture (Task 2.1: DPN-A), temporal feature engineering, and ROC-AUC optimization, achieving superior 87.05\% accuracy with 0.910 AUC-ROC. The integrated multi-task learning analysis (bottom) reveals task interference phenomenon (67.9\% dropout accuracy in HMTL vs 87.05\% in dedicated DPN-A), validating single-task model superiority for this dataset. The LLM enhancement layer (purple box) demonstrates how GPT-4 integration transforms statistical predictions into personalized, actionable student support recommendations. This dual-objective framework addresses both institutional needs: comprehensive student outcome categorization (performance) and targeted at-risk identification (dropout).}
 \label{fig:methodology_objectives}
 \end{figure}
@@ -924,13 +936,13 @@ Applied Random Forest-based importance:
     \item Retain features explaining $>95\%$ cumulative importance
 \end{enumerate}
 
-\textbf{Final Feature Set}: 46 features total (35 original + 12 engineered - 1 redundant = 46 final features; note that the abstract mentions "37 features" but after final feature engineering, we retained 46 features as shown in Table \\ref{tab:feature_attributes})
+\textbf{Final Feature Set}: 46 features total (35 original + 12 engineered - 1 redundant = 46 final features; note that the abstract mentions "37 features" but after final feature engineering, we retained 46 features as shown in Table \ref{tab:feature_attributes})
 
-Figure \\ref{fig:methodology_dataflow} visualizes the complete 10-stage data processing pipeline from raw data to model-ready tensors.
+Figure \ref{fig:methodology_dataflow} visualizes the complete 10-stage data processing pipeline from raw data to model-ready tensors.
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=0.95\textwidth]{outputs/figures_journal/methodology_flowchart_dataflow.pdf}
+\includegraphics[width=0.95\textwidth]{../outputs/figures_journal/methodology_flowchart_dataflow.pdf}
 \caption{\textbf{Data Processing and Preprocessing Pipeline (10-Stage Workflow).} Comprehensive visualization of the data transformation pipeline: Stage 1 (Raw Data Input) ingests 4,424 student records from institutional database with 35 base features; Stage 2 (Initial Validation) performs 4 quality checks (missing values detection, duplicate removal, outlier detection via IQR, data type validation); Stage 3 (Feature Engineering) constructs 12 derived features through 6 equations (total units, success rate, semester consistency, academic progression, parental education, economic stability); Stage 4 (Theoretical Mapping) aligns features with Tinto (68\%, 31 features) and Bean (32\%, 15 features) frameworks; Stage 5 (Missing Value Imputation) applies median imputation for numerical features (18) and mode imputation for categorical features (16); Stage 6 (Categorical Encoding) processes binary (direct 0/1), ordinal (label encoding), and nominal (one-hot encoding) variables while creating 3-class target encoding (Graduate=2, Enrolled=1, Dropout=0); Stage 7 (Feature Selection) implements 3-step dimensionality reduction (correlation threshold |r|>0.95, variance threshold <0.01, Random Forest importance ranking retaining 95\% cumulative importance); Stage 8 (Normalization) applies Z-score standardization $(X_{\text{norm}} = \frac{X - \mu}{\sigma})$ computed exclusively on training set to prevent data leakage; Stage 9 (Train/Val/Test Split) creates stratified 80/10/10 split preserving class distribution (training: 3,539, validation: 442, test: 443 students); Stage 10 (Tensor Conversion) transforms processed data to PyTorch tensors with shape verification and dtype validation for model compatibility. Color-coded stages: green (input/validation), orange (feature work), purple (theoretical), yellow (imputation/encoding), blue (selection/normalization), red (splitting), teal (output). This systematic pipeline ensures data quality, reproducibility, and prevention of common pitfalls like data leakage and class imbalance.}
 \label{fig:methodology_dataflow}
 \end{figure}
@@ -2194,11 +2206,7 @@ Input layer weight magnitudes quantify feature relevance. Table \ref{tab:attenti
 \multicolumn{2}{l}{Engineered Features Contribution} & \multicolumn{4}{l}{26.0\% total weight (4 features: success\_rate, average\_grade, parental\_ed, progression)} \\
 \midrule
 \multicolumn{6}{l}{\textit{Actionable Insights for Interventions:}} \\
-\multicolumn{6}{p{0.95\textwidth}}{
-\textbf{Academic Support} (68\% weight): Tutoring for struggling students (ranks 1-4), supplemental instruction, study skills workshops. \\
-\textbf{Financial Assistance} (20\% weight): Emergency grants for tuition issues (rank 5), scholarship expansion (rank 6), debt counseling (rank 9). \\
-\textbf{Early Warning System} (ranks 1-2): Automated alerts when 1st/2nd semester grades drop below 2.0 GPA threshold.
-} \\
+\multicolumn{6}{p{0.95\textwidth}}{\textbf{Academic Support} (68\% weight): Tutoring for struggling students (ranks 1-4), supplemental instruction, study skills workshops. \textbf{Financial Assistance} (20\% weight): Emergency grants for tuition issues (rank 5), scholarship expansion (rank 6), debt counseling (rank 9). \textbf{Early Warning System} (ranks 1-2): Automated alerts when 1st/2nd semester grades drop below 2.0 GPA threshold.} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -2280,11 +2288,7 @@ HMTL (multi-task) & 18,692 & 187 sec (50 epochs) & 0.09 sec/batch & 2.1 MB & 4.5
 \multicolumn{2}{l}{Fallback System} & \multicolumn{5}{l}{Rule-based (instant, zero cost)} \\
 \midrule
 \multicolumn{7}{l}{\textit{Efficiency Analysis:}} \\
-\multicolumn{7}{p{0.95\textwidth}}{
-\textbf{Training Overhead:} DPN-A 17× faster than SVM, 1.13× slower than PPN (acceptable for 3.2\% accuracy gain). \\
-\textbf{Inference Speed:} All models real-time capable (<0.2s/batch), suitable for production early warning systems. \\
-\textbf{Scalability:} Linear complexity O(N) for inference, batch processing enables 100K+ student predictions in <3 minutes.
-} \\
+\multicolumn{7}{p{0.95\textwidth}}{\textbf{Training Overhead:} DPN-A 17× faster than SVM, 1.13× slower than PPN (acceptable for 3.2\% accuracy gain). \textbf{Inference Speed:} All models real-time capable (<0.2s/batch), suitable for production early warning systems. \textbf{Scalability:} Linear complexity O(N) for inference, batch processing enables 100K+ student predictions in <3 minutes.} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -2531,70 +2535,70 @@ The outlined experimental protocol enables robust inference suitable for publica
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.95\textwidth]{outputs/figures_journal/figure1_model_comparison.pdf}
+    \includegraphics[width=0.95\textwidth]{../outputs/figures_journal/figure1_model_comparison.pdf}
     \caption{\textbf{Comprehensive Model Performance Comparison Across Three Metrics.} Three-panel bar chart comparing six models (Random Forest, Logistic Regression, PPN, DPN-A, HMTL-Performance, HMTL-Dropout) across (A) Accuracy, (B) F1-Macro Score, and (C) AUC-ROC. DPN-A achieves highest accuracy (87.05\%) and competitive AUC-ROC (0.910), marginally exceeding baseline Logistic Regression. HMTL dropout task underperforms (67.9\% accuracy), indicating task interference. Error bars represent 95\% confidence intervals from 10-fold cross-validation. Color coding distinguishes baseline models (blue tones) from deep learning models (orange/green tones).}
     \label{fig:model_comparison}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.75\textwidth]{outputs/figures_journal/figure2_roc_curves.pdf}
+    \includegraphics[width=0.75\textwidth]{../outputs/figures_journal/figure2_roc_curves.pdf}
     \caption{\textbf{ROC Curves for Dropout Prediction Models.} Receiver Operating Characteristic curves comparing discriminative ability of dropout prediction models: Logistic Regression (AUC=0.920, dashed blue), DPN-A (AUC=0.910, solid orange), and HMTL (AUC=0.843, dotted green). All models significantly outperform random classifier (diagonal gray line, AUC=0.50). DPN-A and Logistic Regression curves closely overlap, indicating comparable true positive rate vs. false positive rate trade-offs. Shaded regions represent 95\% confidence intervals from bootstrap resampling (n=1000). Operating points marked with circles indicate selected classification thresholds (0.5 for all models).}
     \label{fig:roc_curves}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.75\textwidth]{outputs/figures_journal/figure3_ppn_confusion_matrix.pdf}
+    \includegraphics[width=0.75\textwidth]{../outputs/figures_journal/figure3_ppn_confusion_matrix.pdf}
     \caption{\textbf{PPN Confusion Matrix for 3-Class Performance Prediction.} Normalized confusion matrix (row percentages) showing PPN classification results on test set (N=664). Diagonal elements represent correct predictions: Dropout (73.7\%), Enrolled (39.5\%), Graduate (91.3\%). "Enrolled" class exhibits highest misclassification rate (60.5\%), primarily confused with Graduate (35.3\%) and Dropout (25.2\%). Graduate class achieves best recall (91.3\%), rarely confused with Dropout (1.5\%). Raw counts displayed in cells. Color intensity indicates classification frequency (dark blue = high, light yellow = low). Overall accuracy: 76.4\%.}
     \label{fig:ppn_cm}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.7\textwidth]{outputs/figures_journal/figure4_dpna_confusion_matrix.pdf}
+    \includegraphics[width=0.7\textwidth]{../outputs/figures_journal/figure4_dpna_confusion_matrix.pdf}
     \caption{\textbf{DPN-A Confusion Matrix for Binary Dropout Prediction.} Normalized confusion matrix showing DPN-A classification performance: True Negatives (94.0\%, n=424), True Positives (72.3\%, n=154), False Positives (6.0\%, n=27), False Negatives (27.7\%, n=59). High specificity (94.0\%) indicates strong ability to correctly identify non-dropout students, minimizing false alarms for intervention programs. Moderate sensitivity (72.3\%) reflects trade-off prioritizing precision (85.1\%) over recall. Overall accuracy: 87.05\%, AUC-ROC: 0.910. Raw counts displayed in cells.}
     \label{fig:dpna_cm}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.9\textwidth]{outputs/figures_journal/figure5_attention_heatmap.pdf}
+    \includegraphics[width=0.9\textwidth]{../outputs/figures_journal/figure5_attention_heatmap.pdf}
     \caption{\textbf{Attention Weight Heatmap Stratified by Dropout Risk.} Self-attention weights from DPN-A hidden layer (15 dimensions $\times$ 20 students) stratified by predicted dropout probability: High-risk (P$>$0.7, n=7, top rows), Medium-risk (0.3$\leq$P$\leq$0.7, n=7, middle rows), Low-risk (P$<$0.3, n=6, bottom rows). High-risk students exhibit concentrated activation in specific dimensions (dims 3, 7, 12), suggesting learned risk signatures. Low-risk students show diffuse attention patterns (uniform yellow-green coloring). Medium-risk students display intermediate heterogeneity. Color bar indicates attention magnitude (0.0--0.4 scale). Demonstrates model's ability to learn personalized risk representations for individualized interventions.}
     \label{fig:attention_heatmap}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.85\textwidth]{outputs/figures_journal/figure6_feature_importance.pdf}
+    \includegraphics[width=0.85\textwidth]{../outputs/figures_journal/figure6_feature_importance.pdf}
     \caption{\textbf{Top 20 Features by Input Layer Weight Magnitude with Theoretical Alignment.} Bar chart ranking features by absolute weight magnitude from DPN-A input layer. Top 5 features all academic (Tinto factors, orange bars): curricular units 2nd semester grade (0.342), curricular units 1st semester grade (0.318), success rate (0.276), average grade (0.264), academic progression (0.142). Financial/environmental factors (Bean factors, blue bars) rank 5th--7th: tuition fees up-to-date (0.189), scholarship holder (0.171), parental education (0.158). Cumulative importance: Tinto 68\%, Bean 32\%. Validates integrated theoretical framework and guides intervention priorities (academic support primary, financial aid supplementary).}
     \label{fig:feature_importance}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.85\textwidth]{outputs/figures_journal/figure7_training_curves.pdf}
+    \includegraphics[width=0.85\textwidth]{../outputs/figures_journal/figure7_training_curves.pdf}
     \caption{\textbf{Training and Validation Loss Curves for PPN and DPN-A.} Two-panel plot showing loss convergence over training epochs: (A) PPN 3-class performance prediction (32 epochs, early stopping), (B) DPN-A binary dropout prediction (29 epochs, early stopping). Training loss (solid lines) decreases monotonically without oscillation. Validation loss (dashed lines) plateaus with slight divergence in final epochs, triggering early stopping. No evidence of overfitting (validation loss remains within 10\% of training loss). PPN final losses: Train=0.4885, Val=0.5365. DPN-A final losses: Train=0.2517, Val=0.2983. Shaded regions indicate standard deviation across 5 random seeds.}
     \label{fig:training_curves}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.85\textwidth]{outputs/figures_journal/figure8_class_distribution.pdf}
+    \includegraphics[width=0.85\textwidth]{../outputs/figures_journal/figure8_class_distribution.pdf}
     \caption{\textbf{Class Distribution in Educational Dataset.} Two-panel visualization of outcome distribution: (A) Pie chart showing proportions (Graduate 49.9\%, Dropout 32.1\%, Enrolled 17.9\%), (B) Bar chart with counts (Graduate n=2,209, Dropout n=1,421, Enrolled n=794). Moderate imbalance addressed via class-weighted loss functions in training. "Enrolled" minority class (17.9\%) presents modeling challenge reflected in lower recall across all models (39.5--42\%). Dataset total: N=4,424 students. Color scheme consistent across all figures (Graduate=blue, Dropout=orange, Enrolled=green).}
     \label{fig:class_distribution}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.75\textwidth]{outputs/figures_journal/figure9_pr_curves.pdf}
+    \includegraphics[width=0.75\textwidth]{../outputs/figures_journal/figure9_pr_curves.pdf}
     \caption{\textbf{Precision-Recall Curves for Dropout Prediction (Supplementary).} Precision-Recall curves for imbalanced dropout class: DPN-A (AUC-PR=0.878, solid orange), Logistic Regression (AUC-PR=0.863, dashed blue), HMTL (AUC-PR=0.741, dotted green). DPN-A achieves highest precision at fixed recall levels, indicating superior performance on minority dropout class. Baseline precision (horizontal dashed line at 0.321) represents dropout prevalence in test set. All models significantly exceed baseline. Knee points indicate optimal precision-recall trade-offs: DPN-A operates at (Recall=0.72, Precision=0.85). Shaded regions represent 95\% confidence intervals from stratified bootstrap (n=1000).}
     \label{fig:pr_curves}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.95\textwidth]{outputs/figures_journal/figure10_dual_task_comparison.pdf}
+    \includegraphics[width=0.95\textwidth]{../outputs/figures_journal/figure10_dual_task_comparison.pdf}
     \caption{\textbf{Integrated Dual-Task Research Analysis: Performance Prediction vs Dropout Prediction.} Four-panel comparative visualization demonstrating both research objectives: (A) Performance Prediction Task (3-class) showing PPN confusion matrix with Graduate class achieving 91.3\% recall, Enrolled class struggling at 39.5\%, and Dropout at 73.7\%; (B) Dropout Prediction Task (binary) showing DPN-A confusion matrix with 94.0\% specificity and 72.3\% sensitivity; (C) Class-wise F1-score comparison revealing PPN's balanced performance across three classes (F1=0.762, 0.439, 0.863) versus DPN-A's focused binary dropout detection (F1=0.782); (D) Overall task complexity analysis comparing 3-class performance prediction (76.4\% accuracy, F1-Macro=0.688) against binary dropout prediction (87.05\% accuracy, F1-Macro=0.782). This integrated view validates the research design addressing both institutional objectives: comprehensive student outcome categorization (Performance task) and targeted at-risk identification (Dropout task). Color scheme: Blue/green for performance task, orange/red for dropout task.}
     \label{fig:dual_task_comparison}
 \end{figure}
@@ -2603,54 +2607,7 @@ The outlined experimental protocol enables robust inference suitable for publica
 % REFERENCES
 % ============================================================================
 
-\begin{thebibliography}{99}
-
-\bibitem{Tinto1993}
-Tinto, V. (1993). \textit{Leaving college: Rethinking the causes and cures of student attrition} (2nd ed.). University of Chicago Press.
-
-\bibitem{Bean1985}
-Bean, J. P. (1985). Interaction effects based on class level in an exploratory model of college student dropout syndrome. \textit{American Educational Research Journal}, 22(1), 35--64.
-
-\bibitem{Breiman2001}
-Breiman, L. (2001). Random forests. \textit{Machine learning}, 45(1), 5--32.
-
-\bibitem{Chen2016}
-Chen, T., \& Guestrin, C. (2016). XGBoost: A scalable tree boosting system. In \textit{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining} (pp. 785--794).
-
-\bibitem{Kingma2014}
-Kingma, D. P., \& Ba, J. (2014). Adam: A method for stochastic optimization. \textit{arXiv preprint arXiv:1412.6980}.
-
-\bibitem{Vaswani2017}
-Vaswani, A., Shazeer, N., Parmar, N., et al. (2017). Attention is all you need. In \textit{Advances in Neural Information Processing Systems} (pp. 5998--6008).
-
-\bibitem{Ruder2017}
-Ruder, S. (2017). An overview of multi-task learning in deep neural networks. \textit{arXiv preprint arXiv:1707.08114}.
-
-\bibitem{Lundberg2017}
-Lundberg, S. M., \& Lee, S. I. (2017). A unified approach to interpreting model predictions. In \textit{Advances in Neural Information Processing Systems} (pp. 4765--4774).
-
-\bibitem{Radford2019}
-Radford, A., Wu, J., Child, R., et al. (2019). Language models are unsupervised multitask learners. \textit{OpenAI Blog}, 1(8), 9.
-
-\bibitem{OpenAI2023}
-OpenAI (2023). GPT-4 technical report. \textit{arXiv preprint arXiv:2303.08774}.
-
-\bibitem{Ioffe2015}
-Ioffe, S., & Szegedy, C. (2015). Batch normalization: Accelerating deep network training by reducing internal covariate shift. In \textit{International conference on machine learning} (pp. 448--456). PMLR.
-
-\bibitem{Srivastava2014}
-Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., \& Salakhutdinov, R. (2014). Dropout: a simple way to prevent neural networks from overfitting. \textit{The journal of machine learning research}, 15(1), 1929--1958.
-
-\bibitem{McNemar1947}
-McNemar, Q. (1947). Note on the sampling error of the difference between correlated proportions or percentages. \textit{Psychometrika}, 12(2), 153--157.
-
-\bibitem{Friedman1940}
-Friedman, M. (1940). A comparison of alternative tests of significance for the problem of m rankings. \textit{The Annals of Mathematical Statistics}, 11(1), 86--92.
-
-\bibitem{Nemenyi1963}
-Demšar, J. (2006). Statistical comparisons of classifiers over multiple data sets. \textit{The Journal of Machine Learning Research}, 7, 1--30.
-
-\end{thebibliography}
+\bibliography{references}
 
 % ============================================================================
 % APPENDIX (Optional)
