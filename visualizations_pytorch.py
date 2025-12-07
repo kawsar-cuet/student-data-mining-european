@@ -241,7 +241,7 @@ ax1.set_xticks(range(len(df_metrics)))
 ax1.set_xticklabels(df_metrics['Model'], rotation=45, ha='right', fontsize=10)
 ax1.axhline(y=0.857, color='red', linestyle='--', linewidth=1, alpha=0.7, label='Best Baseline (LR)')
 ax1.grid(axis='y', alpha=0.3, linestyle='--')
-ax1.legend(loc='lower right', fontsize=9)
+ax1.legend(loc='upper right', fontsize=9)
 # Add value labels
 for i, bar in enumerate(bars1):
     height = bar.get_height()
@@ -259,7 +259,7 @@ ax2.set_xticks(range(len(df_metrics)))
 ax2.set_xticklabels(df_metrics['Model'], rotation=45, ha='right', fontsize=10)
 ax2.axhline(y=0.78, color='red', linestyle='--', linewidth=1, alpha=0.7, label='Best Baseline (LR)')
 ax2.grid(axis='y', alpha=0.3, linestyle='--')
-ax2.legend(loc='lower right', fontsize=9)
+ax2.legend(loc='upper right', fontsize=9)
 # Add value labels
 for i, bar in enumerate(bars2):
     height = bar.get_height()
@@ -278,7 +278,7 @@ ax3.set_xticks(range(len(dropout_models)))
 ax3.set_xticklabels(dropout_models['Model'], rotation=45, ha='right', fontsize=10)
 ax3.axhline(y=0.92, color='red', linestyle='--', linewidth=1, alpha=0.7, label='Best Baseline (LR)')
 ax3.grid(axis='y', alpha=0.3, linestyle='--')
-ax3.legend(loc='lower right', fontsize=9)
+ax3.legend(loc='upper right', fontsize=9)
 # Add value labels
 for i, bar in enumerate(bars3):
     height = bar.get_height()
@@ -518,6 +518,8 @@ ax.set_xlabel('Feature Importance (Weight Magnitude)', fontsize=12, fontweight='
 ax.set_title('Feature Importance - Input Layer Weights (Top 20)\nDPN-A Model', 
              fontsize=13, fontweight='bold', pad=15)
 ax.grid(axis='x', alpha=0.3, linestyle='--')
+# Set x-axis limits to add space for legend
+ax.set_xlim([0, max(top_20_importance) * 1.35])
 
 # Add value labels
 for i, (bar, weight) in enumerate(zip(bars, top_20_importance)):
@@ -531,7 +533,7 @@ legend_elements = [
     Patch(facecolor='#ff7f0e', edgecolor='black', label='Bean Factors (Environmental)'),
     Patch(facecolor='#1f77b4', edgecolor='black', label='Shared Factors')
 ]
-ax.legend(handles=legend_elements, loc='lower right', fontsize=9)
+ax.legend(handles=legend_elements, loc='upper right', fontsize=9)
 
 plt.tight_layout()
 plt.savefig(f"{OUTPUT_DIR}/figure6_feature_importance.pdf", dpi=300, bbox_inches='tight')
@@ -808,7 +810,7 @@ ax4.set_title('(D) Dual Research Objectives Comparison\\nOverall Task Performanc
 ax4.set_xticks(x_tasks)
 ax4.set_xticklabels(task_data['Task'], fontsize=9)
 ax4.set_ylim([0.6, 1.0])
-ax4.legend(loc='lower right', fontsize=9)
+ax4.legend(loc='upper right', fontsize=9)
 ax4.grid(axis='y', alpha=0.3, linestyle='--')
 
 # Add value labels

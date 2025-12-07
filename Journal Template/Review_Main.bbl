@@ -1,0 +1,59 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{farid2016adaptive}
+D.~M. Farid, M.~A. Al-Mamun, B.~Manderick, A.~Now{\'e}, An adaptive rule-based
+  classifier for mining big biological data, Expert Systems with Applications
+  64 (2016) 305--316.
+
+\bibitem{farid2014hybrid}
+D.~M. Farid, L.~Zhang, C.~M. Rahman, M.~A. Hossain, R.~Strachan, Hybrid
+  decision tree and na{\"\i}ve bayes classifiers for multi-class classification
+  tasks, Expert Systems with Applications 41~(4) (2014) 1937--1946.
+
+\bibitem{farid2013adaptive}
+D.~M. Farid, L.~Zhang, A.~Hossain, C.~M. Rahman, R.~Strachan, G.~Sexton,
+  K.~Dahal, An adaptive ensemble classifier for mining concept drifting data
+  streams, Expert Systems with Applications 40~(15) (2013) 5895--5906.
+
+\bibitem{dipu2023TENCON}
+D.~Saha, M.~Karim, S.~Phongmoo, D.~M. Farid, A privacy-preserving approach for
+  big data mining using rainforest with federated learning, in: 2023 IEEE
+  Region 10 Conference {(TENCON)}, Chiang Mai, Thailand, 2023, pp. 1--6.
+
+\bibitem{masudur2023ICCCNT}
+M.~M. Rahman, D.~M. Farid, Exploring federated learning with na\"ive bayes
+  using {AVC} information, in: 14th International Conference on Computing,
+  Communication and Networking Technologies (ICCCNT 2013), IIT - Delhi, India,
+  2023, pp. 1--6.
+
+\bibitem{joy2023CNIOT23}
+M.~A.~M. Joy, M.~F. H.~K. Chowdhury, S.~Afroz, M.~N. Islam, R.~Muhsinat, M.~A.
+  Moly, D.~M. Farid, Real time face recognition with mask using deep
+  convolutional neural network, in: 4th International Conference on Computing,
+  Networks and Internet of Things {(CNIOT'23)}, Xiamen, China, 2023, pp.
+  457--461.
+
+\bibitem{farid2012mining}
+D.~M. Farid, M.~Z. Rahman, C.~M. Rahman, Mining complex network data for
+  adaptive intrusion detection, in: A.~Karahoca (Ed.), Advances in Data Mining
+  Knowledge Discovery and Applications, InTech, Croatia, 2012, pp. 327--348.
+
+\bibitem{farid2018ensemble}
+D.~M. Farid, A.~Now{\'e}, B.~Manderick, Ensemble of trees for classifying
+  high-dimensional imbalanced genomic data, in: Y.~Bi, S.~Kapoor, R.~Bhatia
+  (Eds.), Proceedings of SAI Intelligent Systems Conference (IntelliSys) 2016,
+  Springer International Publishing, Cham, 2018, pp. 172--187.
+
+\bibitem{ahmed2019emerging}
+S.~Ahmed, F.~Rayhan, A.~Mahbub, M.~R. Jani, S.~Shatabda, D.~M. Farid, Liuboost:
+  Locality informed under-boosting for imbalanced data classification, in:
+  A.~Abraham, P.~Dutta, J.~K. Mandal, A.~Bhattacharya, S.~Dutta (Eds.),
+  Emerging Technologies in Data Mining and Information Security, Springer,
+  Singapore, Singapore, 2019, pp. 133--144.
+
+\end{thebibliography}

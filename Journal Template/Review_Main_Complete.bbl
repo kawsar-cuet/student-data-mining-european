@@ -1,0 +1,84 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{Tinto1993}
+V.~Tinto, Leaving college: Rethinking the causes and cures of student
+  attrition, University of Chicago Press.
+
+\bibitem{Romero2020}
+C.~Romero, S.~Ventura, Educational data mining and learning analytics: An
+  updated survey, Wiley Interdisciplinary Reviews: Data Mining and Knowledge
+  Discovery 10~(3) (2020) e1355.
+
+\bibitem{Bean1985}
+J.~P. Bean, Interaction effects based on class level in an explanatory model of
+  college student dropout syndrome, American Educational Research Journal
+  22~(1) (1985) 35--64.
+
+\bibitem{Kotsiantis2013}
+S.~B. Kotsiantis, C.~Pierrakeas, P.~E. Pintelas, Preventing student dropout in
+  distance learning using machine learning techniques, Knowledge-Based Systems
+  60 (2013) 64--74.
+
+\bibitem{Asif2017}
+R.~Asif, A.~Merceron, S.~A. Ali, N.~G. Haider, Analyzing undergraduate
+  students' performance using educational data mining, Computers \& Education
+  113 (2017) 177--194.
+
+\bibitem{Huang2020}
+A.~Y.~Q. Huang, O.~H.~T. Lu, S.~J.~H. Yang, Effects of artificial
+  intelligence--enabled personalized recommendations on learners' learning
+  engagement, motivation, and outcomes in a flipped classroom, Computers \&
+  Education 150 (2020) 103851.
+
+\bibitem{Adnan2021}
+M.~Adnan, A.~Habib, J.~Ashraf, S.~Mussadiq, A.~A. Raza, M.~Abid, M.~Bashir,
+  S.~U. Khan, Predicting at-risk students at different percentages of course
+  length for early intervention using machine learning models, IEEE Access 9
+  (2021) 7519--7539.
+
+\bibitem{Vaswani2017}
+A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N. Gomez,
+  L.~Kaiser, I.~Polosukhin, Attention is all you need, in: Advances in Neural
+  Information Processing Systems, 2017, pp. 5998--6008.
+
+\bibitem{Yang2021}
+T.~Yang, C.~G. Brinton, Understanding student learning behavior and predicting
+  their performance with self-attention mechanism, IEEE Transactions on
+  Learning Technologies 14~(6) (2021) 745--759.
+
+\bibitem{Wang2022}
+W.~Wang, H.~Yu, C.~Miao, Deep model for dropout prediction in moocs, Computers
+  \& Education 182 (2022) 104457.
+
+\bibitem{Ruder2017}
+S.~Ruder, An overview of multi-task learning in deep neural networks, arXiv
+  preprint arXiv:1706.05098.
+
+\bibitem{Liu2019}
+Q.~Liu, Z.~Huang, Y.~Yin, E.~Chen, H.~Xiong, Y.~Su, G.~Hu, Ekt: Exercise-aware
+  knowledge tracing for student performance prediction, IEEE Transactions on
+  Knowledge and Data Engineering 33~(1) (2019) 100--115.
+
+\bibitem{Chen2020}
+P.~Chen, Y.~Lu, V.~W. Zheng, X.~Chen, B.~Yang, Knowedu: A system to construct
+  knowledge graph for education, IEEE Access 6 (2020) 31553--31563.
+
+\bibitem{OpenAI2023}
+{OpenAI}, Gpt-4 technical report, Tech. rep., OpenAI, arXiv:2303.08774 (2023).
+
+\bibitem{Martinez2023}
+J.~Martinez, M.~Rodriguez, C.~Garcia, Large language models for personalized
+  educational recommendations, Computers \& Education: Artificial Intelligence
+  4 (2023) 100134.
+
+\bibitem{Nguyen2024}
+L.~Nguyen, W.~Chen, S.~Brown, Enhancing student engagement through llm-based
+  intelligent tutoring systems, Educational Technology Research and Development
+  72 (2024) 45--68.
+
+\end{thebibliography}

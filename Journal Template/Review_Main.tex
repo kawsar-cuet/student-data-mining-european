@@ -1,0 +1,125 @@
+%\documentclass[final,authoryear,5p,times,twocolumn]{FILES/elsarticle}
+\documentclass[review,12pt]{FILES/elsarticle}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{lineno,hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{lscape}
+\usepackage[width=6in, height=9in]{geometry}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{natbib}
+\usepackage{listings}
+\modulolinenumbers[5]
+
+%\usepackage{setspace}
+%\usepackage{flushend}
+
+% Hyperref configuration
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+}
+
+% Caption settings
+\captionsetup{font=small,labelfont=bf}
+
+% Algorithm commands
+\algnewcommand\Input{\item[\textbf{Input:}]}
+\algnewcommand\Output{\item[\textbf{Output:}]}
+
+% Listings configuration
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red}
+}
+
+\journal{Computers \& Education: Artificial Intelligence}
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Predicting Student Performance and Dropout Risk in Higher Education: A Deep Learning and Large Language Model Approach}
+
+\author[label1]{Dewan Md. Farid \corref{cor1}}
+\ead{dewanfarid@cse.uiu.ac.bd}
+\address[label1]{Department of Computer Science \& Engineering, United International University\\ 
+United City, Madani Avenue,  Badda, Dhaka 1212, Bangladesh}
+\cortext[cor1]{Corresponding author. Tel.: +88 01715833499.}
+
+\begin{abstract}
+Student attrition and academic underperformance remain critical challenges in higher education institutions worldwide. Early identification of at-risk students enables timely interventions that can significantly improve retention rates and academic outcomes. This study presents a comprehensive methodology integrating deep learning architectures with large language models (LLMs) to predict student performance and dropout risk in undergraduate education. We analyze a dataset of 4,424 students from a European higher education institution, incorporating 37 features spanning demographic, academic, socioeconomic, and macroeconomic dimensions. Three neural network architectures are proposed: (1) Performance Prediction Network (PPN) for multi-class grade forecasting, (2) Dropout Prediction Network with Attention mechanism (DPN-A) for binary dropout classification, and (3) Hybrid Multi-Task Learning network (HMTL) for simultaneous performance and dropout prediction. The methodology incorporates self-attention mechanisms for interpretability, multi-task learning for knowledge transfer, and GPT-4 integration for generating personalized, evidence-based intervention recommendations. Rigorous evaluation employs stratified 10-fold cross-validation, statistical significance testing, and SHAP-based feature importance analysis. The proposed framework achieves baseline accuracies of 79.2\% (Random Forest) and 85.7\% (Logistic Regression) on test data, with deep learning models expected to surpass these benchmarks. This methodology provides both predictive accuracy and actionable insights, enabling targeted interventions while maintaining reproducibility standards for educational data mining research.
+\end{abstract}
+
+\begin{keyword}
+Student dropout prediction \sep Academic performance forecasting \sep Deep learning \sep Attention mechanisms \sep Multi-task learning \sep Large language models \sep Educational data mining \sep Early warning systems
+\end{keyword}
+\end{frontmatter}
+
+\linenumbers
+
+\section{Introduction}
+\label{sec:introduction}
+Write introduction here. Citing journals \cite{farid2016adaptive, farid2014hybrid, farid2013adaptive}
+
+Write organisation of the paper.
+
+\section{Related Works}
+\label{sec:related_works}
+Write related works here. Citing conferences \cite{dipu2023TENCON, masudur2023ICCCNT, joy2023CNIOT23}
+
+
+\section{Methodology}
+\label{sec:methodology}
+Write methodology here. Citing book chapters \cite{farid2012mining, farid2018ensemble, ahmed2019emerging}
+
+\subsection{Sub-section 1}
+Write Sub-section here
+
+\subsection{Experimental Setup}
+Write experimental setup here. 
+
+\subsection{Performance Evaluation Metrics}
+
+\subsection{Experimental Results}
+
+
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+Write conclusion and future works here. 
+
+%% References
+\bibliographystyle{FILES/elsarticle-num}
+\bibliography{FILES/Reference}
+
+%\pagebreak
+% Biography Section
+
+\subsection*{  } % This subsection (with no heading) is added to give more space between two biographies
+\noindent \textbf{Dewan Md. Farid} is a Professor of Computer Science and Engineering at United International University. Prof. Farid worked as a Postdoctoral Fellow/Staff at the following research labs/groups: (1) Computational Intelligence Group (CIG), Department of Computer Science and Digital Technology, University of Northumbria at Newcastle, UK in 2013, (2) Computational Modelling Lab (CoMo) and Artificial Intelligence Research Group, Department of Computer Science, Vrije Universiteit Brussel, Belgium in 2015-2016, and (3) Decision and Information Systems for Production systems (DISP) Laboratory, IUT Lumière – Université Lyon 2, France in 2020. Prof. Farid was a Visiting Faculty at the Faculty of Engineering, University of Porto, Portugal in June 2016. He holds a PhD in Computer Science and Engineering from Jahangirnagar University, Bangladesh in 2012. Part of his PhD research has been done at ERIC Laboratory, University Lumière Lyon 2, France by Erasmus-Mundus ECW eLink PhD Exchange Program. He has published 140 peer-reviewed scientific articles, including 33 highly esteemed journals like Expert Systems with Ap­plications, IEEE Access, Journal of Theoretical Biology, Journal of Neuroscience Methods, Bioinformatics, Scientific Reports (Nature), Proteins and so on in the field of Machine Learning, Data Mining and Big Data. Prof. Farid is a IEEE Senior Member and Member ACM.
+
+\end{document}
