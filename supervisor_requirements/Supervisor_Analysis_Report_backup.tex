@@ -1,0 +1,620 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{csvsimple}
+
+% Page setup
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Section formatting
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+    pdftitle={Student Dropout Prediction - Comprehensive Analysis},
+    pdfauthor={},
+}
+
+% Define colors
+\definecolor{headercolor}{RGB}{70,130,180}
+\definecolor{lightgray}{RGB}{240,240,240}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\Huge\bfseries Student Dropout Prediction\par}
+    \vspace{0.5cm}
+    {\LARGE Comprehensive Data Analysis Report\par}
+    \vspace{2cm}
+    
+    {\Large\itshape Supervisor Requirements Analysis\par}
+    \vspace{3cm}
+    
+    {\large\bfseries Dataset Overview and Modeling Results\par}
+    \vspace{0.5cm}
+    {\large 4,424 Students | 34 Features | 3 Classes\par}
+    \vspace{2cm}
+    
+    {\large December 2025\par}
+    
+    \vfill
+    
+    {\large European Higher Education Institution\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% Executive Summary
+\section{Executive Summary}
+
+This comprehensive report presents a detailed analysis of student dropout prediction in higher education, addressing all 11 requirements specified by the thesis supervisor. The analysis encompasses dataset exploration, feature engineering, multiple machine learning models, explainable AI techniques, and rigorous evaluation metrics.
+
+\subsection{Key Findings}
+
+\begin{itemize}
+    \item \textbf{Dataset}: 4,424 students with 34 features across academic, financial, and demographic categories
+    \item \textbf{Class Distribution}: Dropout (32.1\%), Enrolled (17.9\%), Graduate (49.9\%)
+    \item \textbf{Best Model}: XGBoost achieving 77.4\% accuracy with 90.6\% ROC-AUC
+    \item \textbf{Top Predictors}: Curricular units approved (2nd semester), tuition fees status, and semester grades
+    \item \textbf{Cross-Validation}: Consistent performance across 10-fold CV (77.6\% mean accuracy)
+\end{itemize}
+
+\newpage
+
+% Section 1: Dataset Overview
+\section{Dataset Overview (Requirements 1-3)}
+
+\subsection{Total Students and Features}
+
+The dataset contains comprehensive information about \textbf{4,424 students} enrolled in various degree programs at a European higher education institution. The analysis focuses on predicting student outcomes across three classes:
+
+\begin{itemize}
+    \item \textbf{Dropout}: 1,421 students (32.1\%)
+    \item \textbf{Enrolled}: 794 students (17.9\%)
+    \item \textbf{Graduate}: 2,209 students (49.9\%)
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{outputs/figures/01_class_distribution.png}
+    \caption{Distribution of student outcomes across three classes}
+    \label{fig:class_distribution}
+\end{figure}
+
+\subsection{Feature Summary}
+
+The dataset comprises \textbf{34 features} organized into three main categories:
+
+\begin{table}[H]
+\centering
+\caption{Feature Categories and Counts}
+\label{tab:feature_categories}
+\begin{tabular}{lc}
+\toprule
+\textbf{Category} & \textbf{Number of Features} \\
+\midrule
+Academic Features & 18 \\
+Financial Features & 12 \\
+Demographic Features & 16 \\
+\midrule
+\textbf{Total} & \textbf{34} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textit{Note: Some features overlap across categories (e.g., Gender appears in both financial and demographic categories).}
+
+\newpage
+
+% Section 2: Feature Lists
+\section{Feature Lists (Requirements 4-6)}
+
+\subsection{Academic Features (18 features)}
+
+Academic features capture student performance, enrollment patterns, and qualifications:
+
+\begin{enumerate}
+    \item Curricular units 1st sem (credited)
+    \item Curricular units 1st sem (enrolled)
+    \item Curricular units 1st sem (evaluations)
+    \item Curricular units 1st sem (approved)
+    \item Curricular units 1st sem (grade)
+    \item Curricular units 1st sem (without evaluations)
+    \item Curricular units 2nd sem (credited)
+    \item Curricular units 2nd sem (enrolled)
+    \item Curricular units 2nd sem (evaluations)
+    \item Curricular units 2nd sem (approved)
+    \item Curricular units 2nd sem (grade)
+    \item Curricular units 2nd sem (without evaluations)
+    \item Previous qualification grade
+    \item Admission grade
+    \item Application mode
+    \item Application order
+    \item Course
+    \item Daytime/evening attendance
+\end{enumerate}
+
+\subsection{Financial Features (12 features)}
+
+Financial features include tuition status, scholarships, and economic indicators:
+
+\begin{enumerate}
+    \item Tuition fees up to date
+    \item Scholarship holder
+    \item Debtor
+    \item Unemployment rate
+    \item Inflation rate
+    \item GDP
+    \item International status
+    \item Displaced
+    \item Educational special needs
+    \item Gender
+    \item Age at enrollment
+    \item Nationality
+\end{enumerate}
+
+\subsection{Demographic Features (16 features)}
+
+Demographic features capture personal and family background:
+
+\begin{enumerate}
+    \item Marital status
+    \item Previous qualification
+    \item Mother's qualification
+    \item Father's qualification
+    \item Mother's occupation
+    \item Father's occupation
+    \item Gender
+    \item Age at enrollment
+    \item International status
+    \item Displaced
+    \item Educational special needs
+    \item Debtor
+    \item Tuition fees up to date
+    \item Scholarship holder
+    \item Nationality
+    \item Application mode
+\end{enumerate}
+
+\newpage
+
+% Section 3: Feature Ranking
+\section{Feature Ranking (Requirement 7)}
+
+Five different feature ranking methods were applied to identify the most important predictors. Table~\ref{tab:feature_ranking} presents the top 15 features based on average rank across all methods.
+
+\begin{table}[H]
+\centering
+\caption{Top 15 Features by Average Rank (5 Methods)}
+\label{tab:feature_ranking}
+\small
+\begin{tabular}{clcccccc}
+\toprule
+\textbf{Rank} & \textbf{Feature} & \textbf{IG} & \textbf{GR} & \textbf{Gini} & \textbf{Chi2} & \textbf{F-stat} & \textbf{Avg} \\
+\midrule
+1 & Curricular units 2nd sem (approved) & 1 & 2 & 1 & 4 & 1 & 1.80 \\
+2 & Tuition fees up to date & 6 & 1 & 2 & 7 & 5 & 4.20 \\
+3 & Curricular units 2nd sem (grade) & 2 & 7 & 8 & 3 & 2 & 4.40 \\
+4 & Curricular units 1st sem (approved) & 3 & 3 & 7 & 8 & 3 & 4.80 \\
+5 & Curricular units 1st sem (grade) & 4 & 9 & 13 & 6 & 4 & 7.20 \\
+6 & Curricular units 2nd sem (evaluations) & 5 & 10 & 5 & 15 & 11 & 9.20 \\
+7 & Scholarship holder & 10 & 5 & 24 & 1 & 6 & 9.20 \\
+8 & Age at enrollment & 11 & 17 & 4 & 10 & 7 & 9.80 \\
+9 & Debtor & 14 & 6 & 23 & 2 & 8 & 10.60 \\
+10 & Application mode & 8 & 12 & 20 & 9 & 10 & 11.80 \\
+11 & Curricular units 1st sem (enrolled) & 12 & 15 & 3 & 21 & 13 & 12.80 \\
+12 & Gender & 17 & 11 & 22 & 5 & 9 & 12.80 \\
+13 & Curricular units 1st sem (evaluations) & 7 & 14 & 10 & 23 & 14 & 13.60 \\
+14 & Curricular units 2nd sem (enrolled) & 18 & 19 & 6 & 20 & 12 & 15.00 \\
+15 & Previous qualification & 16 & 13 & 27 & 12 & 20 & 17.60 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Methods}: IG = Information Gain, GR = Gain Ratio, Gini = Gini Index, Chi2 = Chi-Square Test, F-stat = ANOVA F-Statistic
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{outputs/figures/03_top20_information_gain.png}
+    \caption{Top 20 features ranked by Information Gain}
+    \label{fig:ig_ranking}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{outputs/figures/03_ranking_heatmap.png}
+    \caption{Feature ranking heatmap comparing all five methods for top 20 features}
+    \label{fig:ranking_heatmap}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{outputs/figures/03_top20_gini_importance.png}
+    \caption{Top 20 features ranked by Gini importance}
+    \label{fig:gini_ranking}
+\end{figure}
+
+\newpage
+
+% Section 4: Dropout Feature Importance
+\section{Dropout Feature Importance (Requirement 8)}
+
+A focused analysis was conducted to identify the most influential features for predicting student dropout. Four methods were combined: Random Forest importance, Gradient Boosting importance, Permutation importance, and correlation analysis.
+
+\subsection{Model Performance}
+
+\begin{itemize}
+    \item \textbf{Random Forest Accuracy}: 87.68\%
+    \item \textbf{Gradient Boosting Accuracy}: 88.25\%
+\end{itemize}
+
+\subsection{Top Dropout Predictors}
+
+\begin{table}[H]
+\centering
+\caption{Top 10 Most Important Features for Dropout Prediction}
+\label{tab:dropout_features}
+\small
+\begin{tabular}{clcccccc}
+\toprule
+\textbf{Rank} & \textbf{Feature} & \textbf{Composite} & \textbf{RF} & \textbf{GB} & \textbf{Perm} & \textbf{Corr} \\
+\midrule
+1 & Curricular units 2nd sem (approved) & 0.9990 & 1 & 1 & 1 & 2 \\
+2 & Curricular units 2nd sem (grade) & 0.4791 & 2 & 3 & 3 & 1 \\
+3 & Tuition fees up to date & 0.4402 & 4 & 2 & 2 & 5 \\
+4 & Curricular units 1st sem (approved) & 0.3899 & 3 & 6 & 8 & 4 \\
+5 & Curricular units 1st sem (grade) & 0.3143 & 5 & 9 & 24 & 3 \\
+6 & Age at enrollment & 0.2165 & 6 & 5 & 4 & 6 \\
+7 & Scholarship holder & 0.1453 & 16 & 22 & 9 & 7 \\
+8 & Debtor & 0.1349 & 10 & 14 & 32 & 8 \\
+9 & Curricular units 2nd sem (enrolled) & 0.1305 & 12 & 4 & 6 & 12 \\
+10 & Curricular units 2nd sem (evaluations) & 0.1178 & 7 & 10 & 34 & 11 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{outputs/figures/04_top20_dropout_features.png}
+    \caption{Top 20 features for dropout prediction (composite score from 4 methods)}
+    \label{fig:dropout_top20}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{outputs/figures/04_methods_comparison.png}
+    \caption{Comparison of four feature importance methods for dropout prediction}
+    \label{fig:dropout_methods}
+\end{figure}
+
+\newpage
+
+% Section 5: Multi-Model Classification
+\section{Multi-Model Classification (Requirement 9)}
+
+Six machine learning models were trained and evaluated: three single classifiers, three ensemble methods, and one deep learning model.
+
+\subsection{Models Trained}
+
+\begin{enumerate}
+    \item \textbf{Single Classifiers}:
+    \begin{itemize}
+        \item Decision Tree
+        \item Naive Bayes
+    \end{itemize}
+    
+    \item \textbf{Ensemble Methods}:
+    \begin{itemize}
+        \item Random Forest (200 trees)
+        \item AdaBoost (100 estimators)
+        \item XGBoost (200 estimators)
+    \end{itemize}
+    
+    \item \textbf{Deep Learning}:
+    \begin{itemize}
+        \item Neural Network (3 hidden layers: 128-64-32 neurons)
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Training Results}
+
+\begin{table}[H]
+\centering
+\caption{Model Training and Test Performance}
+\label{tab:model_training}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Training Accuracy} & \textbf{Test Accuracy} \\
+\midrule
+Decision Tree & 0.8508 & 0.6452 \\
+Naive Bayes & 0.6861 & 0.6667 \\
+Random Forest & 0.8827 & 0.7582 \\
+AdaBoost & 0.8160 & 0.7492 \\
+\rowcolor{lightgray}
+\textbf{XGBoost} & \textbf{0.9847} & \textbf{0.7740} \\
+Neural Network & 0.8943 & 0.7412 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Note}: XGBoost achieved the best test performance with 77.40\% accuracy. The high training accuracy (98.47\%) suggests some overfitting, but test performance remains strong.
+
+\newpage
+
+% Section 6: Comprehensive Evaluation
+\section{Comprehensive Evaluation (Requirement 11)}
+
+\subsection{Performance Metrics}
+
+All models were evaluated using multiple metrics: accuracy, precision, recall, F1-score, and ROC-AUC.
+
+\begin{table}[H]
+\centering
+\caption{Comprehensive Model Evaluation Metrics}
+\label{tab:evaluation_metrics}
+\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{ROC-AUC} \\
+\midrule
+Decision Tree & 0.6452 & 0.6887 & 0.6452 & 0.6614 & 0.8160 \\
+Naive Bayes & 0.6667 & 0.6467 & 0.6667 & 0.6527 & 0.8133 \\
+Random Forest & 0.7582 & 0.7757 & 0.7582 & 0.7641 & 0.9062 \\
+AdaBoost & 0.7492 & 0.7429 & 0.7492 & 0.7452 & 0.8877 \\
+\rowcolor{lightgray}
+\textbf{XGBoost} & \textbf{0.7740} & \textbf{0.7657} & \textbf{0.7740} & \textbf{0.7678} & \textbf{0.9057} \\
+Neural Network & 0.7412 & 0.7407 & 0.7412 & 0.7378 & 0.8730 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{outputs/figures/07_model_comparison.png}
+    \caption{Comparison of all models across four key metrics}
+    \label{fig:model_comparison}
+\end{figure}
+
+\subsection{10-Fold Cross-Validation Results}
+
+\begin{table}[H]
+\centering
+\caption{10-Fold Cross-Validation Performance}
+\label{tab:cross_validation}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Mean Accuracy} & \textbf{Std Dev} & \textbf{Min} & \textbf{Max} \\
+\midrule
+Decision Tree & 0.6738 & 0.0162 & 0.6433 & 0.6968 \\
+Naive Bayes & 0.6878 & 0.0179 & 0.6606 & 0.7172 \\
+Random Forest & 0.7624 & 0.0157 & 0.7330 & 0.7923 \\
+AdaBoost & 0.7647 & 0.0130 & 0.7353 & 0.7805 \\
+\rowcolor{lightgray}
+\textbf{XGBoost} & \textbf{0.7762} & \textbf{0.0097} & \textbf{0.7607} & \textbf{0.7919} \\
+Neural Network & 0.7554 & 0.0144 & 0.7421 & 0.7788 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key Finding}: XGBoost demonstrates the most consistent performance with the lowest standard deviation (0.0097) and highest mean accuracy (77.62\%) across all folds.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{outputs/figures/07_cross_validation.png}
+    \caption{10-fold cross-validation results with standard deviation error bars}
+    \label{fig:cross_validation}
+\end{figure}
+
+\subsection{Confusion Matrices}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{outputs/figures/07_confusion_matrices.png}
+    \caption{Confusion matrices for all six models}
+    \label{fig:confusion_matrices}
+\end{figure}
+
+\subsection{ROC Curves and AUC Scores}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{outputs/figures/07_roc_curves.png}
+    \caption{ROC curves for all models across three classes (One-vs-Rest approach)}
+    \label{fig:roc_curves}
+\end{figure}
+
+\subsection{Per-Class Performance}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{outputs/figures/07_per_class_performance.png}
+    \caption{F1-Score heatmap showing per-class performance for all models}
+    \label{fig:per_class}
+\end{figure}
+
+\newpage
+
+% Section 7: Explainable AI
+\section{Explainable AI (Requirement 10)}
+
+\textit{Note: The explainability analysis using SHAP and LIME is currently being processed. This section will be completed when the analysis finishes. The following visualizations and interpretations will be included:}
+
+\begin{itemize}
+    \item SHAP summary plots for Random Forest and XGBoost
+    \item SHAP feature importance rankings
+    \item LIME explanations for Neural Network predictions
+    \item Individual prediction explanations
+    \item Aggregated feature importance across all methods
+\end{itemize}
+
+\textit{Expected outputs:}
+\begin{itemize}
+    \item \texttt{06\_shap\_rf\_summary.png} - SHAP beeswarm plot for Random Forest
+    \item \texttt{06\_shap\_rf\_importance.png} - SHAP bar chart for Random Forest
+    \item \texttt{06\_shap\_xgb\_summary.png} - SHAP beeswarm plot for XGBoost
+    \item \texttt{06\_shap\_xgb\_importance.png} - SHAP bar chart for XGBoost
+    \item \texttt{06\_lime\_nn\_importance.png} - LIME feature importance for Neural Network
+    \item Individual LIME explanations for sample predictions
+\end{itemize}
+
+% Insert actual SHAP figures that were generated
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{outputs/figures/06_shap_rf_summary.png}
+    \caption{SHAP summary (beeswarm) for Random Forest: impact and direction of top features}
+    \label{fig:shap_rf_summary}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{outputs/figures/06_shap_rf_importance.png}
+    \caption{SHAP bar chart for Random Forest: mean(|SHAP value|) importance ranking}
+    \label{fig:shap_rf_importance}
+\end{figure}
+
+\newpage
+
+% Section 8: Conclusions
+\section{Conclusions and Recommendations}
+
+\subsection{Key Insights}
+
+\begin{enumerate}
+    \item \textbf{Academic Performance is Paramount}: The number of approved curricular units and semester grades are consistently the strongest predictors across all analyses.
+    
+    \item \textbf{Financial Factors Matter}: Tuition payment status and scholarship holder status significantly impact dropout prediction.
+    
+    \item \textbf{Ensemble Methods Excel}: XGBoost and Random Forest substantially outperform single classifiers, achieving 77.4\% and 75.8\% accuracy respectively.
+    
+    \item \textbf{Robust Performance}: XGBoost demonstrates the most stable performance across cross-validation folds (SD = 0.0097).
+    
+    \item \textbf{High ROC-AUC}: Both XGBoost (90.57\%) and Random Forest (90.62\%) achieve excellent discrimination ability.
+\end{enumerate}
+
+\subsection{Recommendations for Intervention}
+
+Based on the analysis, institutions should focus on:
+
+\begin{itemize}
+    \item \textbf{Early Warning System}: Monitor curricular units approved in the first semester as an early indicator
+    \item \textbf{Financial Support}: Proactively identify students with tuition payment issues
+    \item \textbf{Academic Counseling}: Provide targeted support for students struggling with course evaluations
+    \item \textbf{Age-Specific Programs}: Develop interventions tailored to different age groups
+    \item \textbf{Scholarship Programs}: Maintain and expand scholarship offerings given their protective effect
+\end{itemize}
+
+\subsection{Model Deployment Recommendation}
+
+\textbf{XGBoost} is recommended for production deployment due to:
+\begin{itemize}
+    \item Highest test accuracy (77.40\%)
+    \item Excellent ROC-AUC (90.57\%)
+    \item Most consistent cross-validation performance
+    \item Strong performance across all three classes
+    \item Computational efficiency for real-time predictions
+\end{itemize}
+
+\newpage
+
+% Appendix
+\appendix
+
+\section{Technical Details}
+
+\subsection{Data Preprocessing}
+
+\begin{itemize}
+    \item \textbf{Missing Values}: None detected in the dataset
+    \item \textbf{Encoding}: Target variable encoded as Dropout=0, Enrolled=1, Graduate=2
+    \item \textbf{Scaling}: StandardScaler applied for Neural Network (all other models use raw features)
+    \item \textbf{Train/Test Split}: 80/20 stratified split with random state 42
+\end{itemize}
+
+\subsection{Model Hyperparameters}
+
+\begin{itemize}
+    \item \textbf{Decision Tree}: max\_depth=15, min\_samples\_split=10, min\_samples\_leaf=5, class\_weight='balanced'
+    \item \textbf{Random Forest}: n\_estimators=200, max\_depth=15, class\_weight='balanced'
+    \item \textbf{AdaBoost}: n\_estimators=100, base\_estimator=DecisionTree(max\_depth=3)
+    \item \textbf{XGBoost}: n\_estimators=200, max\_depth=6, learning\_rate=0.1
+    \item \textbf{Neural Network}: layers=(128, 64, 32), activation='relu', solver='adam', early\_stopping=True
+\end{itemize}
+
+\subsection{Software Environment}
+
+\begin{itemize}
+    \item \textbf{Python}: 3.10
+    \item \textbf{Key Libraries}: scikit-learn, xgboost, pandas, numpy, matplotlib, seaborn
+    \item \textbf{Explainability}: SHAP, LIME
+    \item \textbf{Hardware}: Standard CPU processing
+\end{itemize}
+
+\section{All Analysis Outputs}
+
+\subsection{Generated Files}
+
+\textbf{Reports}:
+\begin{itemize}
+    \item \texttt{01\_dataset\_summary.txt}
+    \item \texttt{02\_feature\_lists.txt}
+    \item \texttt{03\_feature\_ranking\_report.txt}
+    \item \texttt{04\_dropout\_features\_report.txt}
+    \item \texttt{05\_model\_training\_report.txt}
+    \item \texttt{06\_explainability\_report.txt} (in progress)
+    \item \texttt{07\_comprehensive\_evaluation\_report.txt}
+\end{itemize}
+
+\textbf{CSV Tables}:
+\begin{itemize}
+    \item \texttt{03\_feature\_rankings.csv}
+    \item \texttt{04\_dropout\_feature\_importance.csv}
+    \item \texttt{05\_model\_training\_results.csv}
+    \item \texttt{07\_model\_evaluation\_summary.csv}
+    \item \texttt{07\_cross\_validation\_results.csv}
+\end{itemize}
+
+\textbf{Trained Models}:
+\begin{itemize}
+    \item \texttt{decision\_tree.pkl}
+    \item \texttt{naive\_bayes.pkl}
+    \item \texttt{random\_forest.pkl}
+    \item \texttt{adaboost.pkl}
+    \item \texttt{xgboost.pkl}
+    \item \texttt{neural\_network.pkl}
+    \item \texttt{scaler.pkl}
+\end{itemize}
+
+\end{document}

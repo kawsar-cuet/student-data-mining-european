@@ -1,0 +1,62 @@
+COMPREHENSIVE FEATURE LISTS
+================================================================================
+
+4. LIST OF ACADEMIC FEATURES (18 features)
+--------------------------------------------------------------------------------
+
+    1. Curricular_units_1st_sem_credited
+    2. Curricular_units_1st_sem_enrolled
+    3. Curricular_units_1st_sem_evaluations
+    4. Curricular_units_1st_sem_approved
+    5. Curricular_units_1st_sem_grade
+    6. Curricular_units_1st_sem_without_evaluations
+    7. Curricular_units_2nd_sem_credited
+    8. Curricular_units_2nd_sem_enrolled
+    9. Curricular_units_2nd_sem_evaluations
+   10. Curricular_units_2nd_sem_approved
+   11. Curricular_units_2nd_sem_grade
+   12. Curricular_units_2nd_sem_without_evaluations
+   13. Previous_qualification_grade
+   14. Admission_grade
+   15. Application_mode
+   16. Application_order
+   17. Course
+   18. Daytime_evening_attendance
+
+
+5. LIST OF FINANCIAL FEATURES (12 features)
+--------------------------------------------------------------------------------
+
+    1. Tuition_fees_up_to_date
+    2. Scholarship_holder
+    3. Debtor
+    4. Unemployment_rate
+    5. Inflation_rate
+    6. GDP
+    7. International
+    8. Displaced
+    9. Educational_special_needs
+   10. Gender
+   11. Age_at_enrollment
+   12. Nacionality
+
+
+6. LIST OF DEMOGRAPHIC FEATURES (16 features)
+--------------------------------------------------------------------------------
+
+    1. Marital_status
+    2. Previous_qualification
+    3. Mothers_qualification
+    4. Fathers_qualification
+    5. Mothers_occupation
+    6. Fathers_occupation
+    7. Gender
+    8. Age_at_enrollment
+    9. International
+   10. Displaced
+   11. Educational_special_needs
+   12. Debtor
+   13. Tuition_fees_up_to_date
+   14. Scholarship_holder
+   15. Nacionality
+   16. Application_mode

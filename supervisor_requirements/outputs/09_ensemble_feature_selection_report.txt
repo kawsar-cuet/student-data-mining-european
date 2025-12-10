@@ -1,0 +1,127 @@
+================================================================================
+ENSEMBLE FEATURE SELECTION OPTIMIZATION - SUMMARY REPORT
+================================================================================
+
+OBJECTIVE:
+Test Random Forest, AdaBoost, and XGBoost classifiers with different
+feature selection methods to improve model accuracy using optimal feature subsets.
+
+FEATURE SELECTION METHODS TESTED:
+1. All Features (Baseline)
+2. ANOVA F-statistic (f_classif)
+3. Mutual Information
+4. Chi-Square Test
+5. Recursive Feature Elimination (RFE)
+6. Random Forest Feature Importance
+7. Information Gain
+8. Gain Ratio
+9. Gini Index
+
+FEATURE COUNTS TESTED:
+[5, 10, 15, 20, 25, 30, 34]
+
+================================================================================
+BEST CONFIGURATIONS
+================================================================================
+
+Random Forest:
+  Best Method: RFE
+  Number of Features: 20
+  Test Accuracy: 0.7785
+  CV Accuracy: 0.7711
+  Precision: 0.7730
+  Recall: 0.7785
+  F1-Score: 0.7715
+
+  Improvement over baseline: +0.68%
+  Baseline accuracy (All 34 features): 0.7718
+
+AdaBoost:
+  Best Method: Mutual Info
+  Number of Features: 15
+  Test Accuracy: 0.7706
+  CV Accuracy: 0.7587
+  Precision: 0.7650
+  Recall: 0.7706
+  F1-Score: 0.7661
+
+  Improvement over baseline: +2.15%
+  Baseline accuracy (All 34 features): 0.7492
+
+XGBoost:
+  Best Method: RF Importance
+  Number of Features: 30
+  Test Accuracy: 0.7797
+  CV Accuracy: 0.7708
+  Precision: 0.7715
+  Recall: 0.7797
+  F1-Score: 0.7734
+
+  Improvement over baseline: +0.90%
+  Baseline accuracy (All 34 features): 0.7706
+
+================================================================================
+METHOD PERFORMANCE SUMMARY
+================================================================================
+
+                            Test_Accuracy         CV_Accuracy        
+                                     mean     max        mean     max
+Model         Method                                                 
+AdaBoost      ANOVA F-stat         0.7492  0.7582      0.7466  0.7576
+              All Features         0.7492  0.7492      0.7604  0.7604
+              Chi-Square           0.7437  0.7571      0.7397  0.7587
+              Gain Ratio           0.7505  0.7616      0.7528  0.7652
+              Gini Index           0.7546  0.7638      0.7568  0.7641
+              Info Gain            0.7531  0.7650      0.7514  0.7649
+              Mutual Info          0.7535  0.7706      0.7532  0.7604
+              RF Importance        0.7508  0.7684      0.7480  0.7635
+              RFE                  0.7492  0.7684      0.7481  0.7635
+Random Forest ANOVA F-stat         0.7499  0.7706      0.7539  0.7706
+              All Features         0.7718  0.7718      0.7779  0.7779
+              Chi-Square           0.7439  0.7763      0.7470  0.7737
+              Gain Ratio           0.7554  0.7740      0.7585  0.7793
+              Gini Index           0.7588  0.7763      0.7592  0.7773
+              Info Gain            0.7522  0.7751      0.7581  0.7802
+              Mutual Info          0.7571  0.7740      0.7575  0.7754
+              RF Importance        0.7508  0.7740      0.7582  0.7773
+              RFE                  0.7544  0.7785      0.7545  0.7779
+XGBoost       ANOVA F-stat         0.7531  0.7661      0.7487  0.7638
+              All Features         0.7706  0.7706      0.7691  0.7691
+              Chi-Square           0.7405  0.7672      0.7429  0.7714
+              Gain Ratio           0.7573  0.7763      0.7567  0.7728
+              Gini Index           0.7618  0.7740      0.7630  0.7723
+              Info Gain            0.7578  0.7751      0.7548  0.7723
+              Mutual Info          0.7620  0.7763      0.7576  0.7742
+              RF Importance        0.7542  0.7797      0.7554  0.7731
+              RFE                  0.7556  0.7740      0.7531  0.7728
+
+================================================================================
+VISUALIZATIONS GENERATED
+================================================================================
+
+1. 09_ensemble_accuracy_vs_features.png - Line plots showing accuracy trends
+2. 09_ensemble_accuracy_heatmap.png - Heatmaps of accuracy by method/features
+3. 09_ensemble_best_accuracy_per_method.png - Bar charts of best per method
+4. 09_ensemble_models_comparison.png - Side-by-side 3-model comparison
+5. 09_ensemble_all_metrics_comparison.png - Multi-metric comparison charts
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+For Random Forest:
+  Use RFE with 20 features
+  Expected accuracy: 0.7785
+
+For AdaBoost:
+  Use Mutual Info with 15 features
+  Expected accuracy: 0.7706
+
+For XGBoost:
+  Use RF Importance with 30 features
+  Expected accuracy: 0.7797
+
+Ensemble methods significantly outperform single classifiers. Feature
+selection further improves their already strong performance. XGBoost
+shows the best results overall. All models benefit from reduced feature
+sets, improving both accuracy and computational efficiency.

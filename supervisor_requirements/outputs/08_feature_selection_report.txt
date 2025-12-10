@@ -1,0 +1,101 @@
+================================================================================
+FEATURE SELECTION OPTIMIZATION - SUMMARY REPORT
+================================================================================
+
+OBJECTIVE:
+Test Decision Tree and Naive Bayes classifiers with different feature
+selection methods to improve model accuracy using optimal feature subsets.
+
+FEATURE SELECTION METHODS TESTED:
+1. All Features (Baseline)
+2. ANOVA F-statistic (f_classif)
+3. Mutual Information
+4. Chi-Square Test
+5. Recursive Feature Elimination (RFE)
+6. Random Forest Feature Importance
+7. Information Gain
+8. Gain Ratio
+9. Gini Index
+
+FEATURE COUNTS TESTED:
+[5, 10, 15, 20, 25, 30, 34]
+
+================================================================================
+BEST CONFIGURATIONS
+================================================================================
+
+Decision Tree:
+  Best Method: Info Gain
+  Number of Features: 10
+  Test Accuracy: 0.6881
+  CV Accuracy: 0.6810
+  Precision: 0.7252
+  Recall: 0.6881
+  F1-Score: 0.7019
+
+  Improvement over baseline: +4.29%
+  Baseline accuracy (All 34 features): 0.6452
+
+Naive Bayes:
+  Best Method: Info Gain
+  Number of Features: 15
+  Test Accuracy: 0.7266
+  CV Accuracy: 0.7285
+  Precision: 0.7103
+  Recall: 0.7266
+  F1-Score: 0.7100
+
+  Improvement over baseline: +5.99%
+  Baseline accuracy (All 34 features): 0.6667
+
+================================================================================
+METHOD PERFORMANCE SUMMARY
+================================================================================
+
+                            Test_Accuracy         CV_Accuracy        
+                                     mean     max        mean     max
+Model         Method                                                 
+Decision Tree ANOVA F-stat         0.6559  0.6802      0.6665  0.6804
+              All Features         0.6452  0.6452      0.6618  0.6618
+              Chi-Square           0.6439  0.6701      0.6523  0.6683
+              Gain Ratio           0.6516  0.6599      0.6638  0.6753
+              Gini Index           0.6535  0.6633      0.6677  0.6767
+              Info Gain            0.6520  0.6881      0.6613  0.6810
+              Mutual Info          0.6524  0.6644      0.6628  0.6702
+              RF Importance        0.6444  0.6588      0.6614  0.6739
+              RFE                  0.6480  0.6599      0.6542  0.6623
+Naive Bayes   ANOVA F-stat         0.6908  0.7073      0.7034  0.7194
+              All Features         0.6667  0.6667      0.6815  0.6815
+              Chi-Square           0.6840  0.6960      0.6925  0.6965
+              Gain Ratio           0.6910  0.7107      0.6985  0.7149
+              Gini Index           0.6908  0.7062      0.7038  0.7174
+              Info Gain            0.7009  0.7266      0.7104  0.7285
+              Mutual Info          0.6959  0.7153      0.7079  0.7177
+              RF Importance        0.6940  0.7085      0.7060  0.7225
+              RFE                  0.6917  0.7085      0.7035  0.7225
+
+================================================================================
+VISUALIZATIONS GENERATED
+================================================================================
+
+1. 08_accuracy_vs_features.png - Line plots showing accuracy trends
+2. 08_accuracy_heatmap.png - Heatmaps of accuracy by method and feature count
+3. 08_best_accuracy_per_method.png - Bar charts of best accuracy per method
+4. 08_dt_vs_nb_comparison.png - Side-by-side comparison of DT vs NB
+5. 08_all_metrics_comparison.png - Multi-metric comparison charts
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+For Decision Tree:
+  Use Info Gain with 10 features
+  Expected accuracy: 0.6881
+
+For Naive Bayes:
+  Use Info Gain with 15 features
+  Expected accuracy: 0.7266
+
+Feature selection significantly impacts model performance. Both models
+benefit from careful feature selection, with optimal subset sizes varying
+by selection method. Consider ensemble approaches in future work.

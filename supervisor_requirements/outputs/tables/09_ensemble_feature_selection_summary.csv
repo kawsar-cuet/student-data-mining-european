@@ -1,0 +1,30 @@
+,,Test_Accuracy,Test_Accuracy,CV_Accuracy,CV_Accuracy
+,,mean,max,mean,max
+Model,Method,,,,
+AdaBoost,ANOVA F-stat,0.7492,0.7582,0.7466,0.7576
+AdaBoost,All Features,0.7492,0.7492,0.7604,0.7604
+AdaBoost,Chi-Square,0.7437,0.7571,0.7397,0.7587
+AdaBoost,Gain Ratio,0.7505,0.7616,0.7528,0.7652
+AdaBoost,Gini Index,0.7546,0.7638,0.7568,0.7641
+AdaBoost,Info Gain,0.7531,0.765,0.7514,0.7649
+AdaBoost,Mutual Info,0.7535,0.7706,0.7532,0.7604
+AdaBoost,RF Importance,0.7508,0.7684,0.748,0.7635
+AdaBoost,RFE,0.7492,0.7684,0.7481,0.7635
+Random Forest,ANOVA F-stat,0.7499,0.7706,0.7539,0.7706
+Random Forest,All Features,0.7718,0.7718,0.7779,0.7779
+Random Forest,Chi-Square,0.7439,0.7763,0.747,0.7737
+Random Forest,Gain Ratio,0.7554,0.774,0.7585,0.7793
+Random Forest,Gini Index,0.7588,0.7763,0.7592,0.7773
+Random Forest,Info Gain,0.7522,0.7751,0.7581,0.7802
+Random Forest,Mutual Info,0.7571,0.774,0.7575,0.7754
+Random Forest,RF Importance,0.7508,0.774,0.7582,0.7773
+Random Forest,RFE,0.7544,0.7785,0.7545,0.7779
+XGBoost,ANOVA F-stat,0.7531,0.7661,0.7487,0.7638
+XGBoost,All Features,0.7706,0.7706,0.7691,0.7691
+XGBoost,Chi-Square,0.7405,0.7672,0.7429,0.7714
+XGBoost,Gain Ratio,0.7573,0.7763,0.7567,0.7728
+XGBoost,Gini Index,0.7618,0.774,0.763,0.7723
+XGBoost,Info Gain,0.7578,0.7751,0.7548,0.7723
+XGBoost,Mutual Info,0.762,0.7763,0.7576,0.7742
+XGBoost,RF Importance,0.7542,0.7797,0.7554,0.7731
+XGBoost,RFE,0.7556,0.774,0.7531,0.7728

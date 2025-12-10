@@ -1,0 +1,65 @@
+MULTI-MODEL CLASSIFICATION TRAINING RESULTS
+================================================================================
+
+Dataset: 4424 students
+Features: 34
+Classes: 3 (Dropout, Enrolled, Graduate)
+Train/Test Split: 80/20
+Training Set: 3539 students
+Test Set: 885 students
+
+================================================================================
+
+MODELS TRAINED:
+
+1. Decision Tree
+   Training Accuracy: 0.8508
+   Test Accuracy: 0.6452
+   Saved as: decision_tree.pkl
+
+2. Naive Bayes
+   Training Accuracy: 0.6861
+   Test Accuracy: 0.6667
+   Saved as: naive_bayes.pkl
+
+3. Random Forest
+   Training Accuracy: 0.8827
+   Test Accuracy: 0.7582
+   Saved as: random_forest.pkl
+
+4. AdaBoost
+   Training Accuracy: 0.8160
+   Test Accuracy: 0.7492
+   Saved as: adaboost.pkl
+
+5. XGBoost
+   Training Accuracy: 0.9847
+   Test Accuracy: 0.7740
+   Saved as: xgboost.pkl
+
+6. Neural Network
+   Training Accuracy: 0.8943
+   Test Accuracy: 0.7412
+   Saved as: neural_network.pkl
+
+
+================================================================================
+MODEL CATEGORIES:
+================================================================================
+
+Single Classifiers:
+  1. Decision Tree
+  2. Naive Bayes
+
+Ensemble Methods:
+  3. Random Forest (200 trees)
+  4. AdaBoost (100 estimators)
+  5. XGBoost (200 estimators)
+
+Deep Learning:
+  6. Neural Network (3 hidden layers: 128-64-32)
+
+================================================================================
+
+All models saved to: outputs/models/
+Ready for evaluation and explainable AI analysis.

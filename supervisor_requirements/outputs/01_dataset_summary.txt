@@ -1,0 +1,14 @@
+DATASET OVERVIEW
+================================================================================
+
+1. Total Students (Instances): 4424
+
+2. Total Features: 34
+   2.1 Academic Features: 18
+   2.2 Financial Features: 12
+   2.3 Demographic Features: 16
+
+3. Classes: 3
+   3.1 Dropout: 0
+   3.2 Enrolled: 0
+   3.3 Graduate: 0

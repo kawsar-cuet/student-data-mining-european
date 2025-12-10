@@ -1,0 +1,123 @@
+MOST IMPORTANT FEATURES FOR DROPOUT PREDICTION
+==============================================================================================================
+
+Methods Used:
+  1. Random Forest Feature Importance
+  2. Gradient Boosting Feature Importance
+  3. Permutation Importance
+  4. Correlation Analysis
+
+==============================================================================================================
+
+Rank   Feature                                       Composite   RF     GB     Perm   Corr  
+--------------------------------------------------------------------------------------------------------------
+1      Curricular units 2nd sem (approved)           0.9990      1      1      1      2     
+2      Curricular units 2nd sem (grade)              0.4791      2      3      3      1     
+3      Tuition fees up to date                       0.4402      4      2      2      5     
+4      Curricular units 1st sem (approved)           0.3899      3      6      8      4     
+5      Curricular units 1st sem (grade)              0.3143      5      9      24     3     
+6      Age at enrollment                             0.2165      6      5      4      6     
+7      Scholarship holder                            0.1453      16     22     9      7     
+8      Debtor                                        0.1349      10     14     32     8     
+9      Curricular units 2nd sem (enrolled)           0.1305      12     4      6      12    
+10     Curricular units 2nd sem (evaluations)        0.1178      7      10     34     11    
+11     Application mode                              0.1174      15     17     25     10    
+12     Curricular units 1st sem (enrolled)           0.1125      11     11     7      13    
+13     Gender                                        0.1056      22     25     33     9     
+14     Curricular units 1st sem (evaluations)        0.0853      9      13     16     17    
+15     Course                                        0.0734      8      7      5      34    
+16     Mother's occupation                           0.0713      14     8      27     22    
+17     Father's occupation                           0.0703      13     15     26     20    
+18     Mother's qualification                        0.0614      20     16     10     23    
+19     Displaced                                     0.0602      26     29     31     14    
+20     GDP                                           0.0560      17     18     11     25    
+21     Previous qualification                        0.0549      27     30     23     16    
+22     Marital status                                0.0502      28     31     30     15    
+23     Application order                             0.0502      23     20     28     21    
+24     Curricular units 2nd sem (without evaluations) 0.0487      29     27     17     19    
+25     Daytime/evening attendance                    0.0465      31     33     21     18    
+26     Father's qualification                        0.0419      18     12     13     29    
+27     Inflation rate                                0.0374      21     19     29     28    
+28     Curricular units 2nd sem (credited)           0.0370      25     23     12     26    
+29     Curricular units 1st sem (without evaluations) 0.0367      30     28     22     24    
+30     Unemployment rate                             0.0352      19     21     15     30    
+31     Curricular units 1st sem (credited)           0.0327      24     26     14     27    
+32     International                                 0.0138      34     34     20     31    
+33     Nacionality                                   0.0135      32     24     19     33    
+34     Educational special needs                     0.0118      33     32     18     32    
+
+
+==============================================================================================================
+TOP 10 MOST IMPORTANT FEATURES FOR DROPOUT:
+==============================================================================================================
+
+1. Curricular units 2nd sem (approved)
+   - Composite Score: 0.9990
+   - Random Forest Importance: 0.2169 (Rank: 1)
+   - Gradient Boosting Importance: 0.4572 (Rank: 1)
+   - Permutation Importance: 0.0849 (Rank: 1)
+   - Correlation: 0.5695 (Rank: 2)
+
+2. Curricular units 2nd sem (grade)
+   - Composite Score: 0.4791
+   - Random Forest Importance: 0.1334 (Rank: 2)
+   - Gradient Boosting Importance: 0.0476 (Rank: 3)
+   - Permutation Importance: 0.0141 (Rank: 3)
+   - Correlation: 0.5718 (Rank: 1)
+
+3. Tuition fees up to date
+   - Composite Score: 0.4402
+   - Random Forest Importance: 0.0731 (Rank: 4)
+   - Gradient Boosting Importance: 0.0917 (Rank: 2)
+   - Permutation Importance: 0.0384 (Rank: 2)
+   - Correlation: 0.4291 (Rank: 5)
+
+4. Curricular units 1st sem (approved)
+   - Composite Score: 0.3899
+   - Random Forest Importance: 0.1257 (Rank: 3)
+   - Gradient Boosting Importance: 0.0301 (Rank: 6)
+   - Permutation Importance: 0.0035 (Rank: 8)
+   - Correlation: 0.4791 (Rank: 4)
+
+5. Curricular units 1st sem (grade)
+   - Composite Score: 0.3143
+   - Random Forest Importance: 0.0720 (Rank: 5)
+   - Gradient Boosting Importance: 0.0237 (Rank: 9)
+   - Permutation Importance: -0.0003 (Rank: 24)
+   - Correlation: 0.4807 (Rank: 3)
+
+6. Age at enrollment
+   - Composite Score: 0.2165
+   - Random Forest Importance: 0.0488 (Rank: 6)
+   - Gradient Boosting Importance: 0.0385 (Rank: 5)
+   - Permutation Importance: 0.0067 (Rank: 4)
+   - Correlation: 0.2542 (Rank: 6)
+
+7. Scholarship holder
+   - Composite Score: 0.1453
+   - Random Forest Importance: 0.0177 (Rank: 16)
+   - Gradient Boosting Importance: 0.0081 (Rank: 22)
+   - Permutation Importance: 0.0015 (Rank: 9)
+   - Correlation: 0.2454 (Rank: 7)
+
+8. Debtor
+   - Composite Score: 0.1349
+   - Random Forest Importance: 0.0209 (Rank: 10)
+   - Gradient Boosting Importance: 0.0138 (Rank: 14)
+   - Permutation Importance: -0.0021 (Rank: 32)
+   - Correlation: 0.2294 (Rank: 8)
+
+9. Curricular units 2nd sem (enrolled)
+   - Composite Score: 0.1305
+   - Random Forest Importance: 0.0190 (Rank: 12)
+   - Gradient Boosting Importance: 0.0396 (Rank: 4)
+   - Permutation Importance: 0.0056 (Rank: 6)
+   - Correlation: 0.1415 (Rank: 12)
+
+10. Curricular units 2nd sem (evaluations)
+   - Composite Score: 0.1178
+   - Random Forest Importance: 0.0329 (Rank: 7)
+   - Gradient Boosting Importance: 0.0224 (Rank: 10)
+   - Permutation Importance: -0.0033 (Rank: 34)
+   - Correlation: 0.1550 (Rank: 11)
+

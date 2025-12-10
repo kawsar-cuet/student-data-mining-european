@@ -1,0 +1,21 @@
+,,Test_Accuracy,Test_Accuracy,CV_Accuracy,CV_Accuracy
+,,mean,max,mean,max
+Model,Method,,,,
+Decision Tree,ANOVA F-stat,0.6559,0.6802,0.6665,0.6804
+Decision Tree,All Features,0.6452,0.6452,0.6618,0.6618
+Decision Tree,Chi-Square,0.6439,0.6701,0.6523,0.6683
+Decision Tree,Gain Ratio,0.6516,0.6599,0.6638,0.6753
+Decision Tree,Gini Index,0.6535,0.6633,0.6677,0.6767
+Decision Tree,Info Gain,0.652,0.6881,0.6613,0.681
+Decision Tree,Mutual Info,0.6524,0.6644,0.6628,0.6702
+Decision Tree,RF Importance,0.6444,0.6588,0.6614,0.6739
+Decision Tree,RFE,0.648,0.6599,0.6542,0.6623
+Naive Bayes,ANOVA F-stat,0.6908,0.7073,0.7034,0.7194
+Naive Bayes,All Features,0.6667,0.6667,0.6815,0.6815
+Naive Bayes,Chi-Square,0.684,0.696,0.6925,0.6965
+Naive Bayes,Gain Ratio,0.691,0.7107,0.6985,0.7149
+Naive Bayes,Gini Index,0.6908,0.7062,0.7038,0.7174
+Naive Bayes,Info Gain,0.7009,0.7266,0.7104,0.7285
+Naive Bayes,Mutual Info,0.6959,0.7153,0.7079,0.7177
+Naive Bayes,RF Importance,0.694,0.7085,0.706,0.7225
+Naive Bayes,RFE,0.6917,0.7085,0.7035,0.7225

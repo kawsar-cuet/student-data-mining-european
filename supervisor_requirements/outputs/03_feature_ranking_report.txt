@@ -1,0 +1,48 @@
+FEATURE RANKING ANALYSIS
+====================================================================================================
+
+Methods Used:
+  1. Information Gain (Mutual Information)
+  2. Gain Ratio
+  3. Gini Index (Decision Tree Feature Importances)
+  4. Chi-Square Test
+  5. ANOVA F-Statistic
+
+====================================================================================================
+
+Rank   Feature                                       IG     GR     Gini   Chi2   F      Avg   
+----------------------------------------------------------------------------------------------------
+1      Curricular units 2nd sem (approved)           1      2      1      4      1      1.80  
+2      Tuition fees up to date                       6      1      2      7      5      4.20  
+3      Curricular units 2nd sem (grade)              2      7      8      3      2      4.40  
+4      Curricular units 1st sem (approved)           3      3      7      8      3      4.80  
+5      Curricular units 1st sem (grade)              4      9      13     6      4      7.20  
+6      Curricular units 2nd sem (evaluations)        5      10     5      15     11     9.20  
+7      Scholarship holder                            10     5      24     1      6      9.20  
+8      Age at enrollment                             11     17     4      10     7      9.80  
+9      Debtor                                        14     6      23     2      8      10.60 
+10     Application mode                              8      12     20     9      10     11.80 
+11     Curricular units 1st sem (enrolled)           12     15     3      21     13     12.80 
+12     Gender                                        17     11     22     5      9      12.80 
+13     Curricular units 1st sem (evaluations)        7      14     10     23     14     13.60 
+14     Curricular units 2nd sem (enrolled)           18     19     6      20     12     15.00 
+15     Previous qualification                        16     13     27     12     20     17.60 
+16     Mother's occupation                           15     21     9      27     22     18.80 
+17     Mother's qualification                        19     22     14     19     24     19.60 
+18     Curricular units 1st sem (without evaluations) 20     8      31     17     23     19.80 
+19     Displaced                                     24     25     26     11     15     20.20 
+20     Father's occupation                           21     26     12     25     17     20.20 
+21     Course                                        9      16     11     34     31     20.20 
+22     Curricular units 2nd sem (without evaluations) 25     20     28     14     16     20.60 
+23     Father's qualification                        13     18     17     28     29     21.00 
+24     Application order                             26     28     21     22     19     23.20 
+25     International                                 22     4      32     30     32     24.00 
+26     Curricular units 1st sem (credited)           23     24     29     18     26     24.00 
+27     Marital status                                30     30     30     13     18     24.20 
+28     Curricular units 2nd sem (credited)           31     31     19     16     25     24.40 
+29     GDP                                           27     29     15     29     28     25.60 
+30     Daytime/evening attendance                    29     27     33     24     21     26.80 
+31     Unemployment rate                             33     33     16     26     27     27.00 
+32     Nacionality                                   28     23     25     33     33     28.40 
+33     Inflation rate                                34     34     18     31     30     29.40 
+34     Educational special needs                     32     32     34     32     34     32.80 
