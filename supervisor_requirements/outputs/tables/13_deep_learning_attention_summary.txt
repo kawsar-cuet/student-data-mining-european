@@ -1,0 +1,2 @@
+Deep Learning Attention Model trained successfully
+Accuracy: 0.7661

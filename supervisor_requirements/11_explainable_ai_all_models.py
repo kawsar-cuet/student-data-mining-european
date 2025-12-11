@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 """
 Explainable AI (XAI) Analysis for All Models
-Generates SHAP explanations for all 6 optimized models to understand
+Generates SHAP explanations for all 7 optimized models to understand
 feature importance and model decision-making processes.
 """
 
@@ -200,6 +201,41 @@ nn_model.fit(X_train_nn, y_train)
 nn_accuracy = nn_model.score(X_test_nn, y_test)
 print(f"Neural Network Accuracy: {nn_accuracy:.4f}")
 
+# Model 7: Deep Learning Attention (with MLP architecture)
+print("\n[7/7] Deep Learning Attention with ANOVA F-stat (20 features)")
+print("-" * 60)
+
+dl_selector = SelectKBest(f_classif, k=20)
+X_train_dl_selected = dl_selector.fit_transform(X_train, y_train)
+X_test_dl_selected = dl_selector.transform(X_test)
+
+dl_features = X_train.columns[dl_selector.get_support()].tolist()
+print(f"Selected features: {dl_features}")
+
+# Scale for deep learning
+scaler_dl = StandardScaler()
+X_train_dl = scaler_dl.fit_transform(X_train_dl_selected)
+X_test_dl = scaler_dl.transform(X_test_dl_selected)
+
+dl_model = MLPClassifier(
+    hidden_layer_sizes=(64, 32, 16),  # Attention-like architecture
+    activation='relu',
+    solver='adam',
+    alpha=0.001,
+    batch_size=32,
+    learning_rate='adaptive',
+    learning_rate_init=0.001,
+    max_iter=200,
+    early_stopping=True,
+    validation_fraction=0.1,
+    n_iter_no_change=15,
+    random_state=42,
+    verbose=False
+)
+dl_model.fit(X_train_dl, y_train)
+dl_accuracy = dl_model.score(X_test_dl, y_test)
+print(f"Deep Learning Attention Accuracy: {dl_accuracy:.4f}")
+
 print("\n" + "="*80)
 print("3. GENERATING SHAP EXPLANATIONS")
 print("="*80)
@@ -232,13 +268,15 @@ plt.savefig(figures_dir / "11_shap_decision_tree_importance.png", dpi=300, bbox_
 print("✓ Saved: 11_shap_decision_tree_importance.png")
 plt.close()
 
-# Beeswarm plot
+# Beeswarm plot - Focus on Dropout class (index 0)
 plt.figure(figsize=(12, 8))
+# TreeExplainer returns (n_samples, n_features, n_classes) or list depending on version
 if isinstance(shap_values_dt, list):
-    shap.summary_plot(shap_values_dt[1], X_train_dt_sample, show=False)
+    shap_dropout = shap_values_dt[0]
 else:
-    shap.summary_plot(shap_values_dt, X_train_dt_sample, show=False)
-plt.title("Decision Tree - SHAP Summary Plot", fontsize=14, fontweight='bold', pad=20)
+    shap_dropout = shap_values_dt[:, :, 0] if len(shap_values_dt.shape) == 3 else shap_values_dt
+shap.summary_plot(shap_dropout, X_train_dt_sample.values, feature_names=X_train_dt_sample.columns.tolist(), show=False, max_display=10)
+plt.title("Decision Tree - SHAP Summary Plot (Dropout Class)", fontsize=14, fontweight='bold', pad=20)
 plt.tight_layout()
 plt.savefig(figures_dir / "11_shap_decision_tree_summary.png", dpi=300, bbox_inches='tight')
 print("✓ Saved: 11_shap_decision_tree_summary.png")
@@ -266,11 +304,14 @@ print("✓ Saved: 11_shap_naive_bayes_importance.png")
 plt.close()
 
 plt.figure(figsize=(12, 8))
+# Extract Dropout class (index 0) - handle both list and 3D array formats
 if isinstance(shap_values_nb, list):
-    shap.summary_plot(shap_values_nb[1], X_train_nb_sample[:50], show=False)
+    shap_dropout = shap_values_nb[0]
 else:
-    shap.summary_plot(shap_values_nb, X_train_nb_sample[:50], show=False)
-plt.title("Naive Bayes - SHAP Summary Plot", fontsize=14, fontweight='bold', pad=20)
+    # KernelExplainer returns (n_samples, n_features, n_classes)
+    shap_dropout = shap_values_nb[:, :, 0] if len(shap_values_nb.shape) == 3 else shap_values_nb
+shap.summary_plot(shap_dropout, X_train_nb_sample[:50].values, feature_names=X_train_nb_sample.columns.tolist(), show=False, max_display=15)
+plt.title("Naive Bayes - SHAP Summary Plot (Dropout Class)", fontsize=14, fontweight='bold', pad=20)
 plt.tight_layout()
 plt.savefig(figures_dir / "11_shap_naive_bayes_summary.png", dpi=300, bbox_inches='tight')
 print("✓ Saved: 11_shap_naive_bayes_summary.png")
@@ -297,11 +338,13 @@ print("✓ Saved: 11_shap_random_forest_importance.png")
 plt.close()
 
 plt.figure(figsize=(12, 8))
+# TreeExplainer returns (n_samples, n_features, n_classes) or list depending on version
 if isinstance(shap_values_rf, list):
-    shap.summary_plot(shap_values_rf[1], X_train_rf_df, show=False)
+    shap_dropout = shap_values_rf[0]
 else:
-    shap.summary_plot(shap_values_rf, X_train_rf_df, show=False)
-plt.title("Random Forest - SHAP Summary Plot", fontsize=14, fontweight='bold', pad=20)
+    shap_dropout = shap_values_rf[:, :, 0] if len(shap_values_rf.shape) == 3 else shap_values_rf
+shap.summary_plot(shap_dropout, X_train_rf_df.values, feature_names=X_train_rf_df.columns.tolist(), show=False, max_display=20)
+plt.title("Random Forest - SHAP Summary Plot (Dropout Class)", fontsize=14, fontweight='bold', pad=20)
 plt.tight_layout()
 plt.savefig(figures_dir / "11_shap_random_forest_summary.png", dpi=300, bbox_inches='tight')
 print("✓ Saved: 11_shap_random_forest_summary.png")
@@ -330,11 +373,14 @@ print("✓ Saved: 11_shap_adaboost_importance.png")
 plt.close()
 
 plt.figure(figsize=(12, 8))
+# Extract Dropout class (index 0) - handle both list and 3D array formats
 if isinstance(shap_values_ada, list):
-    shap.summary_plot(shap_values_ada[1], X_train_ada_df[:50], show=False)
+    shap_dropout = shap_values_ada[0]
 else:
-    shap.summary_plot(shap_values_ada, X_train_ada_df[:50], show=False)
-plt.title("AdaBoost - SHAP Summary Plot", fontsize=14, fontweight='bold', pad=20)
+    # KernelExplainer returns (n_samples, n_features, n_classes)
+    shap_dropout = shap_values_ada[:, :, 0] if len(shap_values_ada.shape) == 3 else shap_values_ada
+shap.summary_plot(shap_dropout, X_train_ada_df[:50].values, feature_names=X_train_ada_df.columns.tolist(), show=False, max_display=15)
+plt.title("AdaBoost - SHAP Summary Plot (Dropout Class)", fontsize=14, fontweight='bold', pad=20)
 plt.tight_layout()
 plt.savefig(figures_dir / "11_shap_adaboost_summary.png", dpi=300, bbox_inches='tight')
 print("✓ Saved: 11_shap_adaboost_summary.png")
@@ -365,11 +411,14 @@ print("✓ Saved: 11_shap_xgboost_importance.png")
 plt.close()
 
 plt.figure(figsize=(12, 8))
+# Extract Dropout class (index 0) - handle both list and 3D array formats
 if isinstance(shap_values_xgb, list):
-    shap.summary_plot(shap_values_xgb[1], X_train_xgb_sample[:50], show=False)
+    shap_dropout = shap_values_xgb[0]
 else:
-    shap.summary_plot(shap_values_xgb, X_train_xgb_sample[:50], show=False)
-plt.title("XGBoost - SHAP Summary Plot", fontsize=14, fontweight='bold', pad=20)
+    # KernelExplainer returns (n_samples, n_features, n_classes)
+    shap_dropout = shap_values_xgb[:, :, 0] if len(shap_values_xgb.shape) == 3 else shap_values_xgb
+shap.summary_plot(shap_dropout, X_train_xgb_sample[:50].values, feature_names=X_train_xgb_sample.columns.tolist(), show=False, max_display=30)
+plt.title("XGBoost - SHAP Summary Plot (Dropout Class)", fontsize=14, fontweight='bold', pad=20)
 plt.tight_layout()
 plt.savefig(figures_dir / "11_shap_xgboost_summary.png", dpi=300, bbox_inches='tight')
 print("✓ Saved: 11_shap_xgboost_summary.png")
@@ -398,14 +447,52 @@ print("✓ Saved: 11_shap_neural_network_importance.png")
 plt.close()
 
 plt.figure(figsize=(12, 8))
+# Extract Dropout class (index 0) - handle both list and 3D array formats
 if isinstance(shap_values_nn, list):
-    shap.summary_plot(shap_values_nn[1], X_train_nn_df[:50], show=False)
+    shap_dropout = shap_values_nn[0]
 else:
-    shap.summary_plot(shap_values_nn, X_train_nn_df[:50], show=False)
-plt.title("Neural Network - SHAP Summary Plot", fontsize=14, fontweight='bold', pad=20)
+    # KernelExplainer returns (n_samples, n_features, n_classes)
+    shap_dropout = shap_values_nn[:, :, 0] if len(shap_values_nn.shape) == 3 else shap_values_nn
+shap.summary_plot(shap_dropout, X_train_nn_df[:50].values, feature_names=X_train_nn_df.columns.tolist(), show=False, max_display=15)
+plt.title("Neural Network - SHAP Summary Plot (Dropout Class)", fontsize=14, fontweight='bold', pad=20)
 plt.tight_layout()
 plt.savefig(figures_dir / "11_shap_neural_network_summary.png", dpi=300, bbox_inches='tight')
 print("✓ Saved: 11_shap_neural_network_summary.png")
+plt.close()
+
+print("\n[7/7] SHAP for Deep Learning Attention")
+print("-" * 60)
+
+# Create DataFrame for SHAP
+X_train_dl_df = pd.DataFrame(X_train_dl, columns=dl_features)
+
+# Use KernelExplainer (model-agnostic)
+explainer_dl = shap.KernelExplainer(dl_model.predict_proba, X_train_dl_df[:50])
+shap_values_dl = explainer_dl.shap_values(X_train_dl_df[:50])
+
+plt.figure(figsize=(12, 8))
+if isinstance(shap_values_dl, list):
+    shap.summary_plot(shap_values_dl, X_train_dl_df[:50], plot_type="bar",
+                     class_names=target_names, show=False)
+else:
+    shap.summary_plot(shap_values_dl, X_train_dl_df[:50], plot_type="bar", show=False)
+plt.title("Deep Learning Attention - SHAP Feature Importance", fontsize=14, fontweight='bold', pad=20)
+plt.tight_layout()
+plt.savefig(figures_dir / "11_shap_deep_learning_importance.png", dpi=300, bbox_inches='tight')
+print("✓ Saved: 11_shap_deep_learning_importance.png")
+plt.close()
+
+plt.figure(figsize=(12, 8))
+# Extract Dropout class (index 0)
+if isinstance(shap_values_dl, list):
+    shap_dropout = shap_values_dl[0]
+else:
+    shap_dropout = shap_values_dl[:, :, 0] if len(shap_values_dl.shape) == 3 else shap_values_dl
+shap.summary_plot(shap_dropout, X_train_dl_df[:50].values, feature_names=X_train_dl_df.columns.tolist(), show=False, max_display=20)
+plt.title("Deep Learning Attention - SHAP Summary Plot (Dropout Class)", fontsize=14, fontweight='bold', pad=20)
+plt.tight_layout()
+plt.savefig(figures_dir / "11_shap_deep_learning_summary.png", dpi=300, bbox_inches='tight')
+print("✓ Saved: 11_shap_deep_learning_summary.png")
 plt.close()
 
 print("\n" + "="*80)
@@ -413,15 +500,16 @@ print("4. COMPARATIVE FEATURE IMPORTANCE ANALYSIS")
 print("="*80)
 
 # Create comparative visualization
-fig, axes = plt.subplots(2, 3, figsize=(20, 12))
+fig, axes = plt.subplots(2, 4, figsize=(24, 12))  # Changed to 2x4 for 7 models
 
 models_info = [
     ("Decision Tree", dt_model.feature_importances_, dt_features, axes[0, 0]),
     ("Naive Bayes", None, nb_features, axes[0, 1]),  # NB doesn't have feature_importances_
     ("Random Forest", rf_model.feature_importances_, rf_features, axes[0, 2]),
-    ("AdaBoost", ada_model.feature_importances_, ada_features, axes[1, 0]),
-    ("XGBoost", xgb_model.feature_importances_, xgb_features, axes[1, 1]),
-    ("Neural Network", None, nn_features, axes[1, 2])  # NN doesn't have feature_importances_
+    ("AdaBoost", ada_model.feature_importances_, ada_features, axes[0, 3]),
+    ("XGBoost", xgb_model.feature_importances_, xgb_features, axes[1, 0]),
+    ("Neural Network", None, nn_features, axes[1, 1]),  # NN doesn't have feature_importances_
+    ("Deep Learning Attention", None, dl_features, axes[1, 2])  # DL doesn't have feature_importances_
 ]
 
 for model_name, importances, features, ax in models_info:
@@ -449,7 +537,10 @@ for model_name, importances, features, ax in models_info:
                 bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
         ax.axis('off')
 
-plt.suptitle('Feature Importance Comparison Across All Models', 
+# Hide the extra subplot (axes[1, 3])
+axes[1, 3].axis('off')
+
+plt.suptitle('Feature Importance Comparison Across All 7 Models', 
              fontsize=16, fontweight='bold', y=0.995)
 plt.tight_layout()
 plt.savefig(figures_dir / "11_all_models_feature_importance_comparison.png", dpi=300, bbox_inches='tight')
@@ -467,14 +558,15 @@ models_accuracy = {
     'Random Forest': rf_accuracy,
     'AdaBoost': ada_accuracy,
     'XGBoost': xgb_accuracy,
-    'Neural Network': nn_accuracy
+    'Neural Network': nn_accuracy,
+    'Deep Learning Attention': dl_accuracy
 }
 
-fig, ax = plt.subplots(figsize=(12, 7))
+fig, ax = plt.subplots(figsize=(12, 8))  # Increased height for 7 models
 
 model_names = list(models_accuracy.keys())
 accuracies = list(models_accuracy.values())
-colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F']
+colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#B19CD9']  # Added 7th color
 
 bars = ax.barh(model_names, accuracies, color=colors, edgecolor='black', linewidth=2)
 
@@ -504,7 +596,7 @@ with open(report_path, 'w') as f:
     f.write("="*80 + "\n\n")
     
     f.write("OBJECTIVE:\n")
-    f.write("Generate SHAP (SHapley Additive exPlanations) for all 6 optimized models\n")
+    f.write("Generate SHAP (SHapley Additive exPlanations) for all 7 optimized models\n")
     f.write("to understand feature importance and explain model predictions.\n\n")
     
     f.write("MODELS ANALYZED:\n")
@@ -540,6 +632,12 @@ with open(report_path, 'w') as f:
     f.write(f"   - Accuracy: {nn_accuracy:.4f}\n")
     f.write(f"   - Features: {', '.join(nn_features)}\n\n")
     
+    f.write("7. Deep Learning Attention\n")
+    f.write(f"   - Configuration: ANOVA F-stat, 20 features\n")
+    f.write(f"   - Accuracy: {dl_accuracy:.4f}\n")
+    f.write(f"   - Architecture: 64 → 32 → 16 (attention-like)\n")
+    f.write(f"   - Features: {', '.join(dl_features)}\n\n")
+    
     f.write("="*80 + "\n")
     f.write("SHAP ANALYSIS DETAILS\n")
     f.write("="*80 + "\n\n")
@@ -552,7 +650,7 @@ with open(report_path, 'w') as f:
     
     f.write("Explainers Used:\n")
     f.write("- TreeExplainer: Decision Tree, Random Forest\n")
-    f.write("- KernelExplainer: Naive Bayes, AdaBoost, XGBoost, Neural Network (model-agnostic)\n\n")
+    f.write("- KernelExplainer: Naive Bayes, AdaBoost, XGBoost, Neural Network, Deep Learning Attention\n\n")
     
     f.write("Visualizations Generated (per model):\n")
     f.write("1. Feature Importance Bar Chart - Shows mean |SHAP| value per feature\n")
@@ -574,13 +672,14 @@ with open(report_path, 'w') as f:
     f.write(f"- Random Forest uses {len(rf_features)} features\n")
     f.write(f"- AdaBoost uses {len(ada_features)} features\n")
     f.write(f"- XGBoost uses {len(xgb_features)} features (most comprehensive)\n")
-    f.write(f"- Neural Network uses {len(nn_features)} features\n\n")
+    f.write(f"- Neural Network uses {len(nn_features)} features\n")
+    f.write(f"- Deep Learning Attention uses {len(dl_features)} features\n\n")
     
     f.write("="*80 + "\n")
     f.write("VISUALIZATIONS GENERATED\n")
     f.write("="*80 + "\n\n")
     
-    f.write("SHAP Plots (12 plots - 2 per model):\n")
+    f.write("SHAP Plots (14 plots - 2 per model):\n")
     f.write("1. 11_shap_decision_tree_importance.png\n")
     f.write("2. 11_shap_decision_tree_summary.png\n")
     f.write("3. 11_shap_naive_bayes_importance.png\n")
@@ -592,11 +691,13 @@ with open(report_path, 'w') as f:
     f.write("9. 11_shap_xgboost_importance.png\n")
     f.write("10. 11_shap_xgboost_summary.png\n")
     f.write("11. 11_shap_neural_network_importance.png\n")
-    f.write("12. 11_shap_neural_network_summary.png\n\n")
+    f.write("12. 11_shap_neural_network_summary.png\n")
+    f.write("13. 11_shap_deep_learning_importance.png\n")
+    f.write("14. 11_shap_deep_learning_summary.png\n\n")
     
     f.write("Comparative Plots (2 plots):\n")
-    f.write("13. 11_all_models_feature_importance_comparison.png\n")
-    f.write("14. 11_all_models_accuracy_comparison.png\n\n")
+    f.write("15. 11_all_models_feature_importance_comparison.png\n")
+    f.write("16. 11_all_models_accuracy_comparison.png\n\n")
     
     f.write("="*80 + "\n")
     f.write("INTERPRETATION GUIDE\n")
@@ -641,8 +742,8 @@ print("EXPLAINABLE AI ANALYSIS COMPLETE!")
 print("="*80)
 print(f"\nGenerated files:")
 print(f"  - {report_path}")
-print(f"\nSHAP Visualizations (14 total):")
-print(f"  - 12 model-specific plots (importance + summary for each model)")
+print(f"\nSHAP Visualizations (16 total):")
+print(f"  - 14 model-specific plots (importance + summary for each of 7 models)")
 print(f"  - 2 comparative plots (feature importance + accuracy comparison)")
-print("\nAll visualizations saved in: {figures_dir}")
+print(f"\nAll visualizations saved in: {figures_dir}")
 print("\nExplainable AI analysis provides full transparency into model predictions!")

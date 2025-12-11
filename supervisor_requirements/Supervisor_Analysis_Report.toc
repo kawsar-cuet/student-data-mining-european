@@ -1,40 +1,43 @@
-\contentsline {section}{\numberline {1}Executive Summary}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Key Findings}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Supervisor Requirements Coverage}{2}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Dataset Overview}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Total Students and Features}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Feature Categories}{3}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Feature Lists}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Academic Features (18 features)}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Financial Features (12 features)}{4}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Demographic Features (16 features)}{4}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Feature Ranking}{5}{section.4}%
-\contentsline {section}{\numberline {5}Dropout Feature Importance}{7}{section.5}%
-\contentsline {section}{\numberline {6}Feature Selection Optimization}{9}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Single Classifiers: Decision Tree \& Naive Bayes}{9}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Ensemble Methods: Random Forest, AdaBoost, XGBoost}{11}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Deep Learning: Neural Network}{13}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Explainable AI - SHAP Analysis}{15}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Decision Tree SHAP}{15}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Naive Bayes SHAP}{17}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Random Forest SHAP}{19}{subsection.7.3}%
-\contentsline {subsection}{\numberline {7.4}AdaBoost SHAP}{21}{subsection.7.4}%
-\contentsline {subsection}{\numberline {7.5}XGBoost SHAP}{23}{subsection.7.5}%
-\contentsline {subsection}{\numberline {7.6}Neural Network SHAP}{25}{subsection.7.6}%
-\contentsline {subsection}{\numberline {7.7}Comparative SHAP Analysis}{27}{subsection.7.7}%
-\contentsline {section}{\numberline {8}Comprehensive Model Evaluation}{28}{section.8}%
-\contentsline {subsection}{\numberline {8.1}11.1 Accuracy, Precision, Recall, F1-Score}{28}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}11.2 Confusion Matrices}{29}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}11.3 ROC Curves and AUC Scores}{30}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}11.4 10-Fold Cross-Validation}{31}{subsection.8.4}%
-\contentsline {subsection}{\numberline {8.5}Summary Evaluation Table}{32}{subsection.8.5}%
-\contentsline {section}{\numberline {9}Conclusions and Recommendations}{33}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Overall Best Models}{33}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Key Academic Insights}{33}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Recommendations for Deployment}{33}{subsection.9.3}%
-\contentsline {section}{\numberline {A}Technical Details}{34}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Computational Environment}{34}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}Data Preprocessing}{34}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Optimal Model Configurations}{34}{subsection.A.3}%
-\contentsline {section}{\numberline {B}Generated Outputs Summary}{34}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}Visualizations Generated}{34}{subsection.B.1}%
+\contentsline {section}{\numberline {1}Executive Summary}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Key Findings}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Supervisor Requirements Coverage}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Dataset Overview}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Total Students and Features}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Feature Categories}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Feature Lists}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Academic Features (18 features)}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Financial Features (12 features)}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Demographic Features (16 features)}{5}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Feature Ranking}{6}{section.4}%
+\contentsline {section}{\numberline {5}Dropout Feature Importance}{8}{section.5}%
+\contentsline {section}{\numberline {6}Feature Selection Optimization}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Single Classifiers: Decision Tree \& Naive Bayes}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Ensemble Methods: Random Forest, AdaBoost, XGBoost}{12}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Deep Learning: Neural Network}{14}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Deep Learning with Attention Mechanism}{17}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}3-Class Classification (Dropout/Enrolled/Graduate)}{17}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}Binary Classification (Dropout vs Not Dropout)}{19}{subsubsection.6.4.2}%
+\contentsline {section}{\numberline {7}Explainable AI - SHAP Analysis}{22}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Decision Tree SHAP}{22}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Naive Bayes SHAP}{24}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Random Forest SHAP}{26}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}AdaBoost SHAP}{28}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}XGBoost SHAP}{30}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Neural Network SHAP}{32}{subsection.7.6}%
+\contentsline {subsection}{\numberline {7.7}Comparative SHAP Analysis}{34}{subsection.7.7}%
+\contentsline {section}{\numberline {8}Comprehensive Model Evaluation}{35}{section.8}%
+\contentsline {subsection}{\numberline {8.1}11.1 Accuracy, Precision, Recall, F1-Score}{35}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}11.2 Confusion Matrices}{36}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}11.3 ROC Curves and AUC Scores}{37}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}11.4 10-Fold Cross-Validation}{38}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Summary Evaluation Table}{39}{subsection.8.5}%
+\contentsline {section}{\numberline {9}Conclusions and Recommendations}{40}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Overall Best Models}{40}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Key Academic Insights}{40}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Recommendations for Deployment}{40}{subsection.9.3}%
+\contentsline {section}{\numberline {A}Technical Details}{41}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Computational Environment}{41}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Data Preprocessing}{41}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Optimal Model Configurations}{41}{subsection.A.3}%
+\contentsline {section}{\numberline {B}Generated Outputs Summary}{41}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Visualizations Generated}{41}{subsection.B.1}%
