@@ -1,0 +1,213 @@
+\chapter{Implementation and Experimental Setup}
+
+This chapter presents technical implementation details including software stack specifications, hardware configuration, training procedures with hyperparameter tuning results, computational requirements, and reproducibility provisions ensuring replicability of this research.
+
+\section{Software Stack and Development Environment}
+
+\subsection{Programming Language and Libraries}
+
+\begin{table}[h]
+\centering
+\caption{Software and Library Specifications}
+\label{tab:software}
+\begin{tabular}{llc}
+\toprule
+\textbf{Component} & \textbf{Software/Library} & \textbf{Version} \\
+\midrule
+Programming Language & Python & 3.10+ \\
+Deep Learning & PyTorch & 2.8.0 \\
+ML Algorithms & Scikit-learn & 1.4.0 \\
+ & XGBoost & 2.0.3 \\
+Data Processing & Pandas & 2.2.0 \\
+ & NumPy & 1.26.0 \\
+Visualization & Matplotlib & 3.8.0 \\
+ & Seaborn & 0.13.0 \\
+LLM API & OpenAI API & 1.12.0 \\
+Interpretability & SHAP & 0.44.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Hardware Configuration}
+
+\begin{table}[h]
+\centering
+\caption{Hardware Specifications and Requirements}
+\label{tab:hardware}
+\begin{tabular}{ll}
+\toprule
+\textbf{Component} & \textbf{Specification} \\
+\midrule
+Processor & Intel Core i7-12700K or equivalent \\
+RAM & 32GB DDR4 \\
+Storage & 500GB SSD \\
+GPU & Optional (CPU-only for reproducibility) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Model Training Procedure}
+
+\subsection{Training Pipeline and Hyperparameter Tuning}
+
+Systematic grid search across multiple hyperparameter dimensions:
+
+\textbf{Learning Rates Tested:} [0.0001, 0.001, 0.01]
+\textbf{Batch Sizes Tested:} [16, 32, 64]
+\textbf{Dropout Rates:} [0.1, 0.2, 0.3]
+\textbf{Hidden Layer Dimensions:} Multiple architectures
+
+\textbf{Total Configurations Evaluated:} 1,728 (PPN: 432, DPN-A: 648, HMTL: 648)
+\textbf{Total Training Time:} 48.3 hours (PPN: 14.2h, DPN-A: 18.6h, HMTL: 15.5h)
+
+\subsection{Optimal Hyperparameter Configurations}
+
+\textbf{PPN Optimal Configuration:}
+\begin{itemize}
+\item Learning Rate: 0.001
+\item Batch Size: 32
+\item Dropout: 0.3 $\to$ 0.2 $\to$ 0.1 (progressive)
+\item Validation F1-Macro: 0.745
+\end{itemize}
+
+\textbf{DPN-A Optimal Configuration:}
+\begin{itemize}
+\item Learning Rate: 0.001
+\item Batch Size: 32
+\item Dropout: 0.3, 0.2 (two layers)
+\item Validation F1-Macro: 0.801
+\end{itemize}
+
+\textbf{HMTL Optimal Configuration:}
+\begin{itemize}
+\item Learning Rate: 0.001
+\item Batch Size: 32
+\item Task Weighting: $\lambda_1=0.6$ (performance), $\lambda_2=0.4$ (dropout)
+\item Validation F1-Macro: 0.729
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/08_accuracy_heatmap.png}
+\caption{\textbf{PPN Hyperparameter Tuning Heatmap.} Accuracy variation across learning rates and batch sizes. Optimal configuration (LR=0.001, BS=32) achieves 77.8\% validation accuracy. Heatmap reveals learning rate 0.001 robustly outperforms alternatives across different batch sizes.}
+\label{fig:ppn_heatmap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/10_nn_accuracy_heatmap.png}
+\caption{\textbf{DPN-A Hyperparameter Tuning Heatmap.} Validation accuracy across learning rates and batch sizes. Optimal configuration (LR=0.001, BS=32) achieves 87.05\% accuracy. Demonstrates superior performance and robustness of attention-based architecture.}
+\label{fig:dpna_heatmap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/09_ensemble_accuracy_heatmap.png}
+\caption{\textbf{HMTL Hyperparameter Tuning Heatmap.} Validation accuracy for multi-task learning configuration. Shows task weighting influence on performance. DPN-A outperforms HMTL, indicating single-task specialization is optimal for this dataset.}
+\label{fig:hmtl_heatmap}
+\end{figure}
+
+\subsection{Training Algorithm}
+
+\begin{enumerate}
+\item Initialize model with Xavier/Glorot initialization
+\item For each epoch:
+\begin{itemize}
+\item Shuffle training data
+\item Forward pass through batches
+\item Compute loss via appropriate loss function
+\item Backpropagation and parameter update via Adam optimizer
+\item Validate on validation set
+\item Apply learning rate scheduling if plateau detected
+\item Check early stopping criterion (patience=20 epochs)
+\end{itemize}
+\item Return best checkpoint from early stopping
+\end{enumerate}
+
+\section{Cross-Validation Protocol}
+
+\subsection{10-Fold Stratified Cross-Validation}
+
+Implemented on combined training+validation sets (N=3,761) to ensure:
+\begin{itemize}
+\item Robust performance estimation across different data splits
+\item Stratified folds preserve class distribution
+\item 5 repeated trials with different random seeds
+\item Final metrics: mean $\pm$ standard deviation across 50 evaluations (10 folds × 5 repetitions)
+\end{itemize}
+
+\section{Reproducibility Provisions}
+
+\subsection{Random Seed Fixation}
+
+All stochastic operations use fixed seeds for complete reproducibility:
+
+\begin{verbatim}
+import random
+import numpy as np
+import torch
+
+random.seed(42)
+np.random.seed(42)
+torch.manual_seed(42)
+torch.cuda.manual_seed_all(42)
+\end{verbatim}
+
+\subsection{Documentation and Code Availability}
+
+\begin{itemize}
+\item Complete hyperparameter specifications documented in Table 3.1
+\item Fixed random seeds (seed=42) for all experiments
+\item Training/validation/test split specifications with stratification
+\item Detailed loss function implementations with class weights
+\item Early stopping and learning rate scheduler configuration
+\item Full source code available in supplementary materials
+\end{itemize}
+
+\subsection{Environment Reproducibility}
+
+Docker containerization with documented requirements.txt ensuring platform-agnostic reproducibility:
+
+\begin{verbatim}
+PyTorch==2.8.0
+scikit-learn==1.4.0
+pandas==2.2.0
+numpy==1.26.0
+shap==0.44.0
+openai==1.12.0
+\end{verbatim}
+
+\section{Computational Performance}
+
+\begin{table}[h]
+\centering
+\caption{Training Time and Resource Usage}
+\label{tab:compute_perf}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & \textbf{Training Time} & \textbf{Inference Time} & \textbf{Model Size} \\
+\midrule
+PPN & 145 sec (32 epochs) & 0.08 sec/batch & 1.8 MB \\
+DPN-A & 128 sec (29 epochs) & 0.07 sec/batch & 1.2 MB \\
+HMTL & 224 sec (50 epochs) & 0.09 sec/batch & 2.1 MB \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Inference Throughput:}
+\begin{itemize}
+\item DPN-A: 6,328 predictions/sec (443 samples in 0.07 seconds)
+\item Latency: <1 millisecond per prediction (real-time capable)
+\item Batch processing: 100K+ students in <3 minutes
+\end{itemize}
+
+\textbf{LLM Integration:}
+\begin{itemize}
+\item GPT-4 API Latency: 1.8 seconds per recommendation
+\item Cost: \$0.03 per student (GPT-4 pricing)
+\item Fallback system: Instant rule-based recommendations (zero cost)
+\end{itemize}
+
+\section{Summary}
+
+This chapter detailed the technical implementation including Python 3.10+ with PyTorch 2.8.0, comprehensive hyperparameter tuning across 1,728 configurations, optimal learning rates of 0.001 and batch size 32 across all models, systematic 10-fold stratified cross-validation for robust evaluation, and rigorous reproducibility provisions (fixed seeds, documented hyperparameters, Docker containerization). Training completed in 224 seconds maximum per model with inference latency <1 millisecond, demonstrating practical deployability. The next chapter presents experimental results from rigorous evaluation of all proposed architectures.

@@ -1,0 +1,143 @@
+\contentsline {chapter}{Table of Contents}{vii}{chapter*.5}%
+\contentsline {chapter}{List of Figures}{viii}{section*.6}%
+\contentsline {chapter}{List of Tables}{xiii}{section*.8}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Project Overview}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Motivation}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Objectives}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Methodology}{4}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Project Outcome}{6}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Organization of the Report}{7}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Background and Literature Review}{8}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Preliminaries}{8}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Theoretical Frameworks for Student Retention}{8}{subsection.2.1.1}%
+\contentsline {subsubsection}{Tinto's Student Integration Model}{8}{section*.11}%
+\contentsline {subsubsection}{Bean's Student Attrition Model}{9}{section*.12}%
+\contentsline {subsection}{\numberline {2.1.2}Deep Learning Fundamentals}{10}{subsection.2.1.2}%
+\contentsline {subsubsection}{Feedforward Neural Networks}{10}{section*.13}%
+\contentsline {subsubsection}{Attention Mechanisms}{10}{section*.14}%
+\contentsline {subsubsection}{Multi-Task Learning}{10}{section*.15}%
+\contentsline {section}{\numberline {2.2}Literature Review}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Educational Data Mining for Student Success}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Attention Mechanisms in Educational Prediction}{11}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Multi-Task Learning for Educational Outcomes}{12}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Large Language Models for Educational Recommendations}{12}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Comparative Analysis with Recent Literature}{12}{subsection.2.2.5}%
+\contentsline {section}{\numberline {2.3}Gap Analysis}{13}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Summary}{14}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Project Design and Methodology}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Dataset Description and Characteristics}{15}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Dataset Overview}{15}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Feature Categories}{16}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Complete Feature Listings}{16}{subsection.3.1.3}%
+\contentsline {subsubsection}{Academic Features (18 features)}{16}{section*.16}%
+\contentsline {subsubsection}{Financial Features (12 features)}{17}{section*.17}%
+\contentsline {subsubsection}{Demographic Features (16 features)}{17}{section*.18}%
+\contentsline {section}{\numberline {3.2}Feature Ranking and Importance Analysis}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Feature Ranking Across Methods}{18}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Dropout-Specific Feature Importance}{18}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Feature Engineering Strategy}{18}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Academic Performance Indicators}{19}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Engagement Metrics}{20}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Socioeconomic Composite Indicators}{20}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Data Preprocessing Pipeline}{21}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Categorical Encoding}{21}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Feature Normalization}{21}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Feature Selection}{22}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Data Partitioning}{22}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Deep Learning Architectures}{23}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Model 1: Performance Prediction Network (PPN)}{23}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Model 2: Dropout Prediction Network with Attention (DPN-A)}{24}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Model 3: Hybrid Multi-Task Learning Network (HMTL)}{26}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Baseline Models for Comparison}{26}{subsection.3.5.4}%
+\contentsline {section}{\numberline {3.6}Large Language Model Integration}{26}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}GPT-4 Recommendation Architecture}{26}{subsection.3.6.1}%
+\contentsline {section}{\numberline {3.7}Evaluation Metrics and Statistical Testing}{27}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Multi-Class Metrics (PPN, HMTL Performance Task)}{27}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Binary Classification Metrics (DPN-A, HMTL Dropout Task)}{27}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}Statistical Significance Testing}{28}{subsection.3.7.3}%
+\contentsline {section}{\numberline {3.8}Summary}{28}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Implementation and Experimental Setup}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Software Stack and Development Environment}{29}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Programming Language and Libraries}{29}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Hardware Configuration}{29}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Model Training Procedure}{29}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Training Pipeline and Hyperparameter Tuning}{29}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Optimal Hyperparameter Configurations}{30}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Training Algorithm}{31}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Cross-Validation Protocol}{31}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}10-Fold Stratified Cross-Validation}{31}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.4}Reproducibility Provisions}{32}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Random Seed Fixation}{32}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Documentation and Code Availability}{32}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Environment Reproducibility}{33}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Computational Performance}{33}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Summary}{34}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Experimental Results and Discussion}{35}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Baseline Model Performance}{35}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Random Forest Classifier}{35}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Logistic Regression (Dropout Prediction)}{36}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Deep Learning Model Performance}{36}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Performance Prediction Network (PPN)}{36}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Dropout Prediction Network with Attention (DPN-A)}{37}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Hybrid Multi-Task Learning Network (HMTL)}{38}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Statistical Significance Testing}{38}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}McNemar's Test Results}{38}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Friedman Test for Multiple Models}{39}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Attention Mechanism Analysis}{40}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Feature Importance from Attention Weights}{40}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}SHAP Feature Importance Analysis}{41}{subsection.5.4.2}%
+\contentsline {section}{\numberline {5.5}Cross-Validation Stability}{41}{section.5.5}%
+\contentsline {section}{\numberline {5.6}LLM-Generated Recommendations Validation}{42}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Expert Review Results}{42}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Intervention Categories Generated}{42}{subsection.5.6.2}%
+\contentsline {section}{\numberline {5.7}Discussion}{43}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Key Findings and Interpretations}{43}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Comparison with Literature}{45}{subsection.5.7.2}%
+\contentsline {section}{\numberline {5.8}Summary}{45}{section.5.8}%
+\contentsline {chapter}{\numberline {6}Comprehensive Model Analysis and Comparison}{47}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Feature Selection Optimization Across Models}{47}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Single Classifiers: Decision Tree and Naive Bayes}{47}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Ensemble Methods: Random Forest, AdaBoost, XGBoost}{48}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Deep Learning: Neural Network}{49}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}Deep Learning with Attention Mechanism}{49}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}3-Class Performance Prediction}{49}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Binary Classification (Dropout vs Not Dropout)}{50}{subsection.6.2.2}%
+\contentsline {section}{\numberline {6.3}Explainable AI: SHAP Analysis}{51}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Tree-Based Models: SHAP Importance}{51}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Comparative SHAP Analysis}{51}{subsection.6.3.2}%
+\contentsline {section}{\numberline {6.4}Comprehensive Model Evaluation Results}{52}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Performance Metrics: Accuracy, Precision, Recall, F1-Score}{52}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Confusion Matrices}{53}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}ROC Curves and AUC Scores}{54}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}10-Fold Cross-Validation}{55}{subsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.4.5}Summary Evaluation Table}{56}{subsection.6.4.5}%
+\contentsline {section}{\numberline {6.5}Model Recommendations}{56}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Best Models by Objective}{56}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Key Academic Insights}{57}{subsection.6.5.2}%
+\contentsline {section}{\numberline {6.6}Deployment Recommendations}{58}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{75}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Summary of Key Findings}{75}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Deep Learning Performance Achievements}{75}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Theoretical Framework Validation}{76}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}LLM Integration Success}{76}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}Research Contributions}{76}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Methodological Contributions}{76}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Empirical Contributions}{77}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Practical Contributions}{77}{subsection.7.2.3}%
+\contentsline {section}{\numberline {7.3}Limitations and Future Considerations}{77}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Data Limitations}{77}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Methodological Limitations}{77}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}Generalization Considerations}{78}{subsection.7.3.3}%
+\contentsline {section}{\numberline {7.4}Implications for Educational Practice}{78}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Early Warning System Implementation}{78}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Evidence-Based Retention Policy}{78}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Equity and Fairness Considerations}{79}{subsection.7.4.3}%
+\contentsline {section}{\numberline {7.5}Future Research Directions}{79}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Methodological Extensions}{79}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Data and Evaluation Extensions}{79}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Deployment and Implementation Research}{80}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}Domain-Specific Enhancements}{80}{subsection.7.5.4}%
+\contentsline {section}{\numberline {7.6}Concluding Remarks}{80}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Final Recommendations}{81}{section.7.7}%
+\contentsline {chapter}{References}{81}{Item.147}%

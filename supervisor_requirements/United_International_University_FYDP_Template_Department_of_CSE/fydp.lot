@@ -1,0 +1,23 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Comparison with Recent Literature}}{12}{table.2.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Feature Categories and Counts}}{16}{table.3.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Software and Library Specifications}}{29}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Hardware Specifications and Requirements}}{30}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Training Time and Resource Usage}}{33}{table.4.3}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Random Forest Performance (3-Class Prediction)}}{35}{table.5.1}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Logistic Regression Performance (Binary Dropout)}}{36}{table.5.2}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces PPN Test Set Performance}}{37}{table.5.3}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces DPN-A Test Set Performance}}{38}{table.5.4}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces HMTL Multi-Task Performance}}{38}{table.5.5}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Top 10 Features by Attention Weight}}{40}{table.5.6}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces 10-Fold Cross-Validation Results}}{41}{table.5.7}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces GPT-4 Recommendation Quality Metrics}}{42}{table.5.8}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Comprehensive Performance Metrics for All Models}}{52}{table.6.1}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces AUC Scores (Micro-Average) for All Models}}{54}{table.6.2}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces 10-Fold Cross-Validation Results for All Models}}{55}{table.6.3}%
+\addvspace {10\p@ }

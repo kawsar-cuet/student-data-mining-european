@@ -1,0 +1,500 @@
+\chapter{Comprehensive Model Analysis and Comparison}
+
+This chapter provides a detailed analysis of all machine learning models evaluated in this research, including feature selection optimization, model performance evaluation, and comprehensive model comparison. This represents the complete supervisor requirements analysis covering single classifiers, ensemble methods, and deep learning approaches.
+
+\section{Feature Selection Optimization Across Models}
+
+Systematic feature selection was performed for all 6 baseline models using 9 different methods to identify optimal feature subsets for each approach.
+
+\subsection{Single Classifiers: Decision Tree and Naive Bayes}
+
+\textbf{Decision Tree Configuration}:
+\begin{itemize}
+\item Best Feature Selection: Information Gain (10 features)
+\item Optimal Accuracy: 68.81\%
+\item Total Parameters: Varies by feature count
+\end{itemize}
+
+\textbf{Naive Bayes Configuration}:
+\begin{itemize}
+\item Best Feature Selection: Information Gain (15 features)
+\item Optimal Accuracy: 72.66\%
+\item Assumptions: Feature independence, normal distribution
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/08_accuracy_heatmap.png}
+\caption{\textbf{Single Classifier Hyperparameter Tuning.} Accuracy heatmap for Decision Tree and Naive Bayes across all feature selection methods and feature counts, identifying optimal configurations.}
+\label{fig:dt_nb_heatmap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/08_all_metrics_comparison.png}
+\caption{\textbf{Comprehensive Metrics: Single Classifiers.} Comparison of Accuracy, Precision, Recall, and F1-Score for Decision Tree and Naive Bayes.}
+\label{fig:dt_nb_metrics}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/08_accuracy_vs_features.png}
+\caption{\textbf{Feature Count Effect: Single Classifiers.} Accuracy trends showing how number of features impacts Decision Tree and Naive Bayes performance.}
+\label{fig:dt_nb_accuracy_trend}
+\end{figure}
+
+\subsection{Ensemble Methods: Random Forest, AdaBoost, XGBoost}
+
+\textbf{Random Forest Configuration}:
+\begin{itemize}
+\item Best Feature Selection: Recursive Feature Elimination (20 features)
+\item Optimal Accuracy: 77.85\%
+\item Number of Trees: 100
+\item Max Depth: None (unlimited)
+\end{itemize}
+
+\textbf{AdaBoost Configuration}:
+\begin{itemize}
+\item Best Feature Selection: Mutual Information (15 features)
+\item Optimal Accuracy: 77.06\%
+\item Number of Estimators: 50
+\item Learning Rate: 1.0
+\end{itemize}
+
+\textbf{XGBoost Configuration}:
+\begin{itemize}
+\item Best Feature Selection: Random Forest Importance (30 features)
+\item Optimal Accuracy: 77.97\%
+\item Max Depth: 6
+\item Learning Rate: 0.1
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/09_ensemble_accuracy_heatmap.png}
+\caption{\textbf{Ensemble Methods Feature Selection.} Accuracy heatmap for Random Forest, AdaBoost, and XGBoost across all feature selection methods and configurations.}
+\label{fig:ensemble_heatmap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/09_ensemble_all_metrics_comparison.png}
+\caption{\textbf{Comprehensive Metrics: Ensemble Methods.} Detailed comparison of Accuracy, Precision, Recall, F1-Score, and AUC across ensemble classifiers.}
+\label{fig:ensemble_metrics}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/09_ensemble_accuracy_vs_features.png}
+\caption{\textbf{Feature Count Effect: Ensemble Methods.} Accuracy trends for ensemble methods showing relative robustness to feature count variations.}
+\label{fig:ensemble_accuracy_trend}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/09_ensemble_models_comparison.png}
+\caption{\textbf{Ensemble Methods Comparative Performance.} Direct comparison of Random Forest, AdaBoost, and XGBoost across multiple metrics.}
+\label{fig:ensemble_comparison}
+\end{figure}
+
+\subsection{Deep Learning: Neural Network}
+
+\textbf{Neural Network Configuration}:
+\begin{itemize}
+\item Best Feature Selection: ANOVA F-statistic (15 features)
+\item Optimal Accuracy: 76.84\%
+\item Architecture: Input (15) → Hidden (64) → Hidden (32) → Output (3, Softmax)
+\item Activation: ReLU hidden layers
+\item Optimizer: Adam
+\item Batch Size: 32
+\item Epochs: 100 (with early stopping)
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/10_nn_accuracy_heatmap.png}
+\caption{\textbf{Neural Network Feature Selection Analysis.} Accuracy heatmap across all feature selection methods and feature counts for standard neural network.}
+\label{fig:nn_heatmap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/10_nn_all_metrics_comparison.png}
+\caption{\textbf{Comprehensive Metrics: Neural Network.} Performance metrics comparison for neural network across different configurations.}
+\label{fig:nn_metrics}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/10_nn_accuracy_vs_features.png}
+\caption{\textbf{Feature Count Effect: Neural Network.} Accuracy trends for neural network showing sensitivity to feature dimensionality.}
+\label{fig:nn_accuracy_trend}
+\end{figure}
+
+\section{Deep Learning with Attention Mechanism}
+
+\subsection{3-Class Performance Prediction}
+
+The Deep Learning Attention model (DPN-A) uses a self-attention mechanism to automatically weight feature importance during prediction.
+
+\textbf{Configuration}:
+\begin{itemize}
+\item Architecture: 64 → Attention → 32 → 16 → 3 neurons (Softmax)
+\item Feature Selection: ANOVA F-test (20 features)
+\item Test Accuracy: 76.61\%
+\item Per-Class Performance:
+  \begin{itemize}
+  \item Dropout: 76\% Recall, Precision: 77\%
+  \item Enrolled: 38\% Recall, Precision: 42\%
+  \item Graduate: 90\% Recall, Precision: 88\%
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/13_deep_learning_attention_training.png}
+\caption{\textbf{Deep Learning Attention Model Training History.} Evolution of accuracy, loss, precision, and recall across 200 epochs, demonstrating convergence and model learning.}
+\label{fig:dl_attention_training}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/13_deep_learning_attention_confusion_matrix.png}
+\caption{\textbf{Confusion Matrix: Deep Learning Attention (3-Class).} Classification results showing per-class performance for Dropout, Enrolled, and Graduate outcomes.}
+\label{fig:dl_attention_confusion}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/13_deep_learning_attention_importance.png}
+\caption{\textbf{Attention Mechanism Feature Importance.} Top 15 features weighted by attention mechanism, showing automatic feature importance discovery.}
+\label{fig:dl_attention_importance}
+\end{figure}
+
+\subsection{Binary Classification (Dropout vs Not Dropout)}
+
+The attention mechanism was also evaluated for binary dropout prediction, achieving state-of-the-art performance exceeding journal benchmarks.
+
+\textbf{Binary Classification Performance}:
+\begin{itemize}
+\item Test Accuracy: 87.23\% (exceeds journal target of 87.05\%)
+\item AUC-ROC: 0.9301 (exceeds journal target of 0.9100)
+\item F1-Score: 0.7919
+\item Architecture: 64 → Attention → 32 → 16 → 1 neuron (Sigmoid)
+\item Features: ALL 34 features (no selection required)
+\item Class Weights: {0: 0.74, 1: 1.56} for imbalance handling
+\item Dropout Detection Metrics:
+  \begin{itemize}
+  \item Recall: 75.7\% (sensitivity)
+  \item Precision: 83.0\%
+  \end{itemize}
+\item Not Dropout Detection Metrics:
+  \begin{itemize}
+  \item Recall: 92.7\% (specificity)
+  \item Precision: 89.0\%
+  \end{itemize}
+\end{itemize}
+
+\textbf{Key Insight}: Binary classification achieves 10.6\% higher accuracy than 3-class (87.23\% vs 76.61\%) due to simpler decision boundary. Binary is ideal for early dropout warning systems requiring high precision in identifying at-risk students.
+
+\section{Explainable AI: SHAP Analysis}
+
+SHAP (SHapley Additive exPlanations) analysis was performed on all models to provide complete transparency into model predictions and feature contributions.
+
+\subsection{Tree-Based Models: SHAP Importance}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/11_shap_decision_tree_importance.png}
+\caption{\textbf{SHAP Importance: Decision Tree.} Feature importance based on Shapley values, showing decision tree's feature attribution.}
+\label{fig:shap_dt_importance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/11_shap_decision_tree_summary.png}
+\caption{\textbf{SHAP Summary Plot: Decision Tree.} Distribution of SHAP values showing positive/negative feature impacts on predictions.}
+\label{fig:shap_dt_summary}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/11_shap_naive_bayes_importance.png}
+\caption{\textbf{SHAP Importance: Naive Bayes.} Feature importance analysis for probabilistic classifier.}
+\label{fig:shap_nb_importance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/11_shap_naive_bayes_summary.png}
+\caption{\textbf{SHAP Summary Plot: Naive Bayes.} Shapley-based feature impact analysis for Naive Bayes classifier.}
+\label{fig:shap_nb_summary}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/11_shap_random_forest_importance.png}
+\caption{\textbf{SHAP Importance: Random Forest.} Feature importance from ensemble tree model, showing collective feature contributions.}
+\label{fig:shap_rf_importance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/11_shap_random_forest_summary.png}
+\caption{\textbf{SHAP Summary Plot: Random Forest.} Comprehensive feature impact distribution for ensemble model.}
+\label{fig:shap_rf_summary}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/11_shap_adaboost_importance.png}
+\caption{\textbf{SHAP Importance: AdaBoost.} Adaptive boosting feature importance analysis.}
+\label{fig:shap_ada_importance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/11_shap_adaboost_summary.png}
+\caption{\textbf{SHAP Summary Plot: AdaBoost.} Feature impact distribution for boosted ensemble classifier.}
+\label{fig:shap_ada_summary}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/11_shap_xgboost_importance.png}
+\caption{\textbf{SHAP Importance: XGBoost.} Extreme gradient boosting feature importance, showing top predictors.}
+\label{fig:shap_xgb_importance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/11_shap_xgboost_summary.png}
+\caption{\textbf{SHAP Summary Plot: XGBoost.} Feature impact analysis for XGBoost, showing SHAP value distributions.}
+\label{fig:shap_xgb_summary}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/11_shap_neural_network_importance.png}
+\caption{\textbf{SHAP Importance: Neural Network.} Feature importance approximation for deep learning model.}
+\label{fig:shap_nn_importance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/11_shap_neural_network_summary.png}
+\caption{\textbf{SHAP Summary Plot: Neural Network.} Feature contribution analysis for neural network predictions.}
+\label{fig:shap_nn_summary}
+\end{figure}
+
+\subsection{Comparative SHAP Analysis}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/11_all_models_feature_importance_comparison.png}
+\caption{\textbf{Cross-Model Feature Importance Comparison.} SHAP feature importance across all 7 models, showing consensus on key predictors.}
+\label{fig:shap_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/11_all_models_accuracy_comparison.png}
+\caption{\textbf{Model Accuracy Comparison from SHAP Analysis.} Comprehensive accuracy comparison showing Deep Learning Attention as top performer.}
+\label{fig:shap_accuracy}
+\end{figure}
+
+\textbf{Key SHAP Insight}: While different models use different feature subsets (10-34 features), curricular units approved and tuition fees consistently emerge as top predictors across all models. The Deep Learning Attention model uses its attention mechanism to automatically learn feature importance, achieving competitive results with 20 selected features.
+
+\section{Comprehensive Model Evaluation Results}
+
+\subsection{Performance Metrics: Accuracy, Precision, Recall, F1-Score}
+
+\begin{table}[h]
+\centering
+\caption{Comprehensive Performance Metrics for All Models}
+\label{tab:comprehensive_metrics}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} \\
+\midrule
+Decision Tree & 0.6701 & 0.6702 & 0.6701 & 0.6701 \\
+Naive Bayes & 0.7085 & 0.6856 & 0.7085 & 0.6848 \\
+\rowcolor{lightgray}
+Random Forest & 0.7672 & 0.7540 & 0.7672 & 0.7561 \\
+AdaBoost & 0.7424 & 0.7254 & 0.7424 & 0.7308 \\
+XGBoost & 0.7593 & 0.7526 & 0.7593 & 0.7544 \\
+Neural Network & 0.7141 & 0.7064 & 0.7141 & 0.7100 \\
+DL Attention (3-class) & 0.7661 & 0.7616 & 0.7661 & 0.7638 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/12_comprehensive_metrics_comparison.png}
+\caption{\textbf{Comprehensive Metrics Comparison.} Multi-panel visualization showing (a) Accuracy/Precision/Recall/F1, (b) AUC scores, (c) Cross-validation accuracy, (d) Feature count vs performance trade-offs.}
+\label{fig:comprehensive_metrics}
+\end{figure}
+
+\textbf{Performance Ranking}:
+\begin{enumerate}
+\item Random Forest: 76.72\% Accuracy (Best 3-class model)
+\item XGBoost: 75.93\% Accuracy (Best CV performance at 78.21\%)
+\item DL Attention: 76.61\% Accuracy (3-class) / 87.23\% (Binary)
+\item AdaBoost: 74.24\% Accuracy
+\item Naive Bayes: 70.85\% Accuracy
+\item Neural Network: 71.41\% Accuracy
+\item Decision Tree: 67.01\% Accuracy
+\end{enumerate}
+
+\subsection{Confusion Matrices}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/12_all_models_confusion_matrices.png}
+\caption{\textbf{Confusion Matrices: All Models.} Side-by-side comparison of confusion matrices showing true vs predicted labels for all 6 models across three classes (Dropout, Enrolled, Graduate).}
+\label{fig:confusion_matrices}
+\end{figure}
+
+\textbf{Confusion Matrix Analysis}:
+\begin{itemize}
+\item Random Forest and XGBoost show the most balanced performance across all three classes
+\item Minimal confusion between Dropout and Graduate predictions (indicating clear separation)
+\item Enrolled class consistently misclassified, reflecting its challenging intermediate status
+\item Deep Learning Attention model shows strong Graduate detection (90\% recall) but struggles with Enrolled
+\end{itemize}
+
+\subsection{ROC Curves and AUC Scores}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/12_all_models_roc_curves.png}
+\caption{\textbf{ROC Curves: All Models.} Receiver Operating Characteristic curves for all models showing per-class and micro-average AUC scores for three-class classification.}
+\label{fig:roc_curves}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\caption{AUC Scores (Micro-Average) for All Models}
+\label{tab:auc_scores}
+\begin{tabular}{lc}
+\toprule
+\textbf{Model} & \textbf{Micro-Average AUC} \\
+\midrule
+Decision Tree & 0.7581 \\
+Naive Bayes & 0.8434 \\
+Random Forest & 0.9136 \\
+AdaBoost & 0.8896 \\
+XGBoost & 0.9133 \\
+Neural Network & 0.8608 \\
+DL Attention (3-class) & 0.9045 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{AUC Interpretation}:
+\begin{itemize}
+\item Random Forest and XGBoost achieve excellent AUC scores above 0.91, indicating strong discriminative ability
+\item Deep Learning Attention achieves 0.9045 AUC, competitive with top ensemble methods
+\item All models except Decision Tree achieve AUC > 0.84, indicating good class separation
+\item Binary DL Attention reaches 0.9301 AUC-ROC, exceeding journal benchmarks
+\end{itemize}
+
+\subsection{10-Fold Cross-Validation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/12_cross_validation_results.png}
+\caption{\textbf{10-Fold Cross-Validation Results.} Distribution of validation scores across 10 folds: (a) Boxplots showing score ranges, (b) Mean accuracy with confidence intervals.}
+\label{fig:cross_validation}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\caption{10-Fold Cross-Validation Results for All Models}
+\label{tab:cross_validation}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Mean Accuracy} & \textbf{Std Dev} & \textbf{Min} & \textbf{Max} \\
+\midrule
+Decision Tree & 0.6747 & 0.0130 & 0.6569 & 0.7059 \\
+Naive Bayes & 0.7247 & 0.0207 & 0.6923 & 0.7557 \\
+Random Forest & 0.7722 & 0.0124 & 0.7489 & 0.7941 \\
+AdaBoost & 0.7439 & 0.0117 & 0.7195 & 0.7624 \\
+\rowcolor{lightgray}
+XGBoost & 0.7821 & 0.0081 & 0.7692 & 0.7964 \\
+Neural Network & 0.7233 & 0.0149 & 0.7043 & 0.7579 \\
+DL Attention & 0.7650 & 0.0165 & 0.7298 & 0.8021 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Cross-Validation Findings}:
+\begin{itemize}
+\item XGBoost demonstrates best CV performance (78.21\% mean accuracy) with lowest variance (0.81\%)
+\item Random Forest achieves strong stability with consistent 77.22\% across folds
+\item Decision Tree shows low variance but lowest absolute performance (67.47\%)
+\item Standard deviations < 2\% across all models indicate stable generalization
+\item DL Attention achieves competitive CV performance (76.50\%) with controlled variance
+\end{itemize}
+
+\subsection{Summary Evaluation Table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/12_model_evaluation_summary_table.png}
+\caption{\textbf{Comprehensive Model Evaluation Summary.} Master comparison table integrating all evaluation metrics, feature counts, and key performance indicators.}
+\label{fig:summary_table}
+\end{figure}
+
+\section{Model Recommendations}
+
+\subsection{Best Models by Objective}
+
+\textbf{For 3-Class Outcome Prediction}:
+Recommended model: \textbf{XGBoost}
+\begin{itemize}
+\item Highest cross-validation performance: 78.21\% mean accuracy
+\item Most stable predictions: 0.81\% standard deviation
+\item Excellent AUC: 0.9133
+\item Optimal feature count: 30 features (minimal redundancy)
+\end{itemize}
+
+\textbf{For Binary Dropout Detection}:
+Recommended model: \textbf{Deep Learning Attention (DPN-A)}
+\begin{itemize}
+\item Highest accuracy: 87.23\% (exceeds journal benchmark of 87.05\%)
+\item Best AUC-ROC: 0.9301 (exceeds journal benchmark of 0.9100)
+\item Provides automatic feature importance through attention weights
+\item Ideal for early warning systems requiring high precision
+\end{itemize}
+
+\subsection{Key Academic Insights}
+
+\begin{enumerate}
+\item \textbf{Academic Performance Dominates}: Curricular units approved and grades in both semesters are consistently the strongest predictors across all models and analyses.
+
+\item \textbf{Financial Status Matters}: Tuition payment status ranks in top 3-5 features across all methods, indicating financial difficulties are a major dropout risk factor.
+
+\item \textbf{First Semester is Critical}: Performance in the first semester strongly predicts final outcomes, suggesting early intervention opportunities.
+
+\item \textbf{Feature Selection Improves Performance}: Reducing from 34-46 to 10-30 optimally selected features maintains or improves accuracy while reducing complexity.
+
+\item \textbf{Ensemble Methods Excel}: Tree-based ensemble methods (Random Forest, XGBoost) significantly outperform single classifiers, achieving 76-78\% accuracy vs 67-71\%.
+
+\item \textbf{Binary vs Multi-Class Trade-off}: Binary dropout prediction achieves 87.23\% accuracy (DL Attention) compared to 76.61\% for 3-class prediction, demonstrating the inherent difficulty of multi-class student outcome forecasting.
+
+\item \textbf{Attention Mechanism Value}: The self-attention mechanism automatically learns feature importance weights, achieving competitive performance while providing interpretability through attention weights.
+
+\item \textbf{Model Agreement on Top Features}: Despite using different algorithms and feature subsets, all models converge on curricular units approved and tuition fees as top predictors, validating their importance.
+\end{enumerate}
+
+\section{Deployment Recommendations}
+
+\textbf{Hybrid Approach}: Deploy both models for comprehensive student success support:
+\begin{enumerate}
+\item \textbf{Binary DL Attention Model} for high-accuracy early alerts identifying at-risk students (87.23\% accuracy, 0.9301 AUC-ROC)
+\item \textbf{XGBoost Model} for comprehensive 3-class outcome forecasting and academic planning (78.21\% CV accuracy with stability)
+\end{enumerate}
+
+This dual-model approach provides both high-accuracy dropout detection for intervention programs and nuanced outcome forecasting for institutional planning.

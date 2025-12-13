@@ -1,0 +1,457 @@
+\chapter{Project Design and Methodology}
+
+This chapter presents the comprehensive research methodology, including dataset description, feature engineering strategy, data preprocessing pipeline, deep learning architecture specifications, evaluation metrics, statistical testing procedures, and LLM integration design.
+
+\section{Dataset Description and Characteristics}
+
+This study utilizes an authentic educational dataset from a European higher education institution, comprising comprehensive records of 4,424 undergraduate students tracked across multiple academic years (2017--2021).
+
+\subsection{Dataset Overview}
+
+\textbf{Dataset Characteristics:}
+\begin{itemize}
+\item Total Students: 4,424
+\item Features: 46 (35 original + 12 engineered - 1 redundant)
+\item Temporal Coverage: 5 academic cohorts (2017--2021)
+\item Missing Values: 0 (complete case analysis)
+\item Duplicates: 0
+\item Data Quality: High (comprehensive institutional records)
+\end{itemize}
+
+\textbf{Target Variable Distribution:}
+\begin{itemize}
+\item Graduate: 2,209 students (49.9\%)
+\item Dropout: 1,421 students (32.1\%)
+\item Enrolled: 794 students (17.9\%)
+\end{itemize}
+
+The moderate class imbalance is addressed through stratified sampling and class-weighted loss functions during training.
+
+\subsection{Feature Categories}
+
+The dataset comprises \textbf{46 features} organized into three primary categories aligned with educational literature:
+
+\begin{table}[h]
+\centering
+\caption{Feature Categories and Counts}
+\label{tab:feature_categories}
+\begin{tabular}{lc}
+\toprule
+\textbf{Category} & \textbf{Number of Features} \\
+\midrule
+Academic Features & 18 \\
+Financial Features & 12 \\
+Demographic Features & 16 \\
+\midrule
+\textbf{Total} & \textbf{46} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Complete Feature Listings}
+
+\subsubsection{Academic Features (18 features)}
+
+Academic features capture student performance, enrollment patterns, and academic standing:
+
+\begin{enumerate}
+\item Curricular units 1st semester (credited)
+\item Curricular units 1st semester (enrolled)
+\item Curricular units 1st semester (evaluations)
+\item Curricular units 1st semester (approved)
+\item Curricular units 1st semester (grade)
+\item Curricular units 1st semester (without evaluations)
+\item Curricular units 2nd semester (credited)
+\item Curricular units 2nd semester (enrolled)
+\item Curricular units 2nd semester (evaluations)
+\item Curricular units 2nd semester (approved)
+\item Curricular units 2nd semester (grade)
+\item Curricular units 2nd semester (without evaluations)
+\item Previous qualification grade
+\item Admission grade
+\item Application mode
+\item Application order
+\item Course program
+\item Daytime/evening attendance
+\end{enumerate}
+
+\subsubsection{Financial Features (12 features)}
+
+Financial features capture economic status and institutional support availability:
+
+\begin{enumerate}
+\item Tuition fees up to date
+\item Scholarship holder
+\item Debtor status
+\item Unemployment rate
+\item Inflation rate
+\item GDP
+\item International status
+\item Displaced student
+\item Educational special needs
+\item Gender
+\item Age at enrollment
+\item Nationality
+\end{enumerate}
+
+\subsubsection{Demographic Features (16 features)}
+
+Demographic features capture personal and family background characteristics:
+
+\begin{enumerate}
+\item Marital status
+\item Previous qualification
+\item Mother's qualification
+\item Father's qualification
+\item Mother's occupation
+\item Father's occupation
+\item Gender
+\item Age at enrollment
+\item International status
+\item Displaced student status
+\item Educational special needs
+\item Debtor status
+\item Tuition fees up to date
+\item Scholarship holder status
+\item Nationality
+\item Application mode
+\end{enumerate}
+
+\section{Feature Ranking and Importance Analysis}
+
+Comprehensive feature ranking was performed using multiple methods to identify the most influential predictors of student dropout.
+
+\subsection{Feature Ranking Across Methods}
+
+Five different feature ranking methods were applied to identify the most important predictors:
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/03_ranking_heatmap.png}
+\caption{\textbf{Feature Ranking Heatmap.} Comparison of five feature ranking methods (Information Gain, Gini Importance, Gain Ratio, etc.) for top 20 features, showing consensus among methods.}
+\label{fig:ranking_heatmap}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/03_top20_information_gain.png}
+\caption{\textbf{Top 20 Features by Information Gain.} Information gain ranking identifies curricular units approved (both semesters) and tuition fees as top predictors of student outcomes.}
+\label{fig:ig_ranking}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/03_top20_gini_importance.png}
+\caption{\textbf{Top 20 Features by Gini Importance.} Gini-based ranking demonstrates consistency with information gain, validating top features.}
+\label{fig:gini_ranking}
+\end{figure}
+
+\textbf{Key Finding}: Curricular units 2nd semester (approved) and tuition fees status consistently rank in the top 3 across all methods.
+
+\subsection{Dropout-Specific Feature Importance}
+
+A focused analysis identified the most influential features specifically for predicting student dropout:
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/04_top20_dropout_features.png}
+\caption{\textbf{Top 20 Features for Dropout Prediction.} Composite importance score from four feature importance methods, identifying features most predictive of dropout risk.}
+\label{fig:dropout_top20}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/04_methods_comparison.png}
+\caption{\textbf{Comparison of Feature Importance Methods.} Four methods (Tree-based, Permutation, Correlation, Domain Knowledge) applied to dropout prediction, showing method consensus.}
+\label{fig:dropout_methods}
+\end{figure}
+
+\textbf{Top 5 Dropout Predictors}:
+\begin{enumerate}
+\item Curricular units 2nd semester (approved)
+\item Curricular units 2nd semester (grade)
+\item Tuition fees up to date
+\item Curricular units 1st semester (approved)
+\item Curricular units 1st semester (grade)
+\end{enumerate}
+
+\section{Feature Engineering Strategy}
+
+To enhance model performance and capture complex academic patterns, we engineered 12 novel features derived from raw variables:
+
+\subsection{Academic Performance Indicators}
+
+\begin{align}
+\text{Total\_Units\_Enrolled} &= U_{1st} + U_{2nd} \\
+\text{Total\_Units\_Approved} &= A_{1st} + A_{2nd} \\
+\text{Success\_Rate} &= \frac{\text{Total\_Units\_Approved}}{\text{Total\_Units\_Enrolled}} \\
+\text{Semester\_Consistency} &= |G_{1st} - G_{2nd}| \\
+\text{Academic\_Progression} &= \frac{A_{2nd} - A_{1st}}{U_{\text{enrolled}}} \\
+\text{Average\_Grade} &= \frac{G_{1st} + G_{2nd}}{2}
+\end{align}
+
+\subsection{Engagement Metrics}
+
+\begin{align}
+\text{Total\_Units\_NoEval} &= W_{1st} + W_{2nd} \\
+\text{Engagement\_Index} &= 1 - \frac{\text{Units\_NoEval}}{\text{Total\_Enrolled}} \\
+\text{Total\_Evaluations} &= E_{1st} + E_{2nd} \\
+\text{Eval\_Completion\_Rate} &= \frac{\text{Total\_Evaluations}}{\text{Total\_Enrolled} \times 2}
+\end{align}
+
+\subsection{Socioeconomic Composite Indicators}
+
+\begin{align}
+\text{Parental\_Education} &= \frac{Q_M + Q_F}{2} \\
+\text{Financial\_Support} &= S \times (1 - D) \times T
+\end{align}
+
+where $Q_M, Q_F$ are parental qualifications, $S$ is scholarship status, $D$ is debtor status, and $T$ is tuition payment currency.
+
+\section{Data Preprocessing Pipeline}
+
+\subsection{Categorical Encoding}
+
+\begin{enumerate}
+\item \textbf{Binary Variables:} Direct encoding (0, 1) for gender, international status, scholarship, etc.
+\item \textbf{Ordinal Variables:} Label encoding preserving rank order (application order, qualification levels)
+\item \textbf{Nominal Variables:} One-hot encoding for non-ordinal categories (course programs, application modes)
+\item \textbf{Target Variable:} Three-class encoding (Graduate=2, Enrolled=1, Dropout=0)
+\end{enumerate}
+
+\subsection{Feature Normalization}
+
+All continuous features undergo Z-score standardization:
+
+\begin{equation}
+X_{\text{norm}} = \frac{X - \mu_{\text{train}}}{\sigma_{\text{train}}}
+\end{equation}
+
+where $\mu_{\text{train}}$ and $\sigma_{\text{train}}$ are computed \textbf{exclusively on the training set} to prevent data leakage.
+
+\subsection{Feature Selection}
+
+Three sequential selection criteria:
+
+\begin{enumerate}
+\item \textbf{Correlation-Based Filtering:} Remove features with $|r| > 0.95$ (multicollinearity)
+\item \textbf{Variance Threshold:} Eliminate quasi-constant features with variance $< 0.01$
+\item \textbf{Random Forest Importance Ranking:} Retain top features explaining $\geq$95\% cumulative importance
+\end{enumerate}
+
+Final feature set: 46 features (after engineering and selection).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/03_top20_gini_importance.png}
+\caption{\textbf{Top 20 Features by Gini Importance.} Bar chart ranking features by Random Forest Gini importance. Semester grades dominate (curricular\_units\_*\_sem\_grade), validating Tinto's academic integration theory. Feature selection retained 46 features explaining $\geq$95\% cumulative importance.}
+\label{fig:gini_importance}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/03_top20_information_gain.png}
+\caption{\textbf{Top 20 Features by Information Gain.} Entropy-based feature importance ranking. Complementary to Gini importance, demonstrates robust consensus on critical features. Academic variables (success\_rate, average\_grade) and financial indicators (tuition\_fees\_up\_to\_date) emerge as dominant predictors.}
+\label{fig:ig_importance}
+\end{figure}
+
+\subsection{Data Partitioning}
+
+Stratified random sampling maintains class distribution:
+
+\begin{itemize}
+\item Training Set: 3,539 students (80\%)
+\item Validation Set: 442 students (10\%)
+\item Test Set: 443 students (10\%)
+\end{itemize}
+
+Stratification ensures target class proportions preserved across all partitions.
+
+\section{Deep Learning Architectures}
+
+\subsection{Model 1: Performance Prediction Network (PPN)}
+
+A multi-layer feedforward neural network for 3-class prediction (Graduate, Enrolled, Dropout).
+
+\textbf{Architecture Specifications:}
+\begin{itemize}
+\item Input Layer: 46 features
+\item Hidden Layer 1: 128 units, ReLU activation, Batch Normalization, Dropout (0.3)
+\item Hidden Layer 2: 64 units, ReLU activation, Batch Normalization, Dropout (0.2)
+\item Hidden Layer 3: 32 units, ReLU activation, Dropout (0.1)
+\item Output Layer: 3 units, Softmax activation
+\item Total Parameters: 16,579
+\end{itemize}
+
+\textbf{Training Configuration:}
+\begin{itemize}
+\item Loss Function: Categorical Cross-Entropy with class weights [1.5, 2.8, 1.0]
+\item Optimizer: Adam ($\alpha$=0.001, $\beta_1$=0.9, $\beta_2$=0.999)
+\item Batch Size: 32
+\item Max Epochs: 150 with Early Stopping (patience=20)
+\item Learning Rate Scheduler: ReduceLROnPlateau (factor=0.5, patience=10)
+\end{itemize}
+
+\subsection{Model 2: Dropout Prediction Network with Attention (DPN-A)}
+
+A binary classification network incorporating self-attention for feature importance weighting.
+
+\textbf{Architecture Specifications:}
+\begin{itemize}
+\item Input Layer: 46 features
+\item Hidden Layer 1: 64 units, ReLU activation, Batch Normalization, Dropout (0.3)
+\item Attention Layer: 64-dimensional self-attention mechanism
+\item Hidden Layer 2: 32 units, ReLU activation, Dropout (0.2)
+\item Hidden Layer 3: 16 units, ReLU activation
+\item Output Layer: 1 unit, Sigmoid activation
+\item Total Parameters: 9,857
+\end{itemize}
+
+\textbf{Attention Mechanism:}
+
+\begin{equation}
+\mathbf{e} = \tanh(\mathbf{x} W + \mathbf{b})
+\end{equation}
+
+\begin{equation}
+\boldsymbol{\alpha} = \text{softmax}(\mathbf{e}) = \frac{\exp(\mathbf{e})}{\sum_i \exp(e_i)}
+\end{equation}
+
+\begin{equation}
+\text{output} = \mathbf{x} \odot \boldsymbol{\alpha}
+\end{equation}
+
+where $W \in \mathbb{R}^{64 \times 64}$ is learnable transformation, $\mathbf{b} \in \mathbb{R}^{64}$ is bias, and $\boldsymbol{\alpha}$ are attention weights.
+
+\textbf{Training Configuration:}
+\begin{itemize}
+\item Loss Function: Binary Cross-Entropy with class weights \{0: 1.24, 1: 1.56\}
+\item Optimizer: Adam ($\alpha$=0.001)
+\item Batch Size: 32
+\item Max Epochs: 150 with Early Stopping (patience=20)
+\end{itemize}
+
+\subsection{Model 3: Hybrid Multi-Task Learning Network (HMTL)}
+
+A unified network with shared representation learning and task-specific prediction heads.
+
+\textbf{Architecture Specifications:}
+\begin{itemize}
+\item Shared Trunk:
+\begin{itemize}
+\item Hidden Layer 1: 128 units, ReLU, BatchNorm, Dropout (0.3)
+\item Hidden Layer 2: 64 units, ReLU, BatchNorm, Dropout (0.2)
+\end{itemize}
+\item Performance Prediction Head:
+\begin{itemize}
+\item Hidden: 32 units, ReLU, Dropout (0.1)
+\item Output: 3 units, Softmax
+\end{itemize}
+\item Dropout Prediction Head:
+\begin{itemize}
+\item Hidden: 32 units, ReLU, Dropout (0.1)
+\item Output: 1 unit, Sigmoid
+\end{itemize}
+\item Total Parameters: 18,692
+\end{itemize}
+
+\textbf{Multi-Task Loss Function:}
+
+\begin{equation}
+\mathcal{L}_{\text{total}} = \lambda_1 \mathcal{L}_{\text{perf}} + \lambda_2 \mathcal{L}_{\text{dropout}}
+\end{equation}
+
+where $\lambda_1 = 0.6$, $\lambda_2 = 0.4$ (weighted by class imbalance).
+
+\subsection{Baseline Models for Comparison}
+
+\begin{enumerate}
+\item \textbf{Logistic Regression:} One-vs-Rest strategy, L2 regularization (C=1.0)
+\item \textbf{Random Forest:} 500 trees, balanced class weights, max\_features=auto
+\item \textbf{XGBoost:} 500 estimators, learning\_rate=0.1, max\_depth=6
+\item \textbf{Support Vector Machine:} RBF kernel, C=10.0, balanced class weights
+\end{enumerate}
+
+\section{Large Language Model Integration}
+
+\subsection{GPT-4 Recommendation Architecture}
+
+An integrated pipeline combining predictive model outputs with GPT-4 for interpretable interventions.
+
+\textbf{Student Risk Profile Construction:}
+\begin{itemize}
+\item Academic Profile: Current performance, predicted outcomes, progression patterns
+\item Risk Stratification:
+\begin{itemize}
+\item Low Risk: $P(\text{Dropout}) < 0.3$
+\item Medium Risk: $0.3 \leq P(\text{Dropout}) \leq 0.7$
+\item High Risk: $P(\text{Dropout}) > 0.7$
+\end{itemize}
+\item Contextual Factors: Socioeconomic indicators, scholarship status, payment history
+\end{itemize}
+
+\textbf{GPT-4 Configuration:}
+\begin{itemize}
+\item Model: GPT-4
+\item Temperature: 0.7 (balance creativity and consistency)
+\item Max Tokens: 800 (comprehensive recommendations)
+\item Top-p: 0.9
+\item Frequency Penalty: 0.3 (reduce repetition)
+\end{itemize}
+
+\textbf{Rule-Based Fallback System:}
+\begin{enumerate}
+\item High Dropout Risk + Low Grades: Academic advising, supplemental instruction, course load reduction
+\item Medium Risk + Financial Issues: Scholarship assistance, financial aid consultation
+\item Low Engagement: Study skills workshops, peer tutoring, time management coaching
+\end{enumerate}
+
+\section{Evaluation Metrics and Statistical Testing}
+
+\subsection{Multi-Class Metrics (PPN, HMTL Performance Task)}
+
+\begin{equation}
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+\end{equation}
+
+\begin{equation}
+\text{F1}_{\text{macro}} = \frac{1}{K} \sum_{k=1}^{K} \frac{2 \cdot P_k \cdot R_k}{P_k + R_k}
+\end{equation}
+
+\begin{equation}
+\text{F1}_{\text{weighted}} = \sum_{k=1}^{K} w_k \cdot F1_k \quad \text{where} \quad w_k = \frac{n_k}{N}
+\end{equation}
+
+\subsection{Binary Classification Metrics (DPN-A, HMTL Dropout Task)}
+
+\begin{itemize}
+\item Area Under ROC Curve (AUC-ROC): Threshold-independent discrimination ability
+\item Area Under Precision-Recall Curve (AUC-PR): Emphasizes minority class performance
+\item Matthews Correlation Coefficient (MCC): Balanced metric for imbalanced data
+\end{itemize}
+
+\begin{equation}
+MCC = \frac{TP \cdot TN - FP \cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}
+\end{equation}
+
+\subsection{Statistical Significance Testing}
+
+\textbf{McNemar's Test for Pairwise Comparisons:}
+
+\begin{equation}
+\chi^2 = \frac{(b - c)^2}{b + c}
+\end{equation}
+
+where $b$ and $c$ are off-diagonal counts. Under $H_0$, $\chi^2 \sim \chi^2_1$ with $\alpha = 0.05$.
+
+\textbf{Friedman Test for Multiple Model Comparison:}
+
+\begin{equation}
+\chi^2_F = \frac{12N}{k(k+1)} \sum_{j=1}^{k} R_j^2 - 3N(k+1)
+\end{equation}
+
+where $N$ is number of folds, $k$ is number of models, and $R_j$ is average rank of model $j$.
+
+\section{Summary}
+
+This chapter presented the comprehensive research methodology: dataset characteristics (4,424 students, 46 features across 5 theoretical dimensions), feature engineering strategy (12 derived variables capturing academic progression, engagement, and socioeconomic factors), data preprocessing pipeline (encoding, normalization, stratified partitioning), and deep learning architectures (PPN for 3-class prediction, DPN-A with attention for binary dropout, HMTL for multi-task learning). The methodology integrates GPT-4 for personalized recommendation generation and employs rigorous evaluation through 10-fold cross-validation, comprehensive metrics, and statistical significance testing. The next chapter details the technical implementation, software stack, training procedures, and computational requirements.
