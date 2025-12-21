@@ -1,0 +1,21 @@
+\begin{thebibliography}{1}
+
+\bibitem{Tinto1993}
+Vincent Tinto.
+\newblock Leaving college: Rethinking the causes and cures of student
+  attrition.
+\newblock 1993.
+
+\bibitem{Bean1985}
+John~P Bean.
+\newblock Interaction effects based on class level in an explanatory model of
+  student attrition.
+\newblock {\em American Educational Research Journal}, 22(1):35--64, 1985.
+
+\bibitem{Vaswani2017}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, and Jakob Uszkoreit.
+\newblock Attention is all you need.
+\newblock {\em Advances in Neural Information Processing Systems}, pages
+  5998--6008, 2017.
+
+\end{thebibliography}

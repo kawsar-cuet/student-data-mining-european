@@ -1,34 +1,46 @@
-\chapter{Implementation and Experimental Setup}
+\chapter{Technical Implementation and Experimental Setup}
 
-This chapter presents technical implementation details including software stack specifications, hardware configuration, training procedures with hyperparameter tuning results, computational requirements, and reproducibility provisions ensuring replicability of this research.
+This chapter details the technical implementation of the proposed deep learning systems, including software environment specifications, hardware configuration, comprehensive hyperparameter tuning methodology, training algorithms, cross-validation protocols, and reproducibility provisions ensuring research replicability.
 
-\section{Software Stack and Development Environment}
+\section{Development Environment and Software Stack}
 
-\subsection{Programming Language and Libraries}
+All models were implemented using modern Python-based machine learning frameworks, ensuring both performance and reproducibility.
+
+\subsection{Programming Environment and Core Libraries}
+
+The implementation utilizes Python 3.10+ ecosystem with carefully selected library versions for stability and compatibility.
 
 \begin{table}[h]
 \centering
-\caption{Software and Library Specifications}
+\caption{Software Stack and Library Specifications}
 \label{tab:software}
 \begin{tabular}{llc}
 \toprule
 \textbf{Component} & \textbf{Software/Library} & \textbf{Version} \\
 \midrule
 Programming Language & Python & 3.10+ \\
-Deep Learning & PyTorch & 2.8.0 \\
-ML Algorithms & Scikit-learn & 1.4.0 \\
- & XGBoost & 2.0.3 \\
-Data Processing & Pandas & 2.2.0 \\
- & NumPy & 1.26.0 \\
-Visualization & Matplotlib & 3.8.0 \\
- & Seaborn & 0.13.0 \\
+\midrule
+\multicolumn{3}{l}{\textit{Deep Learning and Machine Learning}} \\
+Deep Learning Framework & PyTorch & 2.8.0 \\
+Classical ML & Scikit-learn & 1.4.0 \\
+Gradient Boosting & XGBoost & 2.0.3 \\
+\midrule
+\multicolumn{3}{l}{\textit{Data Processing and Analysis}} \\
+DataFrame Operations & Pandas & 2.2.0 \\
+Numerical Computing & NumPy & 1.26.0 \\
+\midrule
+\multicolumn{3}{l}{\textit{Visualization}} \\
+Plotting & Matplotlib & 3.8.0 \\
+Statistical Graphics & Seaborn & 0.13.0 \\
+\midrule
+\multicolumn{3}{l}{\textit{Interpretability and LLM Integration}} \\
+Explainability & SHAP & 0.44.0 \\
 LLM API & OpenAI API & 1.12.0 \\
-Interpretability & SHAP & 0.44.0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Hardware Configuration}
+\subsection{Hardware Configuration and Requirements}
 
 \begin{table}[h]
 \centering
@@ -38,27 +50,44 @@ Interpretability & SHAP & 0.44.0 \\
 \toprule
 \textbf{Component} & \textbf{Specification} \\
 \midrule
-Processor & Intel Core i7-12700K or equivalent \\
-RAM & 32GB DDR4 \\
-Storage & 500GB SSD \\
-GPU & Optional (CPU-only for reproducibility) \\
+Processor & Intel Core i7-12700K (or equivalent) \\
+Memory (RAM) & 32 GB DDR4 \\
+Storage & 500 GB SSD \\
+GPU & Optional (CPU-only training for reproducibility) \\
+Operating System & Windows 10/11 or Linux \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\section{Model Training Procedure}
+\textbf{Note on GPU Usage:} While GPU acceleration is optional, all experiments were conducted on CPU to ensure deterministic behavior and exact reproducibility across different hardware configurations.
 
-\subsection{Training Pipeline and Hyperparameter Tuning}
+\section{Hyperparameter Optimization Methodology}
 
-Systematic grid search across multiple hyperparameter dimensions:
+\subsection{Systematic Grid Search Strategy}
 
-\textbf{Learning Rates Tested:} [0.0001, 0.001, 0.01]
-\textbf{Batch Sizes Tested:} [16, 32, 64]
-\textbf{Dropout Rates:} [0.1, 0.2, 0.3]
-\textbf{Hidden Layer Dimensions:} Multiple architectures
+Comprehensive hyperparameter tuning was conducted using grid search across multiple dimensions:
 
-\textbf{Total Configurations Evaluated:} 1,728 (PPN: 432, DPN-A: 648, HMTL: 648)
-\textbf{Total Training Time:} 48.3 hours (PPN: 14.2h, DPN-A: 18.6h, HMTL: 15.5h)
+\textbf{Search Space:}
+\begin{itemize}
+\item \textbf{Learning Rates:} $\{0.0001, 0.001, 0.01\}$ (3 values)
+\item \textbf{Batch Sizes:} $\{16, 32, 64\}$ (3 values)
+\item \textbf{Dropout Rates:} $\{0.1, 0.2, 0.3\}$ (3 values per layer)
+\item \textbf{Architecture Variations:} Multiple hidden layer dimension configurations
+\end{itemize}
+
+\textbf{Total Configurations Evaluated:} 1,728 across all models
+\begin{itemize}
+\item PPN: 432 configurations
+\item DPN-A: 648 configurations
+\item HMTL: 648 configurations
+\end{itemize}
+
+\textbf{Total Training Time:} 48.3 hours
+\begin{itemize}
+\item PPN: 14.2 hours
+\item DPN-A: 18.6 hours
+\item HMTL: 15.5 hours
+\end{itemize}
 
 \subsection{Optimal Hyperparameter Configurations}
 
@@ -109,7 +138,20 @@ Systematic grid search across multiple hyperparameter dimensions:
 
 \subsection{Training Algorithm}
 
+The complete training pipeline for deep learning models:
+
 \begin{enumerate}
+\item \textbf{Data Preprocessing Phase:}
+\begin{itemize}
+\item Apply feature engineering (12 derived features)
+\item Execute categorical encoding (binary, ordinal, one-hot)
+\item Perform Z-score normalization using training set statistics
+\item Apply correlation-based filtering and Random Forest feature importance ranking
+\item Split into training, validation, and test sets
+\end{itemize}
+
+\item \textbf{Deep Learning Training Phase:}
+\begin{itemize}
 \item Initialize model with Xavier/Glorot initialization
 \item For each epoch:
 \begin{itemize}
@@ -122,6 +164,7 @@ Systematic grid search across multiple hyperparameter dimensions:
 \item Check early stopping criterion (patience=20 epochs)
 \end{itemize}
 \item Return best checkpoint from early stopping
+\end{itemize}
 \end{enumerate}
 
 \section{Cross-Validation Protocol}

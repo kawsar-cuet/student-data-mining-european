@@ -1,21 +1,21 @@
-\chapter{Conclusion and Future Work}
+\chapter{Conclusion and Future Directions}
 
-This final chapter summarizes key research contributions, discusses limitations, outlines implications for educational practice, and identifies promising directions for future research.
+This final chapter synthesizes the research contributions, discusses limitations and their implications, outlines practical applications for educational institutions, and identifies promising directions for future investigation.
 
-\section{Summary of Key Findings}
+\section{Research Summary and Key Findings}
 
-This thesis presented a comprehensive methodology integrating deep learning architectures with large language models for student outcome prediction in higher education. Key findings include:
+This thesis presented a comprehensive methodology integrating deep learning architectures with large language models for predicting student outcomes in higher education. The research systematically addressed four primary objectives: multi-class performance prediction, attention-based dropout risk assessment, multi-task learning evaluation, and LLM-powered intervention generation.
 
-\subsection{Deep Learning Performance Achievements}
+\subsection{Technical Achievements}
 
 \begin{enumerate}
-\item \textbf{DPN-A State-of-the-Art Accuracy:} The Dropout Prediction Network with Attention mechanism achieves 87.05\% accuracy and 0.910 AUC-ROC on binary dropout classification, exceeding baseline Logistic Regression (85.7\% accuracy, 0.920 AUC-ROC).
+\item \textbf{State-of-the-Art Dropout Prediction:} The Dropout Prediction Network with Attention (DPN-A) achieves 87.05\% accuracy and 0.910 AUC-ROC on binary dropout classification, exceeding the strong Logistic Regression baseline (85.7\% accuracy, 0.920 AUC-ROC) while providing intrinsic interpretability through attention mechanisms.
 
-\item \textbf{PPN Multi-Class Performance:} The Performance Prediction Network achieves 76.4\% accuracy on 3-class performance prediction (Graduate, Enrolled, Dropout) with balanced F1-Macro of 0.688.
+\item \textbf{Multi-Class Performance Prediction:} The Performance Prediction Network (PPN) achieves 76.4\% accuracy on 3-class outcome prediction (Graduate, Enrolled, Dropout) with balanced F1-Macro score of 0.688, demonstrating competitive performance on this challenging multi-class task.
 
-\item \textbf{Attention-Based Interpretability:} DPN-A's self-attention mechanism identifies critical risk factors aligned with educational retention theory: semester grades (0.342), success rate (0.276), and tuition payment status (0.189).
+\item \textbf{Interpretable Feature Importance:} DPN-A's self-attention mechanism identifies critical risk factors empirically validating educational retention theory: semester grades contribute 34.2\% and 31.8\% attention weight, success rate 27.6\%, and tuition payment status 18.9\%, collectively explaining student dropout patterns.
 
-\item \textbf{Robust Cross-Validation:} 10-fold stratified cross-validation demonstrates stable generalization with low standard deviation (±1.8\% for DPN-A), validating model reliability.
+\item \textbf{Robust Generalization:} 10-fold stratified cross-validation demonstrates stable performance with low variance (DPN-A: 86.2\% $\pm$ 1.8\%), confirming reliable generalization beyond the specific train-test split.
 \end{enumerate}
 
 \subsection{Theoretical Framework Validation}

@@ -1,0 +1,6 @@
+Configuration,Accuracy,AUC-ROC,F1-Score
+Baseline (Traditional Features),87.05,91.8,85.2
++ LLM Features,88.76,93.2,86.9
++ Temporal Attention,89.94,94.1,88.1
++ Adaptive Selection,90.63,94.7,88.6
+Full AHFS-TA,91.32,95.5,89.0

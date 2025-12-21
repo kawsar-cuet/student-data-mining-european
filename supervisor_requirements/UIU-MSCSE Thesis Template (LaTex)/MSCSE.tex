@@ -1,0 +1,279 @@
+\documentclass[a4paper,11pt]{report}
+%\usepackage[none]{hyphenat}
+
+%\usepackage[T1]{fontenc}
+%\usepackage[bitstream-charter]{mathdesign}
+
+%\usepackage[usenames,dvipsnames,pdf]{pstricks}
+%\usepackage[crop=off]{auto-pst-pdf}
+\usepackage{makeidx}
+\usepackage{xurl}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{framed}
+% \usepackage[bibstyle=numeric, sorting=none, dateabbrev=false]{biblatex}
+\usepackage{bibentry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\usepackage[noend,ruled,noline,linesnumbered,algochapter]{algorithm2e}
+
+\usepackage[linktoc=page]{hyperref}
+\usepackage[margin=3cm]{geometry}
+\usepackage{setspace} 
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% Clear all header and footer fields
+\fancyhf{}
+
+% Set only the chapter title in the header (left for even, right for odd pages)
+\fancyhead[LE,RO]{\nouppercase{\leftmark}}  % Chapter name
+\fancyfoot[C]{\thepage}  % Page number in center
+
+
+
+\rhead{\nouppercase\leftmark}
+% \lhead{\nouppercase\rightmark}
+
+\makeindex
+
+\onehalfspacing 
+
+\renewcommand*\contentsname{Table of Contents}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+%title page
+\input{0.0.title.tex}
+
+
+%\clearpage
+%\thispagestyle{empty}
+%\mbox{}
+\clearpage
+
+%\thispagestyle{empty}
+%Dedication
+%I would like to dedicate this thesis to my loving family ...
+    
+
+
+
+%\clearpage
+%\thispagestyle{empty}
+%\mbox{}
+%\clearpage
+%\thispagestyle{empty}
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\input{0.1.approval}
+
+\input{0.2.dec}
+
+\input{0.3.abstract}
+
+\input{0.4.ack}
+
+\input{0.5.pub}
+
+
+
+
+
+
+\clearpage
+\phantomsection
+\tableofcontents
+\renewcommand{\contentsname}{Table of Contents}
+\addcontentsline{toc}{chapter}{Table of Contents}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+
+
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\renewcommand\bibname{References}
+
+\clearpage
+\phantomsection
+
+
+\input{1.intro}
+\input{2.back}
+\input{3.gap}
+\input{4.methodology}
+\input{5.implementation}
+\input{6.Results and Discussion}
+\input{7.conclusion}
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{MSCSE}
+\addcontentsline{toc}{chapter}{References}
+
+% \vspace{0.5cm}
+
+
+
+
+\clearpage
+
+
+\appendix 
+
+% \chapter{Appendix}
+
+\chapter*{Notes/Instructions: For Writing the Appendix Chapter}
+\addcontentsline{toc}{chapter}{Notes/Instructions: For Writing the Appendix Chapter}
+\label{appendix:tips}
+
+\begin{itemize}
+  \item \textbf{Reference clearly in the text:} Always refer to the appendix in the main chapters (e.g., ``See Appendix C for the architecture details.'').
+  \item \textbf{Label consistently:} Use Appendix A, B, C, etc., with subsections like A.1, A.2 for clarity and organization.
+  \item \textbf{Follow formatting conventions:} Maintain the same font, layout, and citation styles used in the main body.
+  \item \textbf{Avoid redundancy:} Do not repeat essential data or results already presented in the main text.
+  \item \textbf{Avoid new findings:} Appendices should support—not introduce—your arguments or conclusions.
+  \item \textbf{Use external links wisely:} When dealing with large codebases or datasets, provide GitHub links or data repositories rather than including raw data directly.
+  \item \textbf{Examples:} There are some examples of what you can add in the appendix section. You can get the idea from them, but you should consult with your supervisor on this.
+\end{itemize}
+
+\chapter{Extended Results and Raw Data}
+\label{appendix:rawdata}
+
+\section*{Confusion Matrix and Model Performance}
+\begin{table}[h!]
+\centering
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l c c c c }
+\hline
+Model & Precision & Recall & F1-Score & Accuracy \\
+\hline
+SVM   & 0.89      & 0.91   & 0.90     & 91.2\% \\
+RF    & 0.85      & 0.86   & 0.85     & 87.5\% \\
+ANN   & 0.91      & 0.89   & 0.90     & 90.6\% \\
+\hline
+\end{tabular}
+\caption{Performance metrics for different models.}
+\end{table}
+
+\chapter{Mathematical Derivations}
+\label{appendix:mathproofs}
+
+\section*{Gradient of the Cost Function}
+\begin{align*}
+J(\theta) &= \frac{1}{2m} \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 \\
+\frac{\partial J(\theta)}{\partial \theta_j} &= \frac{1}{m} \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)}
+\end{align*}
+
+\chapter{System Architecture and Configuration}
+\label{appendix:architecture}
+
+\section*{System Configuration}
+\begin{verbatim}
+{
+  "learning_rate": 0.001,
+  "batch_size": 64,
+  "optimizer": "adam",
+  "epochs": 50
+}
+\end{verbatim}
+
+\section*{Architecture Diagram}
+\begin{center}
+User $\rightarrow$ Web Interface $\rightarrow$ REST API $\rightarrow$ Model Server $\rightarrow$ Database
+\end{center}
+
+\chapter{Source Code and Pseudocode}
+\label{appendix:code}
+
+\section*{Pseudocode for Clustering Algorithm}
+\begin{verbatim}
+Input: Dataset D, number of clusters k
+Initialize centroids randomly
+Repeat until convergence:
+   Assign each point to the nearest centroid
+   Recalculate centroids
+Output: Cluster assignments
+\end{verbatim}
+
+\section*{Source Code Repository}
+Source code is available at: \url{https://github.com/username/thesis-clustering}
+
+\chapter{Survey Instrument}
+\label{appendix:survey}
+
+\section*{User Satisfaction Questionnaire}
+\begin{enumerate}
+  \item I found the system easy to use.
+  \item The interface layout was clear.
+  \item I would recommend this system to others.
+\end{enumerate}
+
+Responses: \textit{Strongly Disagree, Disagree, Neutral, Agree, Strongly Agree}
+
+\chapter{Ethics Documents}
+\label{appendix:ethics}
+
+\section*{Sample Consent Form}
+\begin{quote}
+I voluntarily agree to participate in this study and understand the procedures.\\
+\textbf{Signature:} \hrulefill \hspace{1cm} \textbf{Date:} \hrulefill
+\end{quote}
+
+\section*{IRB Approval Letter}
+\begin{quote}
+Reference No.: 2025-ET-045\\
+Date: 12 March 2025\\
+Approved by the University of XYZ Ethics Committee
+\end{quote}
+
+\chapter{Additional Visuals}
+\label{appendix:figures}
+
+\section*{Prototype User Interface}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{ui_mockup.png} % Replace with actual image path
+  \caption{Screenshot of the prototype interface.}
+\end{figure}
+
+
+
+%\phantomsection
+
+%\addcontentsline{toc}{chapter}{Appendices}
+%\chapter{Amino Acids\label{appAmino}}
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[width=1\textwidth]{./images/background/aminoacids}
+%\end{center}
+%\caption{Twenty different amino acids, their structures and chemical properties.\index{Amino Acid!chemical properties}\cite{Lehninger2012}.}
+%\end{figure}
+%\clearpage
+%\thispagestyle{empty}
+%\mbox{}
+
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Index}
+%\printindex
+
+\end{document}

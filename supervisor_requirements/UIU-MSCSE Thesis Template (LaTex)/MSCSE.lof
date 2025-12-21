@@ -1,0 +1,17 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Comprehensive performance comparison of AHFS-TA with seven baseline models across three key metrics. AHFS-TA (highlighted in red) achieves the highest AUC-ROC (95.5\%), demonstrating superior discrimination capability while maintaining competitive accuracy and balanced precision-recall.}}{23}{figure.6.1}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Ablation study showing progressive performance improvement as each component is added. Left panel: Accuracy progression with value labels. Right panel: All three metrics (Accuracy, AUC-ROC, F1-Score) across configurations. LLM features provide the largest gain (+1.71\%), validating the multimodal approach.}}{24}{figure.6.2}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {G.1}{\ignorespaces Screenshot of the prototype interface.}}{41}{figure.G.1}%

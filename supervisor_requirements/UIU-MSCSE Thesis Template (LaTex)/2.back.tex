@@ -1,0 +1,96 @@
+\chapter{Background and Literature Review}
+
+This chapter provides theoretical foundations and reviews existing literature in educational data mining, machine learning for dropout prediction, and explain able AI techniques.
+
+\section{Student Dropout Problem}
+
+Student dropout represents premature withdrawal from educational programs, distinguished from stop-out (temporary) and transfer (institution change). Globally, tertiary education dropout rates reach 30-50\%, causing individual, institutional, and societal costs \cite{tinto2012completing, rumberger2012dropping}.
+
+\textbf{Tinto's Integration Model} identifies key dropout factors:
+\begin{itemize}
+\item \textbf{Academic}: Prior preparation, GPA trends, course load
+\item \textbf{Financial}: Tuition affordability, scholarship status, debt
+\item \textbf{Social}: Peer relationships, campus engagement
+\item \textbf{Institutional}: Support services quality
+\item \textbf{Personal}: Family obligations, health, motivation
+\end{itemize}
+
+\section{Educational Data Mining}
+
+Educational Data Mining (EDM) applies machine learning to educational datasets for pattern discovery and outcome prediction \cite{romero2020educational, baker2011data}.
+
+\textbf{Key EDM Tasks}: Prediction (performance forecasting), clustering (student grouping), relationship mining (feature associations), discovery with models (learning trajectories), visualization (analytics dashboards).
+
+\textbf{Data Sources}: Student Information Systems (demographics, grades), Learning Management Systems (clickstreams, forum posts), administrative records (financial aid, library usage), surveys (self-reported metrics).
+
+\section{Machine Learning for Dropout Prediction}
+
+\subsection{Traditional Classifiers}
+
+\textbf{Decision Trees} \cite{quinlan1986induction}: Recursive feature space partitioning using Information Gain or Gini Impurity. \textit{Advantages}: Interpretable, handles mixed datatypes. \textit{Limitations}: Overfitting prone, high variance. Delen et al. (2010) achieved 73\% accuracy on 8,500 students \cite{delen2010comparative}.
+
+\textbf{Naive Bayes} \cite{rish2001empirical}: Probabilistic classifier assuming feature independence: $P(y|X) \propto P(y) \prod_{i=1}^{n} P(x_i|y)$. \textit{Advantages}: Fast, works with small data. \textit{Limitations}: Independence assumption rarely holds. Kotsiantis et al. (2003) reported 65-70\% accuracy \cite{kotsiantis2003machine}.
+
+\subsection{Ensemble Methods}
+
+\textbf{Random Forest} \cite{breiman2001random}: Ensemble of decision trees on bootstrap samples with random feature subsets. Reduces overfitting, provides feature importance. Adnan et al. (2021) achieved 84.5\% accuracy \cite{adnan2021student}.
+
+\textbf{AdaBoost} \cite{freund1997decision}: Sequential ensemble focusing on misclassified samples. Sample weights: $w_i^{(t+1)} = w_i^{(t)} \exp(\alpha_t \mathbb{1}(y_i \neq \hat{y}_i))$.
+
+\textbf{XGBoost} \cite{chen2016xgboost}: Optimized gradient boosting with regularization. Objective: $\mathcal{L}(\phi) = \sum_i l(\hat{y}_i, y_i) + \sum_k \Omega(f_k)$.
+
+\subsection{Deep Learning}
+
+\textbf{Neural Networks} \cite{goodfellow2016deep}: Multi-layer perceptrons with non-linear activations (ReLU), trained via backpropagation and Adam optimizer.
+
+\textbf{GRU (Gated Recurrent Unit)} \cite{cho2014learning}: Simplified LSTM with update/reset gates:
+\begin{align}
+z_t &= \sigma(W_z [h_{t-1}, x_t]) \quad \text{(update gate)} \\
+r_t &= \sigma(W_r [h_{t-1}, x_t]) \quad \text{(reset gate)} \\
+\tilde{h}_t &= \tanh(W [r_t \odot h_{t-1}, x_t]) \\
+h_t &= (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t
+\end{align}
+
+Liang et al. (2022) achieved 87.3\% accuracy using GRU+Attention \cite{liang2022student}.
+
+\section{Temporal Modeling and Attention}
+
+\textbf{Attention Mechanism} \cite{bahdanau2015neural}: Learns which inputs to focus on via attention weights: $\alpha_t = \frac{\exp(e_t)}{\sum_{k} \exp(e_k)}$, context vector: $c = \sum_t \alpha_t h_t$.
+
+\textbf{Multi-Head Attention} \cite{vaswani2017attention}: Multiple heads learn different representation subspaces: $\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O$.
+
+\section{Large Language Models}
+
+\textbf{DistilBERT} \cite{sanh2019distilbert}: Distilled BERT variant with 66M parameters (40\% smaller), 60\% faster, retaining 97\% performance. Enables psychosocial feature extraction from student texts (sentiment, engagement, cognitive load).
+
+\section{Explainable AI}
+
+\textbf{SHAP (SHapley Additive exPlanations)} \cite{lundberg2017unified}: Game-theoretic feature attribution based on Shapley values:
+$$\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|!(|N|-|S|-1)!}{|N|!}[f(S \cup \{i\}) - f(S)]$$
+
+Properties: Local fidelity, missingness, consistency. Visualizations: waterfall plots, summary plots, dependence plots.
+
+\section{Feature Selection}
+
+\textbf{Filter Methods}:
+\begin{itemize}
+\item \textbf{Information Gain}: $IG(S, A) = H(S) - \sum_{v} \frac{|S_v|}{|S|} H(S_v)$
+\item \textbf{Gain Ratio}: $GR(S, A) = \frac{IG(S, A)}{H(A)}$ (normalizes IG)
+\item \textbf{Gini Impurity}: $Gini(S) = 1 - \sum_{i=1}^{C} p_i^2$
+\item \textbf{Chi-squared}, \textbf{F-statistic (ANOVA)}
+\end{itemize}
+
+\section{Literature Summary}
+
+\textbf{Classical ML}: Delen (2010) - 73\% accuracy; Pal (2012) - 81\% Random Forest.
+
+\textbf{Deep Learning}: Huang (2020) - 82.3\% NN; Adnan (2021) - 84.5\% LSTM; Yang (2021) - 86.1\% Attention-LSTM; Liang (2022) - 87.3\% GRU-Attention (current SOTA).
+
+\textbf{Identified Gaps}:
+\begin{enumerate}
+\item Limited multimodal learning (no LLM features)
+\item Static modeling dominance (temporal patterns ignored)
+\item Lack of adaptive feature selection
+\item Insufficient explainability integration
+\item Incomplete cross-paradigm benchmarking
+\end{enumerate}

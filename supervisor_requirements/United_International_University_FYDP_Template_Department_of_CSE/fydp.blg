@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: fydp.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: unsrt.bst
+Reallocating 'name_of_file' (item size: 1) to 5 items.
+Database file #1: fydp.bib
+Warning--empty journal in Tinto1993
+You've used 3 entries,
+            1791 wiz_defined-function locations,
+            465 strings with 3981 characters,
+and the built_in function-call counts, 747 in all, are:
+= -- 72
+> -- 22
+< -- 1
++ -- 9
+- -- 6
+* -- 43
+:= -- 116
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 3
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 37
+empty$ -- 69
+format.name$ -- 6
+if$ -- 167
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 3
+newline$ -- 18
+num.names$ -- 3
+pop$ -- 9
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 24
+stack$ -- 0
+substring$ -- 59
+swap$ -- 13
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 8
+width$ -- 4
+write$ -- 33
+(There was 1 warning)
