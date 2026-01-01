@@ -1,0 +1,162 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{tinto1975dropout}
+\citation{dekker2009predicting}
+\citation{oecd2019education}
+\citation{worldbank2020education}
+\citation{tinto1993leaving}
+\citation{romero2020educational}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\citation{tinto1975dropout,bean1980dropouts}
+\citation{tinto1993leaving}
+\citation{dekker2009predicting}
+\citation{kotsiantis2003preventing}
+\citation{marquez2016predicting}
+\citation{chen2016xgboost}
+\citation{fei2015temporal}
+\citation{vaswani2017attention}
+\citation{guyon2003introduction}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Traditional Statistical Approaches}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Machine Learning for Dropout Prediction}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Deep Learning Approaches}{2}{subsection.2.3}\protected@file@percent }
+\citation{lundberg2017unified}
+\citation{swamy2022explainable}
+\citation{khosravi2022explainable}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Feature Selection in Educational Data Mining}{3}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-E}}Explainable AI in Education}{3}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-F}}Comparison with Recent Literature}{3}{subsection.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-G}}Research Gaps}{3}{subsection.2.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Dataset Description}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Dataset Overview}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Comparison with Recent Literature}}{4}{table.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:literature_gap}{{I}{4}{Comparison with Recent Literature}{table.caption.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Dataset Statistics}}{4}{table.caption.2}\protected@file@percent }
+\newlabel{tab:dataset_stats}{{II}{4}{Dataset Statistics}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Feature Categorization}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-B}1}Academic Features (18 Features)}{4}{subsubsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-B}2}Financial Features (12 Features)}{4}{subsubsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-B}3}Demographic Features (16 Features)}{4}{subsubsection.3.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Class distribution in the educational dataset showing imbalanced nature with Graduate class (50.0\%) dominating, followed by Dropout (32.1\%) and Enrolled (17.9\%).}}{4}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:class_dist}{{1}{4}{Class distribution in the educational dataset showing imbalanced nature with Graduate class (50.0\%) dominating, followed by Dropout (32.1\%) and Enrolled (17.9\%)}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Data Preprocessing}{4}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Data Quality and Validation}{5}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Feature Ranking Methodology}{5}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Information Gain}{5}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Gain Ratio}{5}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Gini Index}{5}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Chi-squared Test}{5}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}ANOVA F-Statistic}{5}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-F}}Meta-Ranking Aggregation}{5}{subsection.4.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Feature ranking heatmap across five methods (Information Gain, Gain Ratio, Gini Index, Chi-squared, F-statistic). Darker colors indicate higher importance rankings.}}{5}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:ranking_heatmap}{{2}{5}{Feature ranking heatmap across five methods (Information Gain, Gain Ratio, Gini Index, Chi-squared, F-statistic). Darker colors indicate higher importance rankings}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Baseline Models}{5}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Single Classifiers}{5}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-A}1}Decision Tree (DT)}{5}{subsubsection.5.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Top 15 Features by Meta-Ranking}}{6}{table.caption.4}\protected@file@percent }
+\newlabel{tab:feature_ranking}{{III}{6}{Top 15 Features by Meta-Ranking}{table.caption.4}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Decision Tree Training}}{6}{algorithm.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-A}2}Naive Bayes (NB)}{6}{subsubsection.5.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Ensemble Methods}{6}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}1}Random Forest (RF)}{6}{subsubsection.5.2.1}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Random Forest Training}}{6}{algorithm.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}2}AdaBoost}{6}{subsubsection.5.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}3}XGBoost}{6}{subsubsection.5.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Deep Learning}{6}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-C}1}Neural Network (NN)}{6}{subsubsection.5.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Proposed AHFS-TA Framework}{6}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Framework Architecture}{7}{subsection.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces AHFS-TA Framework Architecture Overview}}{7}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:framework}{{3}{7}{AHFS-TA Framework Architecture Overview}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Component 1: LLM-Based Semantic Feature Extraction}{7}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-C}}Component 2: Temporal Attention Network}{7}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {VI-C}1}Bidirectional GRU}{7}{subsubsection.6.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {VI-C}2}Multi-Head Attention}{7}{subsubsection.6.3.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Temporal Attention Computation}}{7}{algorithm.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-D}}Component 3: Adaptive Hierarchical Feature Selection}{7}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {VI-D}1}Stream 1: SHAP-Based Ranking}{7}{subsubsection.6.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {VI-D}2}Stream 2: LLM Attention Ranking}{7}{subsubsection.6.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {VI-D}3}Stream 3: Temporal Significance Ranking}{7}{subsubsection.6.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {VI-D}4}Weighted Fusion}{7}{subsubsection.6.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-E}}Component 4: Training Methodology}{8}{subsection.6.5}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces AHFS-TA Training Procedure}}{8}{algorithm.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Experimental Setup}{8}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Implementation Details}{8}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Hyperparameter Tuning}{8}{subsection.7.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Baseline Model Hyperparameters}}{8}{table.caption.7}\protected@file@percent }
+\newlabel{tab:hyperparams}{{IV}{8}{Baseline Model Hyperparameters}{table.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Evaluation Metrics}{8}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-D}}Statistical Significance Testing}{8}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-E}}Computational Efficiency}{8}{subsection.7.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Computational Efficiency Comparison}}{9}{table.caption.8}\protected@file@percent }
+\newlabel{tab:timing}{{V}{9}{Computational Efficiency Comparison}{table.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Results and Analysis}{9}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VIII-A}}Overall Performance Comparison}{9}{subsection.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 10-Fold cross-validation results showing accuracy distribution across folds for all models. AHFS-TA demonstrates the highest median accuracy with the lowest variance.}}{9}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:cv_results}{{4}{9}{10-Fold cross-validation results showing accuracy distribution across folds for all models. AHFS-TA demonstrates the highest median accuracy with the lowest variance}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VIII-B}}Per-Class Performance Analysis}{9}{subsection.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VIII-C}}Confusion Matrix Analysis}{9}{subsection.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VIII-D}}ROC Curve Analysis}{9}{subsection.8.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VIII-E}}Improvement Analysis}{9}{subsection.8.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Explainable AI Analysis}{9}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IX-A}}SHAP Feature Importance}{9}{subsection.9.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Comprehensive Model Performance Comparison}}{10}{table.caption.9}\protected@file@percent }
+\newlabel{tab:results}{{VI}{10}{Comprehensive Model Performance Comparison}{table.caption.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Per-Class F1-Scores by Model}}{10}{table.caption.11}\protected@file@percent }
+\newlabel{tab:perclass}{{VII}{10}{Per-Class F1-Scores by Model}{table.caption.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Confusion Matrix: AHFS-TA}}{10}{table.caption.13}\protected@file@percent }
+\newlabel{tab:cm_ahfs}{{VIII}{10}{Confusion Matrix: AHFS-TA}{table.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IX-B}}Cross-Model SHAP Consistency}{10}{subsection.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IX-C}}Attention Weight Analysis (AHFS-TA)}{10}{subsection.9.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IX-D}}Ablation Study}{10}{subsection.9.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Confusion matrices for all seven models (4×2 layout) showing prediction distributions. AHFS-TA achieves the highest diagonal concentrations (262 Dropout, 140 Enrolled, 429 Graduate correctly classified), indicating superior classification across all classes.}}{10}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:confusion_matrices}{{5}{10}{Confusion matrices for all seven models (4×2 layout) showing prediction distributions. AHFS-TA achieves the highest diagonal concentrations (262 Dropout, 140 Enrolled, 429 Graduate correctly classified), indicating superior classification across all classes}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {X}Discussion}{10}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {X-A}}Why AHFS-TA Outperforms Baselines}{10}{subsection.10.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comprehensive model performance comparison showing accuracy, precision, recall, and F1-score across all seven models. AHFS-TA significantly outperforms all baselines across all metrics.}}{11}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:model_comparison}{{6}{11}{Comprehensive model performance comparison showing accuracy, precision, recall, and F1-score across all seven models. AHFS-TA significantly outperforms all baselines across all metrics}{figure.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IX}{\ignorespaces Per-Class AUC-ROC Scores}}{11}{table.caption.14}\protected@file@percent }
+\newlabel{tab:auc}{{IX}{11}{Per-Class AUC-ROC Scores}{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {X}{\ignorespaces AHFS-TA Improvement Over Baselines}}{11}{table.caption.17}\protected@file@percent }
+\newlabel{tab:improvement}{{X}{11}{AHFS-TA Improvement Over Baselines}{table.caption.17}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XI}{\ignorespaces Top 10 SHAP Feature Importance (AHFS-TA)}}{11}{table.caption.18}\protected@file@percent }
+\newlabel{tab:shap}{{XI}{11}{Top 10 SHAP Feature Importance (AHFS-TA)}{table.caption.18}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XII}{\ignorespaces Top 5 Features Across All Models (SHAP)}}{11}{table.caption.19}\protected@file@percent }
+\newlabel{tab:shap_cross}{{XII}{11}{Top 5 Features Across All Models (SHAP)}{table.caption.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {X-B}}Practical Implications}{11}{subsection.10.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces ROC curves for all seven models (4×2 layout) demonstrating discriminative ability. AHFS-TA achieves the highest per-class AUC (Dropout: 0.968, Enrolled: 0.941, Graduate: 0.972) and micro-average AUC (0.955), substantially outperforming all baseline methods.}}{12}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:roc_curves}{{7}{12}{ROC curves for all seven models (4×2 layout) demonstrating discriminative ability. AHFS-TA achieves the highest per-class AUC (Dropout: 0.968, Enrolled: 0.941, Graduate: 0.972) and micro-average AUC (0.955), substantially outperforming all baseline methods}{figure.caption.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XIII}{\ignorespaces Mean Attention Weights by Outcome Class}}{12}{table.caption.21}\protected@file@percent }
+\newlabel{tab:attention}{{XIII}{12}{Mean Attention Weights by Outcome Class}{table.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {X-C}}Limitations}{12}{subsection.10.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces SHAP summary plot for Random Forest model showing feature importance and impact direction. Red indicates high feature values, blue indicates low values.}}{12}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:shap_summary}{{8}{12}{SHAP summary plot for Random Forest model showing feature importance and impact direction. Red indicates high feature values, blue indicates low values}{figure.caption.20}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XIV}{\ignorespaces AHFS-TA Ablation Study Results}}{12}{table.caption.22}\protected@file@percent }
+\newlabel{tab:ablation}{{XIV}{12}{AHFS-TA Ablation Study Results}{table.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {X-D}}Future Directions}{12}{subsection.10.4}\protected@file@percent }
+\bibcite{tinto1975dropout}{1}
+\bibcite{dekker2009predicting}{2}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Ablation study showing component contribution. Each bar represents accuracy when a component is removed, with delta values indicating performance drop from full model (91.32\%).}}{13}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:ablation}{{9}{13}{Ablation study showing component contribution. Each bar represents accuracy when a component is removed, with delta values indicating performance drop from full model (91.32\%)}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {XI}Conclusion}{13}{section.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Performance comparison of AHFS-TA versus baseline models. Four subplots: (1) Performance metrics, (2) AUC scores, (3) Test accuracy (AHFS-TA highlighted), (4) 10-fold cross-validation.}}{13}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:ahfs_comparison}{{10}{13}{Performance comparison of AHFS-TA versus baseline models. Four subplots: (1) Performance metrics, (2) AUC scores, (3) Test accuracy (AHFS-TA highlighted), (4) 10-fold cross-validation}{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {section}{References}{13}{section*.25}\protected@file@percent }
+\bibcite{oecd2019education}{3}
+\bibcite{worldbank2020education}{4}
+\bibcite{tinto1993leaving}{5}
+\bibcite{romero2020educational}{6}
+\bibcite{bean1980dropouts}{7}
+\bibcite{kotsiantis2003preventing}{8}
+\bibcite{marquez2016predicting}{9}
+\bibcite{chen2016xgboost}{10}
+\bibcite{fei2015temporal}{11}
+\bibcite{vaswani2017attention}{12}
+\bibcite{guyon2003introduction}{13}
+\bibcite{lundberg2017unified}{14}
+\bibcite{swamy2022explainable}{15}
+\bibcite{khosravi2022explainable}{16}
+\gdef \@abspage@last{14}
