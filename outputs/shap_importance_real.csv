@@ -1,0 +1,16 @@
+Rank,Feature,Importance
+1,Curricular units 2nd sem (approved),0.153550131158668
+2,Curricular units 2nd sem (grade),0.10669339952270933
+3,Curricular units 1st sem (approved),0.0980367389074561
+4,Curricular units 1st sem (grade),0.06917039594492962
+5,Age at enrollment,0.04468012788249767
+6,Tuition fees up to date,0.04376360911469463
+7,Curricular units 2nd sem (evaluations),0.043342259820891016
+8,Curricular units 1st sem (evaluations),0.03835773146275978
+9,Course,0.03541890073765443
+10,Father's occupation,0.03189811893934372
+11,Mother's occupation,0.029265148585341433
+12,GDP,0.025769345861073958
+13,Application mode,0.02529701039673268
+14,Unemployment rate,0.024477555947912476
+15,Curricular units 2nd sem (enrolled),0.024373034868112025
