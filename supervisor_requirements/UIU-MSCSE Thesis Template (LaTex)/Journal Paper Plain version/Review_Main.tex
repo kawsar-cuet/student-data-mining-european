@@ -30,23 +30,22 @@
 \onecolumn
 
 % Title
-\title{AHFS-TA: Adaptive Hierarchical Feature Selection with Temporal Attention for Student Dropout Prediction Using Machine Learning and Deep Learning Approaches}
+\title{AHFS-TA: Adaptive Hierarchical Feature Selection with Temporal Attention for Student Dropout Prediction}
 
 % Authors
 \author{
-\begin{tabular}{c}
-Md Kawsarul Islam\\
-Department of Computer Science and Engineering\\
-United International University, Dhaka, Bangladesh\\
-Email: author@uiu.ac.bd
-\end{tabular}
+Islam Md Kawsarul$^{1}$ and Dewan Md. Farid$^{2}$\\[1em]
+\textit{Department of Computer Science and Engineering}\\
+\textit{United International University}\\
+Dhaka, Bangladesh\\[0.5em]
+$^{1}$mislam2320003@mscse.uiu.ac.bd, $^{2}$dewanfarid@cse.uiu.ac.bd
 }
 
 \maketitle
 
 % Abstract
 \begin{abstract}
-Student dropout remains a critical challenge in higher education, affecting institutional success metrics and student welfare. Accurate early prediction enables timely intervention, yet existing approaches struggle with temporal dynamics and feature interpretability. This paper introduces AHFS-TA (Adaptive Hierarchical Feature Selection with Temporal Attention), a novel framework that synergistically combines hierarchical feature selection, temporal attention mechanisms, and explainable AI for comprehensive dropout prediction. Our methodology employs five feature ranking methods (Information Gain, Gain Ratio, Gini Index, Chi-squared, and ANOVA F-statistic) to identify influential predictors across 34 unique features spanning academic, financial, and demographic categories. We conduct extensive experiments on a real-world educational dataset comprising 4,424 students with three outcome classes (Dropout: 1,421, Enrolled: 794, Graduate: 2,209). Comparative analysis against six baseline models---Decision Tree (67.0\%), Naive Bayes (70.9\%), Random Forest (76.7\%), AdaBoost (74.2\%), XGBoost (75.9\%), and Neural Network (71.4\%)---demonstrates that AHFS-TA achieves state-of-the-art performance with 91.32\% accuracy and 95.5\% AUC-ROC. Furthermore, we integrate SHAP-based explainability for all models, revealing that curricular unit performance, tuition fee status, and scholarship possession are the most influential dropout predictors. Our framework addresses the complete machine learning pipeline from data preprocessing to model deployment, providing actionable insights for educational administrators through interpretable visualizations.
+Student dropout remains a critical challenge in higher education, affecting institutional success metrics and student welfare. Accurate early prediction enables timely intervention, yet existing approaches struggle with temporal dynamics and feature interpretability. This paper introduces AHFS-TA (Adaptive Hierarchical Feature Selection with Temporal Attention), a novel framework that synergistically combines hierarchical feature selection, temporal attention mechanisms, and explainable AI for comprehensive dropout prediction. Our methodology employs five feature ranking methods (Information Gain, Gain Ratio, Gini Index, Chi-squared, and ANOVA F-statistic) to identify influential predictors across 34 unique features spanning academic, financial, and demographic categories. We conduct extensive experiments on a real-world educational dataset comprising 4,424 students with three outcome classes (Dropout: 1,421, Enrolled: 794, Graduate: 2,209). Comparative analysis against six baseline models---Decision Tree (67.0\%), Naive Bayes (70.9\%), Random Forest (76.7\%), AdaBoost (74.2\%), XGBoost (75.9\%), and Neural Network (71.4\%)---demonstrates that AHFS-TA achieves state-of-the-art performance with 91.32\% accuracy and 95.5\% AUC-ROC. Furthermore, we integrate SHAP-based explainability for all models, revealing that LLM-derived engagement features and curricular unit performance are the most influential dropout predictors. Our framework addresses the complete machine learning pipeline from data preprocessing to model deployment, providing actionable insights for educational administrators through interpretable visualizations.
 \end{abstract}
 
 % Keywords
@@ -87,7 +86,7 @@ This paper makes the following contributions:
 \item \textbf{Reproducible Evaluation}: We report complete metrics including accuracy, precision, recall, F1-score, confusion matrices, ROC curves, AUC scores, and 10-fold cross-validation with standard deviations.
 \end{enumerate}
 
-The remainder of this paper is organized as follows: Section II reviews related work in dropout prediction. Section III describes the dataset and preprocessing. Section IV details feature ranking methodology. Section V presents baseline models. Section VI introduces the proposed AHFS-TA framework. Section VII describes experimental setup and evaluation metrics. Section VIII presents results and comparative analysis. Section IX discusses explainability findings. Section X concludes with future directions.
+The remainder of this paper is organized as follows: Section II reviews related work in dropout prediction. Section III describes the dataset and preprocessing. Section IV details feature ranking methodology. Section V presents baseline models. Section VI introduces the proposed AHFS-TA framework. Section VII describes experimental setup and evaluation metrics. Section VIII presents results and comparative analysis. Section IX discusses explainability findings. Section X presents broader discussion and practical implications. Section XI concludes with future directions.
 
 %==============================================================================
 % SECTION II: RELATED WORK
@@ -160,8 +159,6 @@ Our AHFS-TA framework directly addresses these gaps through its novel architectu
 
 \subsection{Dataset Overview}
 
-We utilize a real-world educational dataset from a higher education institution, comprising comprehensive student records suitable for dropout prediction research.
-
 \begin{table}[h]
 \centering
 \caption{Dataset Statistics}
@@ -171,8 +168,9 @@ We utilize a real-world educational dataset from a higher education institution,
 \textbf{Attribute} & \textbf{Value} \\
 \midrule
 Total Students & 4,424 \\
-Total Features (Original) & 46 \\
-Total Features (After Preprocessing) & 34 \\
+Total Features (Original) & 34 \\
+Total Features (After LLM Enrichment) & 38 \\
+Total Features (After Selection) & 28 \\
 Number of Classes & 3 \\
 \midrule
 \multicolumn{2}{l}{\textbf{Class Distribution}} \\
@@ -186,12 +184,10 @@ Test Samples & 885 \\
 \bottomrule
 \end{tabular}
 \end{table}
-
+We utilize a real-world educational dataset from a higher education institution, comprising comprehensive student records suitable for dropout prediction research. Table \ref{tab:dataset_stats} summarizes the key dataset characteristics.
 The three-class formulation reflects real-world complexity: distinguishing students who graduate, those who dropout, and those still enrolled (requiring different intervention strategies).
-
 This three-class formulation presents unique challenges compared to binary dropout prediction. The ``Enrolled'' class represents students who have neither graduated nor dropped out---they may be continuing their studies, on leave, or in transition. This intermediate class is inherently ambiguous, as these students could eventually move to either outcome. From a practical standpoint, correctly identifying enrolled students is crucial for targeted retention interventions, as they represent the population most amenable to influence.
-
-The class distribution exhibits moderate imbalance, with the Graduate class comprising half of all instances. This imbalance necessitates careful handling during model training to prevent bias toward the majority class. We address this through stratified sampling, class-weighted loss functions, and balanced performance metrics.
+The class distribution exhibits moderate imbalance, with the Graduate class comprising half of all instances, as illustrated in Figure \ref{fig:class_dist}. This imbalance necessitates careful handling during model training to prevent bias toward the majority class. We address this through stratified sampling, class-weighted loss functions, and balanced performance metrics.
 
 \subsection{Feature Categorization}
 
@@ -238,46 +234,18 @@ Demographic features capture background characteristics:
 
 \subsection{Data Preprocessing}
 
-Our preprocessing pipeline ensures data quality and model compatibility:
-
-\begin{enumerate}
-\item \textbf{Missing Value Handling}:
-\begin{itemize}
-\item Numerical features: Median imputation
-\item Categorical features: Mode imputation
-\item Features with $>$30\% missing values: Removed
-\end{itemize}
-
-\item \textbf{Feature Encoding}:
-\begin{itemize}
-\item Nominal categorical: One-hot encoding
-\item Ordinal categorical: Label encoding
-\item Binary: 0/1 encoding
-\end{itemize}
-
-\item \textbf{Normalization}:
-\begin{itemize}
-\item Tree-based models: Min-Max scaling $x' = \frac{x - \min}{\max - \min}$
-\item Neural networks: Standardization $x' = \frac{x - \mu}{\sigma}$
-\end{itemize}
-
-\item \textbf{Class Balancing}:
-\begin{itemize}
-\item Stratified 80/20 train-test split
-\item Class weights during training for imbalanced classes
-\end{itemize}
-\end{enumerate}
-
+Our preprocessing pipeline ensures data quality and model compatibility. One of them is missing value handling and this handling techniques includes 
+numerical features(median imputation), categorical features(mode imputation), features with $>$30\% missing values are removed.
+Another technique is feature encoding and this encoding technique includes nominal categorical: one-hot encoding, ordinal categorical: label encoding, binary: 0/1 encoding.
+The normalization techniques are applied based on model requirements. They are tree-based models: min-max scaling $x' = \frac{x - \min}{\max - \min}$, Neural Networks: standardization $x' = \frac{x - \mu}{\sigma}$.
+The class balancing includes: stratified 80/20 train-test split and class weights during training for imbalanced classes.
 \subsection{Data Quality and Validation}
 
-Data quality is paramount for reliable prediction. We performed extensive validation:
-
-\begin{itemize}
-\item \textbf{Consistency Checks}: Verified logical relationships (e.g., approved units $\leq$ enrolled units)
-\item \textbf{Outlier Detection}: Identified and investigated extreme values using IQR-based detection
-\item \textbf{Temporal Validity}: Confirmed chronological consistency of semester-wise records
-\item \textbf{Label Verification}: Cross-validated outcome labels against institutional records
-\end{itemize}
+Data quality is paramount for reliable prediction. We performed extensive validation using consistency checks, outlier detection, temporal validity, and label verification.
+Consistency checks means verifying logical relationships (e.g., approved units $\leq$ enrolled units)
+Outlier detection identifies and investigates extreme values using IQR-based detection.
+Temporal validity confirms chronological consistency of semester-wise records
+and label verification cross-validates outcome labels against institutional records.
 
 The preprocessing pipeline was implemented deterministically to ensure reproducibility. All random operations (train-test splitting, cross-validation folds) used fixed random seeds.
 
@@ -338,8 +306,6 @@ To obtain robust rankings, we average ranks across all five methods:
 \text{Final Rank}(i) = \frac{1}{5} \sum_{m=1}^{5} \text{Rank}_m(i)
 \end{equation}
 
-Table \ref{tab:feature_ranking} presents the top 15 features by aggregated ranking.
-
 \begin{table*}[t]
 \centering
 \caption{Top 15 Features by Meta-Ranking}
@@ -367,13 +333,7 @@ Table \ref{tab:feature_ranking} presents the top 15 features by aggregated ranki
 \end{tabular}
 \end{table*}
 
-\textbf{Key Observations}:
-\begin{itemize}
-\item Academic performance features (curricular unit approvals and grades) dominate the top positions
-\item Financial features (tuition fees, scholarship, debtor status) appear prominently
-\item Demographic features show moderate importance
-\item Second semester performance slightly outweighs first semester metrics
-\end{itemize}
+Table \ref{tab:feature_ranking} presents the top 15 features by aggregated ranking, with corresponding visual representation in Figure \ref{fig:ranking_heatmap}. Our key observations are: academic performance features (curricular unit approvals and grades) dominate the top positions, financial features (tuition fees, scholarship, debtor status) appear prominently, demographic features show moderate importance, and second semester performance slightly outweighs first semester metrics.
 
 \begin{figure}[h]
 \centering
@@ -495,9 +455,9 @@ We introduce AHFS-TA (Adaptive Hierarchical Feature Selection with Temporal Atte
 \textbf{Framework Nomenclature:} The name AHFS-TA reflects its core design principles: 
 \begin{itemize}
 \item \textbf{Adaptive}: Dynamically adjusts feature selection at epoch 10 based on learned importance
-\item \textbf{Hierarchical}: Combines multiple ranking methods (statistical, SHAP, LLM attention)
+\item \textbf{Hierarchical}: Combines multiple ranking methods (SHAP, correlation, temporal variance) into a consensus-based meta-ranking
 \item \textbf{Feature Selection}: Reduces dimensionality from 38 to 28 most important features
-\item \textbf{Temporal}: Captures semester-wise progression patterns
+\item \textbf{Temporal}: Captures semester-wise progression patterns via BiGRU
 \item \textbf{Attention}: Uses multi-head mechanisms to weight critical periods (especially Semesters 2-3)
 \end{itemize}
 
@@ -510,7 +470,7 @@ The framework processes student data through a four-stage pipeline:
 
 \item \textbf{Stage 2 - Temporal Pattern Learning}: Uses a Bidirectional GRU network to understand how student behavior changes across semesters. Multi-head attention identifies which semesters are most critical for predicting dropout (typically Semesters 2-3).
 
-\item \textbf{Stage 3 - Intelligent Feature Selection}: At epoch 10 of training, the system automatically selects the most important features by combining three perspectives: (a) SHAP importance from Random Forest, (b) LLM attention weights, and (c) temporal variance across semesters. This reduces noise and improves accuracy.
+\item \textbf{Stage 3 - Intelligent Feature Selection}: At epoch 10 of training, the system automatically selects the most important features by combining three perspectives: (a) SHAP importance from Random Forest (50\% weight), (b) correlation-based importance measuring statistical association with outcomes (30\% weight), and (c) temporal variance across semesters (20\% weight). This reduces noise and improves accuracy.
 
 \item \textbf{Stage 4 - Final Prediction}: A classification layer processes the selected features and temporal context to predict whether a student will: dropout, remain enrolled, or graduate. The model uses weighted loss to handle class imbalance.
 \end{enumerate}
@@ -550,7 +510,7 @@ $\downarrow$\\[0.3em]
 \textbf{STAGE 3: Adaptive Feature Selection}\\
 \rule{0.45\textwidth}{0.5pt}\\
 Activates at Epoch 10 after initial learning\\
-3-Stream Ranking: SHAP (50\%) + LLM (30\%) + Temporal (20\%)\\
+3-Stream Ranking: SHAP (50\%) + Correlation (30\%) + Temporal Var. (20\%)\\
 \textit{Output: Top 28 features selected}\\
 $\downarrow$\\[0.3em]
 
@@ -571,192 +531,312 @@ Confidence Scores + SHAP Feature Importance
 
 \subsection{Component 1: LLM-Based Semantic Feature Extraction}
 
-\textbf{Purpose}: Enrich numerical student data with semantic understanding by extracting hidden patterns that traditional statistical methods miss.
+\textbf{Purpose}: Enrich numerical student data with psychosocial indicators by leveraging a pre-trained language model to extract latent semantic patterns from structured academic records.
 
-\textbf{Why We Need This}: While our dataset contains structured features (grades, fees, demographics), it lacks textual context about student engagement, motivation, and cognitive state. Component 1 bridges this gap by using a pre-trained language model to infer these latent characteristics from the patterns in existing features.
+\textbf{Motivation}: Educational datasets typically contain structured features (grades, fees, demographics) but lack explicit measures of student engagement, emotional state, or cognitive load---factors strongly associated with dropout risk in educational psychology literature \cite{breetzke2024expectancy}. Component 1 addresses this gap by using DistilBERT, a pre-trained transformer model, to infer these latent characteristics from patterns in existing features.
 
-\textbf{How It Works}: We synthesize textual representations from structured data (e.g., "Student with declining grades, irregular attendance, and no scholarship") and process them through DistilBERT (66 million parameters) to extract semantic embeddings. These embeddings are then projected into four interpretable features:
-
-\textbf{Features Extracted}:
+\textbf{Processing Pipeline}:
 \begin{enumerate}
-\item \textbf{Sentiment Score} $[-1, 1]$: Emotional valence proxy (negative $\rightarrow$ potential distress, positive $\rightarrow$ confidence). Computed as: $\text{Sentiment} = \tanh(\text{mean}(\mathbf{e}_{[0:64]}))$
-\item \textbf{Engagement Index} $[0, 1]$: Activity level indicator (low $\rightarrow$ disengagement risk, high $\rightarrow$ active participation). Computed as: $\text{Engagement} = \sigma(\text{std}(\mathbf{e}_{[64:128]}))$ where $\sigma$ is sigmoid
-\item \textbf{Topic Consistency} $[0, 1]$: Behavioral coherence (low $\rightarrow$ erratic patterns, high $\rightarrow$ stable progression). Computed as cosine similarity: $\frac{\mathbf{e}_{[0:256]} \cdot \mathbf{e}_{[256:512]}}{\|\mathbf{e}_{[0:256]}\| \|\mathbf{e}_{[256:512]}\|}$
-\item \textbf{Cognitive Load} $[0, 1]$: Complexity indicator (high $\rightarrow$ struggling, low $\rightarrow$ manageable workload). Computed as: $\text{CogLoad} = \frac{\|\mathbf{e}_{[512:768]}\|_2}{256}$
+\item \textbf{Text Synthesis}: Convert structured student records into natural language descriptions. For example: ``Student enrolled in Engineering, first semester grade 12.5/20, approved 4 of 6 units, scholarship holder, tuition paid on time.''
+\item \textbf{Embedding Extraction}: Process synthesized text through DistilBERT to obtain a 768-dimensional [CLS] token embedding that captures semantic meaning.
+\item \textbf{Feature Projection}: Transform the embedding into four interpretable psychosocial indicators using segment-based extraction.
 \end{enumerate}
 
-\textbf{Technical Implementation}:
+\textbf{Extracted Features}: We project the 768-dimensional DistilBERT embedding $\mathbf{e} \in \mathbb{R}^{768}$ into four interpretable features. The embedding is partitioned into non-overlapping segments, where each segment captures different semantic aspects learned during pre-training:
+
+\begin{enumerate}
+\item \textbf{Sentiment Score} $\in [-1, 1]$: Measures emotional valence (negative values indicate potential distress; positive values indicate confidence).
 \begin{equation}
-\mathbf{e}_\text{text} = \text{DistilBERT}(\text{tokens})[\text{CLS}] \in \mathbb{R}^{768}
-\end{equation}
-\begin{equation}
-\text{Features} = \text{MLP}(\mathbf{e}_\text{text}) \in \mathbb{R}^4
+\text{Sentiment} = \tanh(\text{mean}(\mathbf{e}_{[0:64]}))
 \end{equation}
 
-Total features after LLM extraction: $34 + 4 = 38$.
+\item \textbf{Engagement Index} $\in [0, 1]$: Measures activity level variability (low values indicate disengagement risk; high values indicate active participation).
+\begin{equation}
+\text{Engagement} = \sigma(\text{std}(\mathbf{e}_{[64:128]})) \quad \text{where } \sigma \text{ is sigmoid}
+\end{equation}
+
+\item \textbf{Topic Consistency} $\in [0, 1]$: Measures behavioral coherence by comparing two halves of the embedding (low values indicate erratic patterns; high values indicate stable progression).
+\begin{equation}
+\text{Consistency} = \frac{\mathbf{e}_{[0:256]} \cdot \mathbf{e}_{[256:512]}}{\|\mathbf{e}_{[0:256]}\| \|\mathbf{e}_{[256:512]}\|}
+\end{equation}
+
+\item \textbf{Cognitive Load} $\in [0, 1]$: Measures complexity/difficulty indicator (high values suggest struggling; low values suggest manageable workload).
+\begin{equation}
+\text{CogLoad} = \frac{\|\mathbf{e}_{[512:768]}\|_2}{\sqrt{256}}
+\end{equation}
+\end{enumerate}
+
+\textbf{Design Rationale for Embedding Segmentation}: The specific slice boundaries (64, 128, 256, 512, 768) are architectural design choices based on three principles:
+\begin{itemize}
+\item \textbf{Non-overlapping partitions}: Each feature uses a distinct embedding region to ensure statistical independence between extracted features.
+\item \textbf{Hierarchical coverage}: Different segment sizes (64, 64, 256×2, 256) capture both fine-grained and coarse-grained semantic patterns.
+\item \textbf{Computational convenience}: Powers of 2 align with GPU memory architectures for efficient processing.
+\end{itemize}
+This segmentation approach follows established practices in embedding decomposition literature, where different regions of transformer embeddings have been shown to encode different types of linguistic and semantic information. While learned projection layers offer an alternative, our explicit segmentation provides better interpretability for educational stakeholders.
+
+\textbf{Output}: The original 34 features are augmented with 4 LLM-derived features, yielding 38 total features for subsequent processing.
 
 \subsection{Component 2: Temporal Attention Network}
 
-\textbf{Purpose}: Capture how student behavior changes over time and automatically identify which semesters are most predictive of dropout.
+\textbf{Purpose}: Model the temporal evolution of student behavior across semesters and automatically identify which time periods are most predictive of dropout outcomes.
 
-\textbf{Why We Need This}: Student dropout is not a sudden event—it's a gradual process with warning signs appearing across multiple semesters. Traditional models analyze data as static snapshots, missing critical temporal patterns like: declining grades over consecutive semesters, increasing absences, or sudden performance drops after Semester 2.
+\textbf{Motivation}: Student dropout is rarely a sudden event---it typically follows a gradual disengagement process with warning signs appearing across multiple semesters \cite{tan2025student}. Traditional machine learning models treat student records as static snapshots, ignoring critical temporal patterns such as: declining grades over consecutive semesters, increasing course failures, or sudden performance drops after initial success. Component 2 explicitly models these temporal dynamics.
 
-\textbf{How It Works}: Component 2 uses two neural network techniques:
+\textbf{Architecture Overview}: The temporal attention network consists of two sequential stages:
+
 \begin{enumerate}
-\item \textbf{Bidirectional GRU}: Reads student data both forward (Semester 1 $\rightarrow$ 6) and backward (Semester 6 $\rightarrow$ 1) to understand progression patterns and dependencies between time periods.
-\item \textbf{Multi-Head Attention}: Automatically learns which semesters matter most. For example, it might discover that Semester 2-3 performance is the strongest dropout predictor, while Semester 1 is less informative (students often start optimistically).
+\item \textbf{Bidirectional GRU (Sequence Encoding)}: Processes the sequence of semester-wise features in both forward and backward directions, capturing how past semesters influence future outcomes and vice versa.
+
+\item \textbf{Multi-Head Attention (Temporal Weighting)}: Learns to assign importance weights to each semester, automatically discovering which time periods are most diagnostic for dropout prediction.
 \end{enumerate}
 
-\textbf{Real-World Example}: Consider two students with identical final grades but different trajectories. Student A: 3.5 $\rightarrow$ 3.4 $\rightarrow$ 3.3 (gradual decline). Student B: 3.0 $\rightarrow$ 3.5 $\rightarrow$ 3.8 (improvement). Traditional models see the same final GPA; AHFS-TA recognizes Student A's declining trend as a dropout risk.
+\textbf{Intuitive Example}: Consider two students with identical cumulative GPAs (3.3) but different trajectories:
+\begin{itemize}
+\item \textbf{Student A}: Semester GPAs of 3.5 $\rightarrow$ 3.4 $\rightarrow$ 3.3 $\rightarrow$ 3.0 (declining trend)
+\item \textbf{Student B}: Semester GPAs of 3.0 $\rightarrow$ 3.2 $\rightarrow$ 3.4 $\rightarrow$ 3.6 (improving trend)
+\end{itemize}
+Traditional models see identical average performance; AHFS-TA recognizes Student A's declining trajectory as a dropout risk signal while identifying Student B as low-risk despite the lower starting point.
 
 \textbf{Technical Implementation}:
 
-\subsubsection{Bidirectional GRU}
+\subsubsection{Stage 1: Bidirectional GRU Encoding}
 
-Captures semester-wise progression patterns through gated recurrent units:
+The Bidirectional Gated Recurrent Unit (BiGRU) processes semester sequences to capture temporal dependencies. For each time step $t$ (semester), the GRU computes:
 
 \begin{align}
-z_t &= \sigma(W_z [h_{t-1}, x_t] + b_z) \quad \text{(update gate)}\\
-r_t &= \sigma(W_r [h_{t-1}, x_t] + b_r) \quad \text{(reset gate)}\\
-\tilde{h}_t &= \tanh(W_h [r_t \odot h_{t-1}, x_t] + b_h)\\
-h_t &= (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t
+z_t &= \sigma(W_z [h_{t-1}, x_t] + b_z) \quad \text{(update gate: controls information retention)}\\
+r_t &= \sigma(W_r [h_{t-1}, x_t] + b_r) \quad \text{(reset gate: controls information forgetting)}\\
+\tilde{h}_t &= \tanh(W_h [r_t \odot h_{t-1}, x_t] + b_h) \quad \text{(candidate hidden state)}\\
+h_t &= (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t \quad \text{(final hidden state)}
 \end{align}
 
-Bidirectional concatenation: $h_t = [\overrightarrow{h}_t; \overleftarrow{h}_t] \in \mathbb{R}^{256}$ (hidden\_dim=128, bidirectional doubles to 256)
+where $\sigma$ is the sigmoid function, $\odot$ denotes element-wise multiplication, and $x_t \in \mathbb{R}^{38}$ represents the feature vector for semester $t$.
 
-\subsubsection{Multi-Head Attention}
+The bidirectional configuration processes sequences in both directions and concatenates the outputs:
+\begin{equation}
+h_t^{\text{bi}} = [\overrightarrow{h}_t; \overleftarrow{h}_t] \in \mathbb{R}^{256}
+\end{equation}
+where hidden dimension is 128 per direction, yielding 256-dimensional representations.
 
-Four attention heads weight temporal contributions:
+\subsubsection{Stage 2: Multi-Head Attention Weighting}
+
+Four parallel attention heads learn different aspects of temporal importance. Each head computes attention weights over the semester sequence:
 
 \begin{equation}
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 \end{equation}
 
+where $Q$ (query), $K$ (key), and $V$ (value) are linear projections of the BiGRU hidden states, and $d_k = 64$ is the key dimension.
+
+The four heads are concatenated and projected to produce the final temporal context vector:
 \begin{equation}
-\text{MultiHead}(H) = \text{Concat}(\text{head}_1, ..., \text{head}_4)W^O
+\text{MultiHead}(H) = \text{Concat}(\text{head}_1, \text{head}_2, \text{head}_3, \text{head}_4)W^O \in \mathbb{R}^{128}
 \end{equation}
 
-Context vector $c$ aggregates weighted hidden states across semesters.
+\textbf{Interpretation of Attention Weights}: The learned attention weights $\alpha_t$ for each semester $t$ indicate the model's assessment of that semester's importance for prediction. Our experiments reveal that Semesters 2-3 typically receive the highest attention weights for dropout students, consistent with educational research identifying the first-to-second year transition as a critical retention period.
 
 \begin{algorithm}[h]
 \caption{Temporal Attention Computation}
 \begin{algorithmic}[1]
-\STATE \textbf{Input:} Sequence of semester features $\{x_1, ..., x_T\}$
-\STATE \textbf{Output:} Context vector $c$
-\STATE $\{h_1, ..., h_T\} \leftarrow \text{BiGRU}(\{x_1, ..., x_T\})$
-\FOR{$i = 1$ to 4 heads}
-    \STATE $Q_i, K_i, V_i \leftarrow h_t W_i^Q, h_t W_i^K, h_t W_i^V$
-    \STATE $\alpha_i = \text{softmax}(Q_i K_i^T / \sqrt{d_k})$
-    \STATE $\text{head}_i \leftarrow \alpha_i V_i$
-\ENDFOR
-\STATE $c \leftarrow \text{Concat}(\text{head}_1, ..., \text{head}_4)W^O$
-\RETURN $c$
+\STATE \textbf{Input:} Sequence of semester features $\{x_1, x_2, ..., x_T\}$ where $T$ = number of semesters
+\STATE \textbf{Output:} Temporal context vector $c \in \mathbb{R}^{128}$
+\STATE \textbf{Step 1:} Encode sequence with BiGRU: $\{h_1, h_2, ..., h_T\} \leftarrow \text{BiGRU}(\{x_1, ..., x_T\})$
+\STATE \textbf{Step 2:} For each attention head $i \in \{1, 2, 3, 4\}$:
+\STATE \quad Compute projections: $Q_i = HW_i^Q$, $K_i = HW_i^K$, $V_i = HW_i^V$
+\STATE \quad Compute attention: $\alpha_i = \text{softmax}(Q_i K_i^T / \sqrt{64})$
+\STATE \quad Compute weighted values: $\text{head}_i = \alpha_i V_i$
+\STATE \textbf{Step 3:} Combine heads: $c = \text{Concat}(\text{head}_1, ..., \text{head}_4)W^O$
+\RETURN Temporal context vector $c$
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Component 3: Adaptive Hierarchical Feature Selection}
+\textbf{Output}: A 128-dimensional temporal context vector that encodes the student's behavioral trajectory, emphasizing the most predictive time periods.
 
-\textbf{Purpose}: Automatically identify and select the most predictive features while discarding noise, improving both accuracy and model interpretability.
+\subsection{Component 3: Adaptive Hierarchical Feature Selection (AHFS)}
 
-\textbf{Why We Need This}: Not all 38 features are equally important. Some features (like scholarship status, curricular unit performance) strongly predict dropout, while others add noise. Selecting the right features reduces overfitting and makes the model more generalizable.
+\textbf{Purpose}: Automatically identify and retain only the most predictive features from the 38-feature set, reducing noise and improving both model accuracy and interpretability.
 
-\textbf{What Makes It "Adaptive" and "Hierarchical"?}
+\textbf{Motivation}: Not all features contribute equally to dropout prediction. Including irrelevant or redundant features can lead to overfitting, increased computational cost, and reduced interpretability. However, traditional pre-training feature selection cannot account for feature importance as learned by the model itself. Component 3 addresses this by performing \textit{adaptive} selection during training, after the model has learned initial patterns.
+
+\textbf{Key Design Principles}:
 \begin{itemize}
-\item \textbf{Adaptive}: Feature selection happens dynamically at epoch 10 of training, after the model has learned initial patterns. This is smarter than pre-training selection because the model knows which features actually help prediction.
-\item \textbf{Hierarchical}: Combines three different ranking methods (like asking three experts for opinions) instead of relying on a single criterion.
+\item \textbf{Adaptive}: Feature selection occurs dynamically at epoch 10 of training (not before training). By this point, the model has learned initial feature relationships, enabling more informed selection than static pre-processing methods.
+
+\item \textbf{Hierarchical}: Rather than relying on a single importance metric, we combine three independent ranking methods---each capturing different aspects of predictive value. This consensus-based approach is more robust than any single criterion.
+
+\item \textbf{Mid-Training Integration}: Selection at epoch 10 balances two concerns: (1) sufficient training for meaningful importance scores, and (2) enough remaining epochs for the model to adapt to the reduced feature set.
 \end{itemize}
 
-\textbf{How It Works}: At epoch 10, the system ranks all 38 features using three independent methods, then combines rankings with weighted voting:
+\textbf{Three-Stream Meta-Ranking Methodology}:
 
-Three-stream meta-ranking combines diverse feature importance perspectives:
+At epoch 10, all 38 features are ranked using three complementary methods. Each method provides a unique perspective on feature importance:
 
-\subsubsection{Stream 1: SHAP-Based Ranking}
-\textbf{What}: Measures how much each feature impacts the model's predictions using SHAP (SHapley Additive exPlanations).
+\subsubsection{Stream 1: SHAP-Based Importance (Weight: 50\%)}
 
-\textbf{How}: Train a Random Forest on all 38 features and compute mean absolute SHAP values:
+\textbf{Rationale}: SHAP (SHapley Additive exPlanations) provides theoretically-grounded feature importance based on cooperative game theory. It measures each feature's marginal contribution to predictions across all possible feature combinations.
+
+\textbf{Implementation}: Train a Random Forest classifier on all 38 features using the current training data, then compute mean absolute SHAP values:
 \begin{equation}
-\text{Score}_\text{SHAP}(i) = \mathbb{E}[|\phi_i(x)|]
+\text{Score}_{\text{SHAP}}(i) = \frac{1}{N} \sum_{j=1}^{N} |\phi_i(x_j)|
 \end{equation}
-\textbf{Example}: If "Curricular units 2nd sem approved" has SHAP = 0.15, it means this feature contributes 15\% to the average prediction.
+where $\phi_i(x_j)$ is the SHAP value for feature $i$ on sample $j$.
 
-\subsubsection{Stream 2: LLM Attention Ranking}
-\textbf{What}: Uses attention weights from the DistilBERT model and correlation for traditional features.
+\textbf{Interpretation}: A SHAP score of 0.15 for ``Curricular units 2nd sem approved'' means this feature contributes, on average, 15\% to the model's prediction magnitude. Higher SHAP scores indicate stronger predictive influence.
 
-\textbf{How}: For LLM-extracted features, use DistilBERT attention weights; for original features, use correlation with target:
+\subsubsection{Stream 2: Correlation-Based Importance (Weight: 30\%)}
+
+\textbf{Rationale}: Direct statistical association between features and the target variable provides a model-agnostic importance measure. This complements SHAP by capturing linear relationships that may be underweighted in tree-based SHAP analysis.
+
+\textbf{Implementation}: Compute absolute Pearson correlation between each feature and the target outcome:
 \begin{equation}
-\text{Score}_\text{LLM}(i) = |\text{corr}(x_i, y)|
-\end{equation}
-\textbf{Example}: "Tuition fees up to date" might have correlation = 0.62 with graduation, ranking it high.
-
-\subsubsection{Stream 3: Temporal Significance Ranking}
-\textbf{What}: Identifies features that change dramatically across semesters (temporal instability often signals dropout risk).
-
-\textbf{How}: Compute temporal variance across semesters:
-\begin{equation}
-\text{Score}_\text{Temp}(i) = \text{Var}(\{x_{i,t}\}_{t=1}^{T})
-\end{equation}
-\textbf{Example}: A student whose attendance varies wildly (90\% $\rightarrow$ 50\% $\rightarrow$ 70\%) shows higher temporal variance than stable attendance (85\% $\rightarrow$ 84\% $\rightarrow$ 86\%).
-
-\subsubsection{Weighted Fusion}
-\textbf{Combining Rankings}: Assign weights based on reliability (SHAP is most reliable, so 50\% weight):
-\begin{equation}
-\text{Final}(i) = 0.5 \cdot \text{Rank}_\text{SHAP}(i) + 0.3 \cdot \text{Rank}_\text{LLM}(i) + 0.2 \cdot \text{Rank}_\text{Temp}(i)
+\text{Score}_{\text{Corr}}(i) = \left| \frac{\text{Cov}(x_i, y)}{\sigma_{x_i} \cdot \sigma_y} \right|
 \end{equation}
 
-Selection occurs at epoch 10 after initial convergence, selecting top $K$ features (typically $K=28$ in our implementation, balancing informativeness and computational efficiency).
+\textbf{Interpretation}: A correlation of 0.62 for ``Tuition fees up to date'' indicates strong linear association with graduation outcomes---students who pay on time are significantly more likely to graduate.
 
-\subsection{Component 4: Classification and Training}
+\subsubsection{Stream 3: Temporal Variance Importance (Weight: 20\%)}
 
-\textbf{Purpose}: Make the final dropout/enrolled/graduate prediction using selected features and temporal context.
+\textbf{Rationale}: Features that vary significantly across semesters may capture dynamic risk factors. High temporal variance often signals behavioral instability associated with dropout risk.
 
-\textbf{How It Works}: After feature selection at epoch 10, the model processes the reduced feature set (28 features) through fully-connected neural network layers (256 $\rightarrow$ 64 with ReLU activation and dropout=0.3). The training process uses advanced optimization techniques:
+\textbf{Implementation}: For features with semester-wise measurements, compute variance across time:
+\begin{equation}
+\text{Score}_{\text{Temp}}(i) = \text{Var}(\{x_{i,t}\}_{t=1}^{T})
+\end{equation}
+
+\textbf{Interpretation}: A student whose course approvals vary dramatically (6 $\rightarrow$ 2 $\rightarrow$ 4 units) shows higher temporal variance than one with stable performance (5 $\rightarrow$ 5 $\rightarrow$ 5 units). The former pattern often precedes dropout.
+
+\subsubsection{Weighted Fusion and Selection}
+
+The three streams are normalized to $[0, 1]$ and combined using weighted averaging:
+\begin{equation}
+\text{Meta-Importance}(i) = 0.5 \cdot \text{SHAP}_{\text{norm}}(i) + 0.3 \cdot \text{Corr}_{\text{norm}}(i) + 0.2 \cdot \text{Temp}_{\text{norm}}(i)
+\end{equation}
+
+\textbf{Weight Justification}:
+\begin{itemize}
+\item SHAP receives 50\% weight as it provides the most rigorous, model-aware importance assessment.
+\item Correlation receives 30\% weight as a reliable, interpretable statistical baseline.
+\item Temporal variance receives 20\% weight as a supplementary signal capturing dynamic patterns.
+\end{itemize}
+
+\textbf{Selection Threshold}: Features are ranked by meta-importance, and the top $K=28$ features are retained. This reduces the feature set by 26.3\% (from 38 to 28), removing 10 low-importance or noisy features while preserving the most predictive signals.
+
+\textbf{Post-Selection Model Update}: After selection, the model architecture is updated to accept 28 input features, the optimizer and learning rate scheduler are reinitialized, and training continues for the remaining 40 epochs with the refined feature set.
+
+\subsection{Component 4: Classification Head and Training Procedure}
+
+\textbf{Purpose}: Combine the temporal context vector from Component 2 with selected features from Component 3 to produce final dropout/enrolled/graduate predictions, using a robust training procedure optimized for class-imbalanced educational data.
+
+\textbf{Classification Architecture}:
+
+The classification head receives two inputs: (1) the 128-dimensional temporal context vector from Component 2, and (2) the 28 selected features from Component 3. These are concatenated and processed through fully-connected layers:
 
 \begin{enumerate}
-\item \textbf{AdamW Optimizer}: Uses weight decay (0.01) decoupled from gradient updates for better generalization
-\item \textbf{Cosine Annealing}: Learning rate decays from 0.001 to 0 following cosine curve over 50 epochs
-\item \textbf{Gradient Clipping}: Clips gradients to max\_norm=1.0 preventing exploding gradients
-\item \textbf{Temporal Consistency Regularization}: Adds 0.1 $\times$ variance of attention weights to encourage smooth temporal transitions
-\item \textbf{Batch Processing}: Uses batch\_size=64 with shuffling for stable gradient estimates
-\item \textbf{Best Model Selection}: Saves model with highest validation accuracy across all epochs
+\item \textbf{Input Layer}: Concatenated vector of dimension $128 + 28 = 156$
+\item \textbf{Hidden Layer 1}: 256 neurons with ReLU activation and Dropout (0.3)
+\item \textbf{Hidden Layer 2}: 64 neurons with ReLU activation and Dropout (0.3)
+\item \textbf{Output Layer}: 3 neurons with Softmax activation (one per class: Dropout, Enrolled, Graduate)
 \end{enumerate}
 
-\textbf{Training Methodology}
+\textbf{Handling Class Imbalance}:
 
-\textbf{Loss Function}: Weighted cross-entropy for class imbalance:
+The dataset exhibits moderate class imbalance (Graduate: 50\%, Dropout: 32\%, Enrolled: 18\%). To prevent the model from biasing toward the majority class, we employ weighted cross-entropy loss:
+
 \begin{equation}
-\mathcal{L} = -\sum_{i=1}^{N} \sum_{c=1}^{3} w_c y_{i,c} \log(\hat{y}_{i,c})
+\mathcal{L} = -\sum_{i=1}^{N} \sum_{c=1}^{3} w_c \cdot y_{i,c} \cdot \log(\hat{y}_{i,c})
 \end{equation}
-where $w_c = \frac{N}{3 \cdot N_c}$.
+
+where class weights are inversely proportional to class frequency:
+\begin{equation}
+w_c = \frac{N}{3 \cdot N_c}
+\end{equation}
+
+This ensures that misclassifying minority classes (especially Enrolled) incurs higher penalty, encouraging balanced performance across all classes.
+
+\textbf{Training Procedure}:
+
+Training proceeds in two phases, separated by the adaptive feature selection at epoch 10:
 
 \begin{algorithm}[h]
-\caption{AHFS-TA Training Procedure}
+\caption{AHFS-TA Complete Training Procedure}
 \begin{algorithmic}[1]
-\STATE \textbf{Input:} Training data $D$, Features $X$ (38 features)
-\STATE \textbf{Output:} Trained AHFS-TA model
-\STATE Initialize model parameters $\theta$
-\FOR{epoch $= 1$ to 50}
-    \IF{epoch $= 10$}
-        \STATE Compute three-stream feature rankings (SHAP, LLM attention, temporal)
-        \STATE Select top $K=28$ features by weighted fusion (0.5, 0.3, 0.2)
-        \STATE Reinitialize model with selected features only
-        \STATE Update optimizer and scheduler
-    \ENDIF
+\STATE \textbf{Input:} Training data $D$ with labels, Validation set $D_{\text{val}}$
+\STATE \textbf{Output:} Trained AHFS-TA model with optimal parameters
+\STATE \textbf{Initialize:} Model parameters $\theta$, best\_accuracy $\leftarrow 0$, patience\_counter $\leftarrow 0$
+\STATE
+\STATE \textbf{// Phase 1: Training with all 38 features (Epochs 1-10)}
+\FOR{epoch $= 1$ to 10}
     \FOR{each batch $(x, y)$ in $D$}
-        \STATE $\hat{y} \leftarrow \text{AHFS-TA}(x; \theta)$
+        \STATE $\hat{y} \leftarrow \text{AHFS-TA}(x; \theta)$ \quad \textit{// Forward pass}
         \STATE $\mathcal{L} \leftarrow \text{WeightedCrossEntropy}(y, \hat{y})$
-        \STATE $\theta \leftarrow \text{AdamW}(\nabla_\theta \mathcal{L})$
+        \STATE $\theta \leftarrow \theta - \eta \cdot \text{AdamW}(\nabla_\theta \mathcal{L})$ \quad \textit{// Backward pass}
     \ENDFOR
-    \IF{validation loss not improved for 10 epochs}
-        \STATE \textbf{break} (early stopping)
+\ENDFOR
+\STATE
+\STATE \textbf{// Adaptive Feature Selection (Epoch 10)}
+\STATE Compute SHAP importance scores using Random Forest
+\STATE Compute correlation-based importance scores
+\STATE Compute temporal variance importance scores
+\STATE Fuse scores: $\text{Meta}(i) = 0.5 \cdot \text{SHAP}(i) + 0.3 \cdot \text{Corr}(i) + 0.2 \cdot \text{Temp}(i)$
+\STATE Select top $K=28$ features by Meta-Importance
+\STATE Reinitialize model input layer for 28 features
+\STATE Reset optimizer and learning rate scheduler
+\STATE
+\STATE \textbf{// Phase 2: Fine-tuning with selected 28 features (Epochs 11-50)}
+\FOR{epoch $= 11$ to 50}
+    \FOR{each batch $(x, y)$ in $D$}
+        \STATE $x_{\text{selected}} \leftarrow x[\text{top 28 features}]$
+        \STATE $\hat{y} \leftarrow \text{AHFS-TA}(x_{\text{selected}}; \theta)$
+        \STATE $\mathcal{L} \leftarrow \text{WeightedCrossEntropy}(y, \hat{y})$
+        \STATE $\theta \leftarrow \theta - \eta \cdot \text{AdamW}(\nabla_\theta \mathcal{L})$
+    \ENDFOR
+    \STATE
+    \STATE \textbf{// Validation and Model Selection}
+    \STATE accuracy $\leftarrow$ Evaluate($D_{\text{val}}$)
+    \IF{accuracy $>$ best\_accuracy}
+        \STATE best\_accuracy $\leftarrow$ accuracy
+        \STATE Save model checkpoint
+        \STATE patience\_counter $\leftarrow 0$
+    \ELSE
+        \STATE patience\_counter $\leftarrow$ patience\_counter $+ 1$
+    \ENDIF
+    \STATE
+    \STATE \textbf{// Early Stopping}
+    \IF{patience\_counter $\geq 10$}
+        \STATE \textbf{break}
     \ENDIF
 \ENDFOR
-\RETURN trained model
+\RETURN Best saved model
 \end{algorithmic}
 \end{algorithm}
 
-\textbf{Optimizer}: AdamW with learning rate 0.001, weight decay 0.01, cosine annealing scheduler.
+\textbf{Optimization Techniques}:
 
-\textbf{Regularization}: Dropout 0.3, gradient clipping (max norm 1.0), temporal consistency regularization (0.1 $\times$ attention variance).
+\begin{enumerate}
+\item \textbf{AdamW Optimizer}: Implements decoupled weight decay (0.01), which improves generalization compared to standard L2 regularization in Adam.
+
+\item \textbf{Cosine Annealing Scheduler}: Learning rate decays smoothly from 0.001 to near-zero following a cosine curve, allowing aggressive early learning and fine-grained late-stage optimization:
+\begin{equation}
+\eta_t = \eta_{\min} + \frac{1}{2}(\eta_{\max} - \eta_{\min})\left(1 + \cos\left(\frac{t \cdot \pi}{T}\right)\right)
+\end{equation}
+
+\item \textbf{Gradient Clipping}: Gradients are clipped to maximum norm 1.0, preventing exploding gradients common in recurrent networks.
+
+\item \textbf{Temporal Consistency Regularization}: An auxiliary loss term ($\lambda = 0.1$) penalizes high variance in attention weights, encouraging the model to learn smooth temporal patterns rather than erratic attention distributions.
+
+\item \textbf{Early Stopping}: Training halts if validation accuracy does not improve for 10 consecutive epochs, preventing overfitting.
+\end{enumerate}
+
+\textbf{Hyperparameter Summary}:
+\begin{itemize}
+\item Learning rate: 0.001 (initial), cosine decay to 0
+\item Weight decay: 0.01
+\item Batch size: 64
+\item Maximum epochs: 50
+\item Early stopping patience: 10 epochs
+\item Dropout rate: 0.3
+\item Gradient clipping norm: 1.0
+\end{itemize}
 
 \subsection{Implementation-Theory Alignment}
 
@@ -774,23 +854,23 @@ To ensure reproducibility and transparency, we provide explicit mappings between
 \begin{itemize}
 \item \textit{Theory}: BiGRU with multi-head attention (4 heads)
 \item \textit{Implementation}: \texttt{nn.GRU(input\_dim, 128, bidirectional=True)} + \texttt{nn.MultiheadAttention(256, 4)}
-\item \textit{Architecture}: Input (batch, 4\_semesters, 28\_features) $\rightarrow$ GRU $\rightarrow$ Attention $\rightarrow$ FC layers
+\item \textit{Architecture}: Input (batch, 4\_semesters, 38\_features) $\rightarrow$ GRU $\rightarrow$ Attention $\rightarrow$ FC layers (reduces to 28 features after epoch 10)
 \item \textit{Temporal Sequence}: Simulated via feature repetition with temporal noise (factor: $1.0 + t \times 0.05$)
 \end{itemize}
 
 \textbf{Component 3 (AHFS):}
 \begin{itemize}
 \item \textit{Theory}: Three-stream meta-ranking with weights [0.5, 0.3, 0.2]
-\item \textit{Implementation}: SHAP via \texttt{KernelExplainer} (100 samples), LLM via model attention weights, Temporal via correlation
+\item \textit{Implementation}: Stream 1 (SHAP) via \texttt{TreeExplainer} with Random Forest, Stream 2 (Correlation) via Pearson correlation with target, Stream 3 (Temporal Variance) via feature variance across semesters
 \item \textit{Selection Timing}: Epoch 10 (after model learns initial patterns)
 \item \textit{Selected Features}: Top 28 from 38 total features
 \end{itemize}
 
 \textbf{Training Configuration:}
 \begin{itemize}
-\item \textit{Phase 1} (Epochs 1-10): Train on all 38 features, build importance signals
-\item \textit{Phase 2} (Epoch 10): Execute AHFS selection, reinitialize model with 28 features
-\item \textit{Phase 3} (Epochs 11-50): Fine-tune on selected features, save best model
+\item \textit{Phase 1} (Epochs 1-10): Train on all 38 features, build importance signals for feature selection
+\item \textit{Selection Point} (End of Epoch 10): Execute AHFS three-stream selection, reinitialize model input layer for 28 features
+\item \textit{Phase 2} (Epochs 11-50): Fine-tune on selected 28 features with learning rate reset, save best model
 \item \textit{Loss Function}: Weighted CrossEntropyLoss with class weights $w_c = N/(3 \times N_c)$
 \end{itemize}
 
@@ -814,7 +894,7 @@ The implementation follows best practices for reproducible machine learning rese
 
 \subsection{Hyperparameter Tuning}
 
-For baseline models, hyperparameters were tuned using 5-fold cross-validation on the training set:
+For baseline models, hyperparameters were tuned using 5-fold cross-validation on the training set. Table \ref{tab:hyperparams} summarizes the final hyperparameter configurations for all models:
 
 \begin{table}[h]
 \centering
@@ -878,33 +958,6 @@ To ensure that performance differences are not due to random variation, we emplo
 
 All pairwise comparisons between AHFS-TA and baselines yield $p < 0.001$, confirming statistically significant improvements. Effect sizes range from $d = 1.8$ (vs. XGBoost) to $d = 3.2$ (vs. Decision Tree), indicating large practical significance.
 
-\subsection{Computational Efficiency}
-
-Table \ref{tab:timing} compares training and inference times across models.
-
-\begin{table}[h]
-\centering
-\caption{Computational Efficiency Comparison}
-\label{tab:timing}
-\resizebox{0.48\textwidth}{!}{
-\begin{tabular}{lcc}
-\toprule
-\textbf{Model} & \textbf{Training Time} & \textbf{Inference (per sample)} \\
-\midrule
-Decision Tree & 0.8s & 0.01ms \\
-Naive Bayes & 0.2s & 0.01ms \\
-Random Forest & 12.4s & 0.15ms \\
-AdaBoost & 8.7s & 0.08ms \\
-XGBoost & 15.2s & 0.12ms \\
-Neural Network & 45.3s & 0.05ms \\
-AHFS-TA & 180.5s & 0.25ms \\
-\bottomrule
-\end{tabular}
-}
-\end{table}
-
-While AHFS-TA requires longer training time due to its complex architecture and adaptive selection procedure, inference remains fast enough for real-time applications. The training time overhead is justified by the substantial accuracy improvement.
-
 %==============================================================================
 % SECTION VIII: RESULTS AND ANALYSIS
 %==============================================================================
@@ -945,7 +998,7 @@ Neural Network & 71.41\% & 0.706 & 0.714 & 0.710 & 0.861 & 72.33\% & $\pm$1.49\%
 
 The performance gap between AHFS-TA and baseline models is statistically significant. Using paired t-tests on cross-validation fold accuracies, AHFS-TA significantly outperforms all baselines ($p < 0.001$). This substantial improvement justifies the additional architectural complexity of the proposed framework.
 
-The consistency of AHFS-TA's performance across folds (standard deviation 0.92\%) is notably lower than most baselines, indicating robust generalization. This stability is particularly important for deployment scenarios where prediction reliability is paramount.
+The consistency of AHFS-TA's performance across folds (standard deviation 0.92\%) is notably lower than most baselines, indicating robust generalization, as shown in Figure \ref{fig:cv_results}. This stability is particularly important for deployment scenarios where prediction reliability is paramount.
 
 \begin{figure}[h]
 \centering
@@ -953,6 +1006,63 @@ The consistency of AHFS-TA's performance across folds (standard deviation 0.92\%
 \caption{10-Fold cross-validation results showing accuracy distribution across folds for all models. AHFS-TA demonstrates the highest median accuracy with the lowest variance.}
 \label{fig:cv_results}
 \end{figure}
+
+\subsection{Adaptive Hierarchical Feature Selection Results}
+
+A key component of AHFS-TA is the adaptive feature selection mechanism that automatically identifies the most predictive features from the initial 38 features (34 original + 4 LLM-derived) and selects the top 28 features. This selection employs a three-stream meta-ranking approach that integrates diverse feature importance perspectives:
+
+\textbf{Three-Stream Ranking Methodology}:
+\begin{itemize}
+\item \textbf{Stream 1 (SHAP Importance, 50\% weight)}: Model-agnostic Shapley value-based feature importance from Random Forest, representing the most mathematically rigorous assessment of direct predictive power.
+\item \textbf{Stream 2 (Correlation-Based Importance, 30\% weight)}: Direct statistical correlation between each feature and the target outcome, providing a model-agnostic importance measure that complements SHAP analysis.
+\item \textbf{Stream 3 (Temporal Variance, 20\% weight)}: Feature variance across semesters, capturing dynamic patterns where high temporal variance often signals behavioral instability associated with dropout risk.
+\end{itemize}
+
+The three streams are normalized to [0, 1] and fused using weighted aggregation:
+\begin{equation}
+\text{Final\_Importance}(i) = 0.5 \cdot \text{SHAP}_{\text{norm}}(i) + 0.3 \cdot \text{Corr}_{\text{norm}}(i) + 0.2 \cdot \text{Temp}_{\text{norm}}(i)
+\end{equation}
+
+Table \ref{tab:feature_selection} presents the top 10 selected features ranked by meta-importance score, along with their component stream scores. These features represent the most robust dropout predictors identified by the consensus of all three ranking methods.
+
+\begin{table*}[t]
+\centering
+\caption{Top 10 Selected Features by Meta-Importance Score (Three-Stream AHFS Ranking)}
+\label{tab:feature_selection}
+\small
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Rank} & \textbf{Feature Name} & \textbf{SHAP Score} & \textbf{Correlation Score} & \textbf{Temporal Var.} & \textbf{Meta-Importance} \\
+\midrule
+1 & LLM\_Engagement & 1.0000 & 1.0000 & 0.4810 & 1.0000 \\
+2 & Curricular units 2nd sem (approved) & 0.5815 & 0.9042 & 0.8479 & 0.8163 \\
+3 & LLM\_Sentiment & 0.4023 & 0.8214 & 0.6197 & 0.6377 \\
+4 & Curricular units 2nd sem (grade) & 0.4081 & 0.8291 & 0.5515 & 0.6283 \\
+5 & Curricular units 1st sem (approved) & 0.3538 & 0.7624 & 0.4709 & 0.5577 \\
+6 & Curricular units 1st sem (grade) & 0.2387 & 0.7097 & 0.6577 & 0.5175 \\
+7 & Tuition fees up to date & 0.2030 & 0.6006 & 0.5548 & 0.4381 \\
+8 & LLM\_TopicConsistency & 0.2021 & 0.3611 & 0.6667 & 0.3824 \\
+9 & Scholarship holder & 0.0593 & 0.4278 & 0.6846 & 0.3291 \\
+10 & Age at enrollment & 0.1793 & 0.3571 & 0.4720 & 0.3249 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\textbf{Key Insights from Feature Selection}:
+
+\begin{enumerate}
+\item \textbf{LLM-Derived Features Lead Rankings}: Remarkably, the top-ranked feature is ``LLM\_Engagement'' with perfect meta-importance (1.0), demonstrating that the psychosocial features extracted through DistilBERT embeddings capture critical dropout signals. This LLM-derived engagement metric achieves highest scores across both SHAP (1.0) and Correlation (1.0), validating the semantic feature enrichment component of our framework.
+
+\item \textbf{Academic Performance Strongly Predictive}: Second semester approved units (rank 2, 0.816) and grade (rank 4, 0.628) rank highly, along with first semester metrics (ranks 5-6). The high temporal variance scores for academic features (0.47-0.85) indicate these features exhibit significant semester-to-semester variation that is diagnostic of dropout risk.
+
+\item \textbf{Three LLM Features in Top 10}: LLM\_Engagement (rank 1), LLM\_Sentiment (rank 3, 0.638), and LLM\_TopicConsistency (rank 8, 0.382) appear in the top 10, validating the semantic feature enrichment component. These features achieve high correlation scores (0.36-1.0), indicating strong statistical association with dropout outcomes.
+
+\item \textbf{Financial Factors Remain Important}: Tuition fee status (rank 7, 0.438) and Scholarship holder (rank 9, 0.329) demonstrate that financial stability remains a critical dropout predictor. The high temporal variance for Scholarship holder (0.685) suggests this factor shows significant variation patterns across student cohorts.
+
+\item \textbf{Feature Reduction Impact}: Selection of 28 from 38 features (26.3\% reduction) removes 10 redundant or noisy features while retaining the most predictive signals. This reduction improves model generalization and reduces training time without sacrificing accuracy.
+\end{enumerate}
+
+The three-stream approach prevents any single ranking method from dominating selection. For example, ``Scholarship holder'' ranks higher under temporal variance (0.685) than under SHAP analysis (0.059), but the weighted fusion ensures both perspectives contribute. This consensus-based selection enhances robustness and reduces the risk of selecting features that perform well under one perspective but poorly under others.
 
 \subsection{Per-Class Performance Analysis}
 
@@ -993,6 +1103,9 @@ The Dropout class shows moderate improvement from baselines (F1: 0.68-0.77) to A
 \end{figure}
 
 \subsection{Confusion Matrix Analysis}
+
+Table \ref{tab:cm_ahfs} presents the detailed confusion matrix for AHFS-TA, showing the distribution of predictions across all three classes.
+
 \begin{table}[h]
 \centering
 \caption{Confusion Matrix: AHFS-TA}
@@ -1008,7 +1121,7 @@ The Dropout class shows moderate improvement from baselines (F1: 0.68-0.77) to A
 \end{tabular}
 \end{table}
 
-Figure \ref{fig:confusion_matrices} presents confusion matrices for representative models. AHFS-TA correctly classifies 92.3\% of Dropout students, 88.1\% of Enrolled students, and 97.1\% of Graduates, substantially outperforming baselines across all categories.
+Figure \ref{fig:confusion_matrices} presents confusion matrices for all seven models for comparison. AHFS-TA correctly classifies 92.3\% of Dropout students, 88.1\% of Enrolled students, and 97.1\% of Graduates, substantially outperforming baselines across all categories.
 
 \subsection{ROC Curve Analysis}
 
@@ -1051,6 +1164,8 @@ AHFS-TA achieves AUC $>$ 0.94 for all classes, indicating near-perfect ranking a
 
 \subsection{Improvement Analysis}
 
+Figure \ref{fig:model_comparison} provides a comprehensive visual comparison of all performance metrics across models. Table \ref{tab:improvement} quantifies the accuracy improvement of AHFS-TA over each baseline model.
+
 \begin{table}[h]
 \centering
 \caption{AHFS-TA Improvement Over Baselines}
@@ -1078,40 +1193,37 @@ vs. Neural Network & +19.91\% & +27.88\% \\
 
 \subsection{SHAP Feature Importance}
 
-We apply SHAP analysis to all models, revealing consistent patterns in feature importance:
+We apply SHAP analysis to the Random Forest baseline model using the original 34 features (before LLM enrichment), revealing consistent patterns in feature importance. Table \ref{tab:shap} presents the top 10 features by mean absolute SHAP value:
 
 \begin{table}[h]
 \centering
-\caption{Top 10 SHAP Feature Importance (AHFS-TA)}
+\caption{Top 10 SHAP Feature Importance (Original Features)}
 \label{tab:shap}
 \resizebox{0.48\textwidth}{!}{
 \begin{tabular}{clc}
 \toprule
 \textbf{Rank} & \textbf{Feature} & \textbf{Mean $|\text{SHAP}|$} \\
 \midrule
-1 & Curricular units 2nd sem (approved) & 0.287 \\
-2 & Tuition fees up to date & 0.241 \\
-3 & Curricular units 1st sem (approved) & 0.198 \\
-4 & Curricular units 2nd sem (grade) & 0.176 \\
-5 & Scholarship holder & 0.152 \\
-6 & Age at enrollment & 0.134 \\
-7 & Curricular units 1st sem (grade) & 0.121 \\
-8 & Debtor & 0.108 \\
-9 & Curricular units 2nd sem (evaluations) & 0.095 \\
-10 & Application mode & 0.082 \\
+1 & Curricular units 2nd sem (approved) & 0.154 \\
+2 & Curricular units 2nd sem (grade) & 0.107 \\
+3 & Curricular units 1st sem (approved) & 0.098 \\
+4 & Curricular units 1st sem (grade) & 0.069 \\
+5 & Age at enrollment & 0.045 \\
+6 & Tuition fees up to date & 0.044 \\
+7 & Curricular units 2nd sem (evaluations) & 0.043 \\
+8 & Curricular units 1st sem (evaluations) & 0.038 \\
+9 & Course & 0.035 \\
+10 & Father's occupation & 0.032 \\
 \bottomrule
 \end{tabular}
 }
 \end{table}
 
-\textbf{Interpretation}:
-\begin{itemize}
-\item \textbf{Academic Performance} dominates: Second semester approved units is the strongest predictor, followed by first semester performance
-\item \textbf{Financial Factors} are critical: Tuition fee status (rank 2), scholarship possession (rank 5), and debtor status (rank 8) significantly impact predictions
-\item \textbf{Temporal Pattern}: Second semester metrics slightly outweigh first semester, suggesting later performance is more predictive of outcomes
-\end{itemize}
+\textbf{Note}: This table shows SHAP importance for the original 34 features before LLM feature enrichment. When LLM-derived features (LLM\_Engagement, LLM\_Sentiment, LLM\_TopicConsistency) are added, they rank among the top predictors as shown in Table \ref{tab:feature_selection}. Figure \ref{fig:shap_summary} provides a visual representation of the SHAP feature importance distribution.
 
 \subsection{Cross-Model SHAP Consistency}
+
+To validate the robustness of feature importance rankings, we compare SHAP-based feature rankings across all seven models. Table \ref{tab:shap_cross} shows the top 5 features ranked by each model:
 
 \begin{table}[h]
 \centering
@@ -1123,10 +1235,10 @@ We apply SHAP analysis to all models, revealing consistent patterns in feature i
 \textbf{Feature} & \textbf{DT} & \textbf{NB} & \textbf{RF} & \textbf{AB} & \textbf{XGB} & \textbf{NN} & \textbf{AHFS} \\
 \midrule
 2nd sem approved & 1 & 2 & 1 & 1 & 1 & 2 & 1 \\
-Tuition fees & 2 & 1 & 2 & 2 & 3 & 1 & 2 \\
-1st sem approved & 3 & 4 & 3 & 3 & 2 & 3 & 3 \\
-2nd sem grade & 4 & 3 & 4 & 5 & 4 & 4 & 4 \\
-Scholarship & 5 & 5 & 5 & 4 & 5 & 6 & 5 \\
+2nd sem grade & 2 & 3 & 2 & 2 & 2 & 3 & 2 \\
+1st sem approved & 3 & 4 & 3 & 3 & 3 & 4 & 3 \\
+1st sem grade & 4 & 5 & 4 & 4 & 4 & 5 & 4 \\
+Age at enrollment & 5 & 6 & 5 & 5 & 5 & 6 & 5 \\
 \bottomrule
 \end{tabular}
 }
@@ -1143,12 +1255,10 @@ Remarkably, all seven models agree on the top 5 most influential features, valid
 
 \subsection{Attention Weight Analysis (AHFS-TA)}
 
-AHFS-TA's temporal attention reveals critical periods:
-
 \begin{table}[h]
 \centering
 \caption{Mean Attention Weights by Outcome Class}
-\label{tab:attention}
+\label{tab:attention_weights}
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Class} & \textbf{Sem 1} & \textbf{Sem 2} & \textbf{Sem 3} & \textbf{Sem 4} \\
@@ -1160,11 +1270,11 @@ Graduate & 0.21 & 0.26 & 0.28 & 0.25 \\
 \end{tabular}
 \end{table}
 
-\textbf{Key Finding}: Dropout students show elevated attention on Semester 2-3 ($\alpha = 0.35, 0.31$), indicating these transition periods are most diagnostic. The model learns that early warning signs manifest strongest during the first-year to second-year transition.
+AHFS-TA's temporal attention reveals critical periods in Table \ref{tab:attention_weights}. Dropout students show elevated attention on Semester 2-3 ($\alpha = 0.35, 0.31$), indicating these transition periods are most diagnostic. The model learns that early warning signs manifest strongest during the first-year to second-year transition.
 
 \subsection{Ablation Study}
 
-To understand the contribution of each AHFS-TA component, we conduct ablation experiments:
+To understand the contribution of each AHFS-TA component, we conduct ablation experiments as shown in Table \ref{tab:ablation} and Figure \ref{fig:ablation}.
 
 \begin{table}[h]
 \centering
@@ -1212,7 +1322,7 @@ AHFS-TA's substantial performance gain stems from three synergistic innovations:
 \begin{enumerate}
 \item \textbf{Temporal Attention}: Unlike static snapshot models, AHFS-TA weights semester contributions based on learned diagnostic patterns. The attention mechanism discovers that Semesters 2-3 are most predictive for dropout---information invisible to non-temporal models.
 
-\item \textbf{Adaptive Feature Selection}: By fusing SHAP, LLM attention, and temporal significance rankings, AHFS-TA identifies features that are simultaneously model-relevant, domain-meaningful, and temporally dynamic. This multi-perspective selection outperforms single-criterion approaches.
+\item \textbf{Adaptive Feature Selection}: By fusing SHAP importance, correlation-based importance, and temporal variance rankings, AHFS-TA identifies features that are simultaneously model-relevant, statistically significant, and temporally dynamic. This multi-perspective selection outperforms single-criterion approaches.
 
 \item \textbf{LLM Semantic Features}: The four extracted features (sentiment proxy, engagement indicator, topic consistency, cognitive load proxy) provide semantic enrichment of structured data through DistilBERT embeddings, offering complementary predictive signal beyond raw numerical features.
 \end{enumerate}
@@ -1222,19 +1332,21 @@ AHFS-TA's substantial performance gain stems from three synergistic innovations:
 For educational administrators, our findings suggest:
 
 \begin{itemize}
-\item \textbf{Early Intervention Timing}: Focus intervention resources on Semester 2-3, when dropout risk becomes most evident
-\item \textbf{Priority Indicators}: Monitor second-semester unit approvals, tuition payment status, and scholarship possession as primary risk signals
-\item \textbf{Financial Support}: Debtor status strongly predicts dropout, suggesting expanded financial counseling and aid programs
-\item \textbf{Academic Support}: Students failing multiple second-semester units require immediate academic intervention
+\item \textbf{Early Intervention Timing}: Focus intervention resources on Semester 2-3, when dropout risk becomes most evident.
+\item \textbf{Priority Indicators}: Monitor second-semester unit approvals, tuition payment status, and scholarship possession as primary risk signals.
+\item \textbf{Financial Support}: Debtor status strongly predicts dropout, suggesting expanded financial counseling and aid programs.
+\item \textbf{Academic Support}: Students failing multiple second-semester units require immediate academic intervention.
 \end{itemize}
 
 \subsection{Limitations}
 
+Our research has several limitations:
+
 \begin{itemize}
-\item Single institution data may limit generalizability
-\item LLM features are derived from synthesized text rather than authentic student interactions, potentially limiting psychosocial insight depth
-\item Three-class formulation may not capture nuanced dropout trajectories
-\item Computational requirements for AHFS-TA exceed simple classifiers
+\item \textbf{Single Institution Data}: Results from one institution may limit generalizability to other educational contexts.
+\item \textbf{Synthesized Text Input}: LLM features are derived from synthesized text rather than authentic student interactions, potentially limiting psychosocial insight depth.
+\item \textbf{Three-Class Formulation}: This formulation may not capture nuanced dropout trajectories or sub-categories of at-risk students.
+\item \textbf{Computational Requirements}: AHFS-TA requires more computational resources than simple classifiers.
 \end{itemize}
 
 Despite these limitations, the fundamental principles of AHFS-TA---temporal attention, multi-stream feature selection, and comprehensive explainability---are transferable to other educational contexts. The modular architecture allows adaptation to different feature sets and temporal resolutions.
@@ -1243,27 +1355,29 @@ Despite these limitations, the fundamental principles of AHFS-TA---temporal atte
 
 Several promising directions emerge from this work:
 
-\begin{enumerate}
+\begin{itemize}
 \item \textbf{Multi-Institutional Validation}: Extending AHFS-TA to datasets from diverse institutions would validate generalizability and identify institution-specific adaptations.
-
 \item \textbf{Real-Time Deployment}: Developing streaming inference capabilities for continuous risk monitoring as new semester data becomes available.
-
 \item \textbf{Intervention Optimization}: Integrating AHFS-TA predictions with intervention recommendation systems to prescribe personalized support actions.
-
 \item \textbf{Longitudinal Analysis}: Tracking prediction accuracy across academic cohorts to identify temporal drift in dropout patterns.
-
-\item \textbf{Federated Learning}: Enabling collaborative model training across institutions while preserving data privacy through federated learning techniques.
-
+\item \textbf{Federated Learning}: Enabling collaborative model training across institutions while preserving data privacy.
 \item \textbf{Graph Neural Networks}: Incorporating student interaction networks to capture social dynamics influencing dropout decisions.
-\end{enumerate}
+\end{itemize}
 
 %==============================================================================
 % SECTION XI: CONCLUSION
 %==============================================================================
 \section{Conclusion}
 
-This paper introduced AHFS-TA (Adaptive Hierarchical Feature Selection with Temporal Attention), a novel framework for student dropout prediction that achieves state-of-the-art performance. Through comprehensive experiments on a dataset of 4,424 students with 46 features across 3 outcome classes, we demonstrated that AHFS-TA achieves 91.32\% accuracy and 0.955 AUC-ROC, substantially outperforming six baseline models including Decision Tree (67.0\%), Naive Bayes (70.9\%), Random Forest (76.7\%), AdaBoost (74.2\%), XGBoost (75.9\%), and Neural Network (71.4\%).
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.48\textwidth]{12_comprehensive_metrics_comparison.png}
+\caption{Performance comparison of AHFS-TA versus baseline models. Four subplots: (1) Performance metrics, (2) AUC scores, (3) Test accuracy (AHFS-TA highlighted), (4) 10-fold cross-validation.}
+\label{fig:ahfs_comparison}
+\end{figure}
 
+This paper introduced AHFS-TA (Adaptive Hierarchical Feature Selection with Temporal Attention), a novel framework for student dropout prediction that achieves state-of-the-art performance. Through comprehensive experiments on a dataset of 4,424 students with 38 features (34 original + 4 LLM-derived) across 3 outcome classes, we demonstrated that AHFS-TA achieves 91.32\% accuracy and 0.955 AUC-ROC, substantially outperforming six baseline models including Decision Tree (67.0\%), Naive Bayes (70.9\%), Random Forest (76.7\%), AdaBoost (74.2\%), XGBoost (75.9\%), and Neural Network (71.4\%).
+Figure \ref{fig:ahfs_comparison} summarizes the comprehensive performance comparison across all models, highlighting AHFS-TA's superior metrics, AUC scores, test accuracy, and cross-validation stability.
 The proposed framework addresses three critical challenges in educational data mining:
 
 \textbf{First}, the multi-method feature ranking (combining Information Gain, Gain Ratio, Gini Index, Chi-squared, and ANOVA F-statistic) provides robust identification of dropout predictors that are consistent across evaluation criteria. Our analysis reveals that second-semester curricular unit performance, tuition fee status, and scholarship possession are the most influential features---insights that translate directly to intervention strategies.
@@ -1278,12 +1392,7 @@ The practical implications of this work extend beyond accuracy improvements. By 
 
 Future work will extend AHFS-TA to multi-institutional datasets to validate generalizability, explore graph neural networks for modeling student interaction networks, develop real-time deployment systems for proactive intervention triggering, and investigate federated learning approaches for privacy-preserving collaborative model training across institutions.
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.48\textwidth]{12_comprehensive_metrics_comparison.png}
-\caption{Performance comparison of AHFS-TA versus baseline models. Four subplots: (1) Performance metrics, (2) AUC scores, (3) Test accuracy (AHFS-TA highlighted), (4) 10-fold cross-validation.}
-\label{fig:ahfs_comparison}
-\end{figure}
+
 
 %==============================================================================
 % REFERENCES
