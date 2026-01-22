@@ -1,0 +1,421 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(Review_Main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/ieeetran\IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+-- This is a 10 point document.
+) (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithmic.s
+ty (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithm.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cf
+g)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def)
+)) (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx))
+ (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/cite\cite.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+) (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.st
+y)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)
+
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinek
+eys.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.st
+y (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.
+sty))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmacro.
+sty) (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
+) (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitl
+estring.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty)
+)) (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+) (C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.
+sty))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfile
+check.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniqueco
+unter.sty)))
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdft
+ex.def) (Review_Main.aux)
+-- Lines per column: 58 (exact).
+
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mki
+i
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-ba
+se.sty
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cf
+g)) (Review_Main.out) (Review_Main.out)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd)
+
+LaTeX Warning: Citation `rahmani2024dropout' on page 1 undefined on input line 
+66.
+
+
+LaTeX Warning: Citation `pelima2024predicting' on page 1 undefined on input lin
+e 66.
+
+
+LaTeX Warning: Citation `kaplan1977dropout' on page 1 undefined on input line 6
+6.
+
+
+LaTeX Warning: Citation `wirba2022transforming' on page 1 undefined on input li
+ne 66.
+
+
+LaTeX Warning: Citation `fia2022higher' on page 1 undefined on input line 66.
+
+
+LaTeX Warning: Citation `wolniak2010academic' on page 1 undefined on input line
+ 69.
+
+
+LaTeX Warning: Citation `reynolds2020factors' on page 1 undefined on input line
+ 69.
+
+
+LaTeX Warning: Citation `lopez2024dynamics' on page 1 undefined on input line 6
+9.
+
+
+LaTeX Warning: Citation `shafiq2022student' on page 1 undefined on input line 6
+9.
+
+
+LaTeX Warning: Citation `susnjak2024beyond' on page 1 undefined on input line 6
+9.
+
+
+LaTeX Warning: Citation `balachandar2025multi' on page 1 undefined on input lin
+e 69.
+
+
+LaTeX Warning: Citation `nath2025smart' on page 1 undefined on input line 69.
+
+[1{C:/Users/DELL/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/DEL
+L/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
+
+LaTeX Warning: Citation `malik2025advancing' on page 2 undefined on input line 
+72.
+
+
+LaTeX Warning: Citation `tan2025student' on page 2 undefined on input line 72.
+
+
+LaTeX Warning: Citation `castro2025predictive' on page 2 undefined on input lin
+e 72.
+
+
+LaTeX Warning: Citation `zhang2025machine' on page 2 undefined on input line 72
+.
+
+
+LaTeX Warning: Citation `lopez2025ai' on page 2 undefined on input line 72.
+
+
+LaTeX Warning: Citation `huynh2025early' on page 2 undefined on input line 88.
+
+
+LaTeX Warning: Citation `castro2025predictive' on page 2 undefined on input lin
+e 88.
+
+
+LaTeX Warning: Citation `nuuyoma2025revisiting' on page 2 undefined on input li
+ne 89.
+
+
+LaTeX Warning: Citation `alyahyan2023student' on page 2 undefined on input line
+ 90.
+
+
+LaTeX Warning: Citation `das2024machine' on page 2 undefined on input line 90.
+
+
+LaTeX Warning: Citation `delogu2024predicting' on page 2 undefined on input lin
+e 94.
+
+
+LaTeX Warning: Citation `vaarma2024predicting' on page 2 undefined on input lin
+e 95.
+
+
+LaTeX Warning: Citation `schnedlitz2025complete' on page 2 undefined on input l
+ine 95.
+
+
+LaTeX Warning: Citation `vaarma2024predicting' on page 2 undefined on input lin
+e 97.
+
+
+LaTeX Warning: Citation `schnedlitz2025complete' on page 2 undefined on input l
+ine 97.
+
+[2]
+
+LaTeX Warning: Citation `delogu2024predicting' on page 3 undefined on input lin
+e 99.
+
+
+LaTeX Warning: Citation `padmasiri2024interpretable' on page 3 undefined on inp
+ut line 99.
+
+
+LaTeX Warning: Citation `villar2024supervised' on page 3 undefined on input lin
+e 99.
+
+
+LaTeX Warning: Citation `breetzke2024expectancy' on page 3 undefined on input l
+ine 101.
+
+
+LaTeX Warning: Citation `villar2024supervised' on page 3 undefined on input lin
+e 103.
+
+
+LaTeX Warning: Citation `rabelo2025model' on page 3 undefined on input line 103
+.
+
+
+LaTeX Warning: Citation `basnet2022dropout' on page 3 undefined on input line 1
+17.
+
+
+LaTeX Warning: Citation `phan2023decision' on page 3 undefined on input line 11
+8.
+
+
+LaTeX Warning: Citation `kruger2023explainable' on page 3 undefined on input li
+ne 119.
+
+
+LaTeX Warning: Citation `leelaluk2024attention' on page 3 undefined on input li
+ne 120.
+
+
+LaTeX Warning: Citation `chaikalis2024predictive' on page 3 undefined on input 
+line 121.
+
+
+LaTeX Warning: Citation `padmasiri2024interpretable' on page 3 undefined on inp
+ut line 122.
+
+
+LaTeX Warning: Citation `klinke2024equal' on page 3 undefined on input line 123
+.
+
+
+LaTeX Warning: Citation `vaarma2024predicting' on page 3 undefined on input lin
+e 124.
+
+
+LaTeX Warning: Citation `diaz2024toward' on page 3 undefined on input line 125.
+
+
+
+LaTeX Warning: Citation `okoye2024machine' on page 3 undefined on input line 12
+6.
+
+
+LaTeX Warning: Citation `okoye2024machine' on page 3 undefined on input line 12
+7.
+
+
+LaTeX Warning: Citation `shou2025classroom' on page 3 undefined on input line 1
+28.
+
+
+Overfull \hbox (16.94087pt too wide) in paragraph at lines 113--133
+ [][] 
+
+LaTeX Warning: Citation `niu2023pmct' on page 3 undefined on input line 136.
+
+
+LaTeX Warning: Citation `sivakarthi2024predicting' on page 3 undefined on input
+ line 136.
+
+
+LaTeX Warning: Citation `van2025student' on page 3 undefined on input line 136.
+
+
+
+LaTeX Warning: Citation `kayande2025design' on page 3 undefined on input line 1
+36.
+
+
+LaTeX Warning: Citation `mustofa2025novel' on page 3 undefined on input line 13
+6.
+
+
+LaTeX Warning: Citation `goran2024identifying' on page 3 undefined on input lin
+e 136.
+
+
+LaTeX Warning: Citation `mustofa2025novel' on page 3 undefined on input line 13
+8.
+
+
+LaTeX Warning: Citation `radhakrishnan2025narx_cnn' on page 3 undefined on inpu
+t line 138.
+
+
+LaTeX Warning: Citation `kruger2023explainable' on page 3 undefined on input li
+ne 138.
+
+[3]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[4] [5 <./figures/01_class_distribution.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6] [7 <./figures/03_ranking_heatmap.png>]
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd)
+
+LaTeX Warning: Citation `breetzke2024expectancy' on page 8 undefined on input l
+ine 362.
+
+[8]
+
+LaTeX Warning: Citation `tan2025student' on page 9 undefined on input line 385.
+
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[9] [10] [11]
+(C:\Users\DELL\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd)
+[12] [13 <./figures/12_cross_validation_results.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[15 <./figures/07_confusion_matrices.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[16 <./figures/07_model_comparison.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[17 <./figures/07_roc_curves.png>] [18 <./figures/11_shap_random_forest_summary
+.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `fig:ahfs_comparison' on page 19 undefined on input li
+ne 874.
+
+
+Underfull \vbox (badness 2012) has occurred while \output is active [19 <./figu
+res/ahfs_ta_ablation_study.png>] [20 <./figures/12_comprehensive_metrics_compar
+ison.png>] (Review_Main.bbl) [21] (Review_Main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `Review_Main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)<C:/Users/DELL/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/DELL/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/D
+ELL/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:
+/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.
+pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmmi7.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmmi8.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmr5.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/DELL/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/DELL/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/DELL/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/DELL/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/DELL/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/User
+s/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
+C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy
+9.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+symbols/msbm10.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/urw
+/courier/ucrr8a.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/ur
+w/times/utmb8a.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/urw
+/times/utmr8a.pfb><C:/Users/DELL/AppData/Local/Programs/MiKTeX/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on Review_Main.pdf (21 pages, 3895802 bytes).
+Transcript written on Review_Main.log.
+pdflatex: major issue: So far, you have not checked for MiKTeX updates.

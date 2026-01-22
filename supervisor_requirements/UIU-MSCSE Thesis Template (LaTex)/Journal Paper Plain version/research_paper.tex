@@ -34,11 +34,7 @@
 
 % Authors
 \author{
-Islam Md Kawsarul$^{1}$ and Dewan Md. Farid$^{2}$\\[1em]
-\textit{Department of Computer Science and Engineering}\\
-\textit{United International University}\\
-Dhaka, Bangladesh\\[0.5em]
-$^{1}$mislam2320003@mscse.uiu.ac.bd, $^{2}$dewanfarid@cse.uiu.ac.bd
+Md. Kawsarul Islam$^{1}$
 }
 
 \maketitle
@@ -192,7 +188,7 @@ Demographic features capture background characteristics that may influence stude
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.70\textwidth]{01_class_distribution.png}
-\caption{Class distribution in the educational dataset illustrating the moderate class imbalance challenge. The Graduate class represents the majority (50.0\%), followed by Dropout (32.1\%) and Enrolled (17.9\%). This imbalance necessitates the use of weighted cross-entropy loss during training to ensure the model does not bias toward the majority class while maintaining sensitivity to the critical Dropout and Enrolled classes.}
+\caption{Class distribution in the educational dataset illustrating the moderate class imbalance challenge. (a) Pie chart displaying class proportions: Graduate represents the majority (49.9\%), followed by Dropout (32.1\%) and Enrolled (17.9\%). (b) Bar chart showing class frequencies: Graduate (2,209 students), Dropout (1,421 students), and Enrolled (794 students). This imbalance necessitates the use of weighted cross-entropy loss during training to ensure the model does not bias toward the majority class while maintaining sensitivity to the critical Dropout and Enrolled classes.}
 \label{fig:class_dist}
 \end{figure}
 
@@ -595,7 +591,7 @@ The consistency of AHFS-TA's performance across folds (standard deviation 0.92\%
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.90\textwidth]{12_cross_validation_results.png}
-\caption{10-Fold cross-validation results showing accuracy distribution across folds for all models. The box plots display median accuracy (center line), interquartile range (box), and outliers (whiskers). AHFS-TA demonstrates the highest median accuracy (90.85\%) with the lowest variance (±0.92\%), indicating both superior performance and excellent generalization stability compared to baseline models.}
+\caption{10-Fold cross-validation results showing accuracy distribution across folds for all models. (a) Box plots displaying median accuracy (center line), interquartile range (box), and outliers (whiskers) for each model. (b) Line plot showing fold-wise accuracy variation across all 10 folds for each model. AHFS-TA demonstrates the highest median accuracy (90.85\%) with the lowest variance ($\pm$0.92\%), indicating both superior performance and excellent generalization stability compared to baseline models.}
 \label{fig:cv_results}
 \end{figure}
 
@@ -671,7 +667,7 @@ Table~\ref{tab:cm_ahfs} presents the detailed confusion matrix for AHFS-TA. AHFS
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.80\textwidth]{07_confusion_matrices.png}
-\caption{Confusion matrices for all seven models showing predicted versus actual class assignments. AHFS-TA achieves the highest diagonal concentrations, indicating superior classification performance.}
+\caption{Confusion matrices for all seven models showing predicted versus actual class assignments. (a) Decision Tree, (b) Naive Bayes, (c) Random Forest, (d) AdaBoost, (e) XGBoost, (f) Neural Network, and (g) AHFS-TA. AHFS-TA achieves the highest diagonal concentrations (262 Dropout, 140 Enrolled, 429 Graduate correctly classified), indicating superior classification performance across all three classes.}
 \label{fig:confusion_matrices}
 \end{figure}
 
@@ -708,7 +704,7 @@ Neural Network & 0.856 & 0.710 & 0.902 & 0.861 \\
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.80\textwidth]{07_roc_curves.png}
-\caption{ROC curves for all seven models demonstrating discriminative ability. AHFS-TA achieves the highest per-class AUC and micro-average AUC (0.955).}
+\caption{ROC curves for all seven models demonstrating discriminative ability. (a) Decision Tree (AUC: 0.758), (b) Naive Bayes (AUC: 0.843), (c) Random Forest (AUC: 0.914), (d) AdaBoost (AUC: 0.890), (e) XGBoost (AUC: 0.913), (f) Neural Network (AUC: 0.861), and (g) AHFS-TA (AUC: 0.955). AHFS-TA achieves the highest per-class AUC (Dropout: 0.968, Enrolled: 0.941, Graduate: 0.972) and micro-average AUC (0.955).}
 \label{fig:roc_curves}
 \end{figure}
 
@@ -862,7 +858,7 @@ Despite these limitations, the fundamental principles of AHFS-TA---temporal atte
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.90\textwidth]{12_comprehensive_metrics_comparison.png}
-\caption{Performance comparison of AHFS-TA versus baseline models. Four subplots: (1) Performance metrics, (2) AUC scores, (3) Test accuracy (AHFS-TA highlighted), (4) 10-fold cross-validation.}
+\caption{Performance comparison of AHFS-TA versus baseline models. (a) Bar chart comparing accuracy, precision, recall, and F1-score across all models. (b) Grouped bar chart showing per-class and micro-average AUC-ROC scores. (c) Bar chart highlighting test accuracy with AHFS-TA achieving 91.32\%. (d) Box plot displaying 10-fold cross-validation results with mean accuracy and standard deviation for each model.}
 \label{fig:ahfs_comparison}
 \end{figure}
 
@@ -882,6 +878,17 @@ The practical implications of this work extend beyond accuracy improvements. By 
 
 Future work will extend AHFS-TA to multi-institutional datasets to validate generalizability, explore graph neural networks for modeling student interaction networks, develop real-time deployment systems for proactive intervention triggering, and investigate federated learning approaches for privacy-preserving collaborative model training across institutions.
 
+% \vspace{\baselineskip}
+
+% \textbf{Conflict of Interests:} The authors declare that there is no conflict of interest. The work is new and will be publishable in this journal.
+
+% \vspace{\baselineskip}
+
+% \textbf{Acknowledgments:} This study is supported by TU Berg Akademie Freiberg, Freiberg, 09599, Germany.
+
+% \vspace{\baselineskip}
+
+% \textbf{Data availability:} All data needed to evaluate the conclusion of this study are presented in the paper. Additional data are available from the corresponding author upon reasonable request.
 
 
 %==============================================================================
