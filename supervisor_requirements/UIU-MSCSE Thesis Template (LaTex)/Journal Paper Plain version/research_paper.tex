@@ -368,7 +368,7 @@ We project the DistilBERT embedding $\mathbf{e} \in \mathbb{R}^{768}$ into four 
 \begin{equation}
 \text{CogLoad} = \frac{\|\mathbf{e}_{[512:768]}\|_2}{\sqrt{256}}
 \end{equation}
-The Sentiment Score $\in [-1, 1]$ measures emotional valence where negative values indicate potential distress and positive values indicate confidence. The Engagement Index $\in [0, 1]$ measures activity level variability with low values indicating disengagement risk. Topic Consistency $\in [0, 1]$ measures behavioral coherence. Finally, Cognitive Load $\in [0, 1]$ measures perceived difficulty where high values suggest struggling students.
+The Sentiment Score $\in [-1, 1]$ measures emotional valence where negative values indicate potential distress and positive values indicate confidence. The Engagement Index $\in [0, 1]$ measures activity level variability with low values indicating disengagement risk. Topic Consistency $\in [0, 1]$ measures behavioral coherence where high values indicate focused, on-topic communication patterns suggesting academic stability, while low values indicate scattered or unfocused discourse patterns often associated with academic disengagement. Finally, Cognitive Load $\in [0, 1]$ measures perceived difficulty where high values suggest struggling students.
 
 The specific slice boundaries (64, 128, 256, 512, 768) are architectural design choices based on three principles: non-overlapping partitions ensure statistical independence between extracted features, hierarchical coverage through different segment sizes captures both fine-grained and coarse-grained semantic patterns, and powers of 2 align with GPU memory architectures for efficient processing. This segmentation approach follows established practices in embedding decomposition literature, where different regions of transformer embeddings encode different types of linguistic and semantic information, providing better interpretability for educational stakeholders than learned projection layers. The original 34 features are thus augmented with 4 LLM-derived features, yielding 38 total features for subsequent processing.
 
@@ -438,11 +438,11 @@ where $\phi_i(x_j)$ is the SHAP value for feature $i$ on sample $j$. The second 
 \begin{equation}
 \text{Score}_{\text{Corr}}(i) = \left| \frac{\text{Cov}(x_i, y)}{\sigma_{x_i} \cdot \sigma_y} \right|
 \end{equation}
-This model-agnostic measure complements SHAP by capturing linear relationships that may be underweighted in tree-based SHAP analysis. The third stream measures temporal variance importance with 20\% weight, computing variance across time for semester-wise features:
+This model-agnostic measure complements SHAP by capturing linear relationships that may be underweighted in tree-based SHAP analysis. The third stream measures temporal variance importance with 20\% weight, computing variance across time for semester-wise features. For each feature $i$, we compute the variance of its values across all $T$ semesters:
 \begin{equation}
-\text{Score}_{\text{Temp}}(i) = \text{Var}(\{x_{i,t}\}_{t=1}^{T})
+\text{Score}_{\text{Temp}}(i) = \text{Var}(\{x_{i,t}\}_{t=1}^{T}) = \frac{1}{T}\sum_{t=1}^{T}(x_{i,t} - \bar{x}_i)^2
 \end{equation}
-Features that vary significantly across semesters may capture dynamic risk factors, as high temporal variance often signals behavioral instability associated with dropout risk.
+where $x_{i,t}$ denotes the value of feature $i$ at semester $t$, $\bar{x}_i = \frac{1}{T}\sum_{t=1}^{T}x_{i,t}$ is the mean of feature $i$ across all semesters, and $T=4$ represents the number of semesters. For example, if a student's attendance rates across four semesters are $\{95, 90, 75, 45\}$, then $\bar{x} = 76.25$ and $\text{Var} = \frac{1}{4}[(95-76.25)^2 + (90-76.25)^2 + (75-76.25)^2 + (45-76.25)^2] = 379.69$. This high variance indicates significant temporal change, signaling potential dropout risk. Features that vary significantly across semesters capture dynamic risk factors, as high temporal variance often signals behavioral instability associated with dropout risk, while low temporal variance indicates stable patterns.
 
 The three streams are normalized to $[0, 1]$ and combined using weighted averaging to produce the meta-importance score:
 \begin{equation}
@@ -473,7 +473,9 @@ Training proceeds in two phases, separated by the adaptive feature selection at 
 \STATE \textbf{// Phase 1: Training with all 38 features (Epochs 1-10)}
 \FOR{epoch $= 1$ to 10}
     \FOR{each batch $(x, y)$ in $D$}
-        \STATE $\hat{y} \leftarrow \text{AHFS-TA}(x; \theta)$ \quad \textit{// Forward pass}
+        \STATE $c \leftarrow \text{TemporalAttention}(x)$ \quad \textit{// BiGRU + Multi-Head Attention $\rightarrow$ 128-D}
+        \STATE $z \leftarrow [c; x] \in \mathbb{R}^{166}$ \quad \textit{// Concatenate temporal context (128-D) + features (38-D)}
+        \STATE $\hat{y} \leftarrow \text{ClassificationHead}(z; \theta)$ \quad \textit{// Dense layers $\rightarrow$ predictions}
         \STATE $\mathcal{L} \leftarrow \text{WeightedCrossEntropy}(y, \hat{y})$
         \STATE $\theta \leftarrow \theta - \eta \cdot \text{AdamW}(\nabla_\theta \mathcal{L})$ \quad \textit{// Backward pass}
     \ENDFOR
@@ -487,8 +489,10 @@ Training proceeds in two phases, separated by the adaptive feature selection at 
 \STATE \textbf{// Phase 2: Fine-tuning with selected 28 features (Epochs 11-50)}
 \FOR{epoch $= 11$ to 50}
     \FOR{each batch $(x, y)$ in $D$}
-        \STATE $x_{\text{selected}} \leftarrow x[\text{top 28 features}]$
-        \STATE $\hat{y} \leftarrow \text{AHFS-TA}(x_{\text{selected}}; \theta)$
+        \STATE $x_{\text{sel}} \leftarrow x[\text{top 28 features}]$ \quad \textit{// Extract selected features}
+        \STATE $c \leftarrow \text{TemporalAttention}(x_{\text{sel}})$ \quad \textit{// BiGRU + Attention $\rightarrow$ 128-D context}
+        \STATE $z \leftarrow [c; x_{\text{sel}}] \in \mathbb{R}^{156}$ \quad \textit{// Concatenate: temporal (128-D) + selected (28-D)}
+        \STATE $\hat{y} \leftarrow \text{ClassificationHead}(z; \theta)$ \quad \textit{// Forward pass}
         \STATE $\mathcal{L} \leftarrow \text{WeightedCrossEntropy}(y, \hat{y})$
         \STATE $\theta \leftarrow \theta - \eta \cdot \text{AdamW}(\nabla_\theta \mathcal{L})$
     \ENDFOR
