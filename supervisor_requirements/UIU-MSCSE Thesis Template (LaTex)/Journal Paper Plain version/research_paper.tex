@@ -614,21 +614,21 @@ Table~\ref{tab:feature_selection} presents the top 10 selected features ranked b
 \toprule
 \textbf{Rank} & \textbf{Feature Name} & \textbf{SHAP Score} & \textbf{Correlation Score} & \textbf{Temporal Var.} & \textbf{Meta-Importance} \\
 \midrule
-1 & LLM\_Engagement & 1.0000 & 1.0000 & 0.4810 & 1.0000 \\
-2 & Curricular units 2nd sem (approved) & 0.5815 & 0.9042 & 0.8479 & 0.8163 \\
-3 & LLM\_Sentiment & 0.4023 & 0.8214 & 0.6197 & 0.6377 \\
-4 & Curricular units 2nd sem (grade) & 0.4081 & 0.8291 & 0.5515 & 0.6283 \\
-5 & Curricular units 1st sem (approved) & 0.3538 & 0.7624 & 0.4709 & 0.5577 \\
-6 & Curricular units 1st sem (grade) & 0.2387 & 0.7097 & 0.6577 & 0.5175 \\
-7 & Tuition fees up to date & 0.2030 & 0.6006 & 0.5548 & 0.4381 \\
-8 & LLM\_TopicConsistency & 0.2021 & 0.3611 & 0.6667 & 0.3824 \\
-9 & Scholarship holder & 0.0593 & 0.4278 & 0.6846 & 0.3291 \\
-10 & Age at enrollment & 0.1793 & 0.3571 & 0.4720 & 0.3249 \\
+1 & LLM\_Engagement & 1.0000 & 1.0000 & 0.4810 & 0.8962 \\
+2 & Curricular units 2nd sem (approved) & 0.5815 & 0.9042 & 0.8479 & 0.7316 \\
+3 & LLM\_Sentiment & 0.4023 & 0.8214 & 0.6197 & 0.5715 \\
+4 & Curricular units 2nd sem (grade) & 0.4081 & 0.8291 & 0.5515 & 0.5631 \\
+5 & Curricular units 1st sem (approved) & 0.3538 & 0.7624 & 0.4709 & 0.4998 \\
+6 & Curricular units 1st sem (grade) & 0.2387 & 0.7097 & 0.6577 & 0.4638 \\
+7 & Tuition fees up to date & 0.2030 & 0.6006 & 0.5548 & 0.3926 \\
+8 & LLM\_TopicConsistency & 0.2021 & 0.3611 & 0.6667 & 0.3427 \\
+9 & Scholarship holder & 0.0593 & 0.4278 & 0.6846 & 0.2949 \\
+10 & Age at enrollment & 0.1793 & 0.3571 & 0.4720 & 0.2912 \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-The feature selection results reveal several important findings. Remarkably, the top-ranked feature is ``LLM\_Engagement'' with perfect meta-importance (1.0), demonstrating that the psychosocial features extracted through DistilBERT embeddings capture critical dropout signals---this LLM-derived engagement metric achieves highest scores across both SHAP (1.0) and Correlation (1.0), validating the semantic feature enrichment component of our framework. Academic performance features also rank strongly: second semester approved units (rank 2, 0.816) and grade (rank 4, 0.628) rank highly, along with first semester metrics (ranks 5-6), with high temporal variance scores (0.47-0.85) indicating significant semester-to-semester variation diagnostic of dropout risk. The presence of three LLM-derived features in the top 10---LLM\_Engagement (rank 1), LLM\_Sentiment (rank 3, 0.638), and LLM\_TopicConsistency (rank 8, 0.382)---further validates the semantic feature enrichment component, with these features achieving high correlation scores (0.36-1.0) indicating strong statistical association with dropout outcomes. Financial factors remain critical predictors: tuition fee status (rank 7, 0.438) and scholarship holder (rank 9, 0.329) demonstrate that financial stability is a key dropout predictor, with the high temporal variance for scholarship holder (0.685) suggesting significant variation patterns across student cohorts. The feature reduction from 38 to 28 features (26.3\% reduction) removes redundant or noisy features while retaining the most predictive signals, improving model generalization and reducing training time without sacrificing accuracy. The three-stream approach prevents any single ranking method from dominating selection, with the weighted fusion ensuring diverse perspectives contribute to a robust consensus-based selection.
+The feature selection results reveal several important findings. Remarkably, the top-ranked feature is ``LLM\_Engagement'' with highest meta-importance (0.896), demonstrating that the psychosocial features extracted through DistilBERT embeddings capture critical dropout signals---this LLM-derived engagement metric achieves highest scores across both SHAP (1.0) and Correlation (1.0), validating the semantic feature enrichment component of our framework. Academic performance features also rank strongly: second semester approved units (rank 2, 0.732) and grade (rank 4, 0.563) rank highly, along with first semester metrics (ranks 5-6), with high temporal variance scores (0.47-0.85) indicating significant semester-to-semester variation diagnostic of dropout risk. The presence of three LLM-derived features in the top 10---LLM\_Engagement (rank 1), LLM\_Sentiment (rank 3, 0.572), and LLM\_TopicConsistency (rank 8, 0.343)---further validates the semantic feature enrichment component, with these features achieving high correlation scores (0.36-1.0) indicating strong statistical association with dropout outcomes. Financial factors remain critical predictors: tuition fee status (rank 7, 0.393) and scholarship holder (rank 9, 0.295) demonstrate that financial stability is a key dropout predictor, with the high temporal variance for scholarship holder (0.685) suggesting significant variation patterns across student cohorts. The feature reduction from 38 to 28 features (26.3\% reduction) removes redundant or noisy features while retaining the most predictive signals, improving model generalization and reducing training time without sacrificing accuracy. The three-stream approach prevents any single ranking method from dominating selection, with the weighted fusion ensuring diverse perspectives contribute to a robust consensus-based selection.
 
 Table~\ref{tab:perclass} shows class-specific metrics revealing model strengths and weaknesses. The ``Enrolled'' class (continuing students) poses the greatest challenge for all baseline models (F1: 0.28-0.47), which is expected given its smaller sample size (794 students) and inherent ambiguity---these students have not yet reached a definitive outcome. AHFS-TA dramatically improves Enrolled detection (F1: 0.88), likely through temporal patterns indicating ongoing engagement rather than imminent dropout. This improvement is particularly significant for practical applications, as identifying students who are struggling but have not yet made a dropout decision provides the greatest opportunity for effective intervention. The Graduate class achieves the highest F1-scores across all models (0.79-0.93), benefiting from its larger sample size and more distinct feature patterns, while the Dropout class shows substantial improvement from baselines (F1: 0.68-0.77) to AHFS-TA (F1: 0.92), which is crucial for early warning systems.
 
